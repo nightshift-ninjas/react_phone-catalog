@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './ThemeButton.scss';
-import MoonIcon from '../../../../public/icons/moon.svg?react';
-import SunIcon from '../../../../public/icons/moon.svg?react';
+import MoonIcon from '../../assets/icons/moon.svg?react';
+import SunIcon from '../../assets/icons/sun.svg?react';
 
 export const ThemeButton: React.FC = () => {
   const [isDark, setIsDark] = useState(

@@ -1,0 +1,20 @@
+@use "sass:map";
+@use "../../../shared/styles/vars" as *;
+
+.auth {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__wrapper {
+    border-radius: 10px;
+    padding: map.get($spacing, "md");
+    background-color: var(--bg-color-lighter);
+  }
+
+  input {
+    border: $border;
+  }
+}
