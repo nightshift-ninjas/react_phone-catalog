@@ -2,7 +2,7 @@
   "experimentalTernaries": true,
   "singleQuote": true,
   "quoteProps": "consistent",
-  "singleAttributePerLine": true,
+  "singleAttributePerLine": false,
   "arrowParens": "always",
   "bracketSameLine": false,
   "bracketSpacing": true,
