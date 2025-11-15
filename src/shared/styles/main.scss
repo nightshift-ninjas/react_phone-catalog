@@ -1,0 +1,17 @@
+@use "sass:map";
+@use "./resets";
+@use "./vars" as *;
+@use "./mixins" as *;
+@use "./typography";
+@use "./theme";
+@use "./fonts";
+
+main {
+  max-width: $max-container-width;
+  margin-inline: auto;
+
+  padding: map.get($spacing, "md");
+  @include on-desktop {
+    padding: 0;
+  }
+}
