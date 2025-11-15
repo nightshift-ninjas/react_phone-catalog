@@ -1,5 +1,5 @@
 {
-  "experimentalTernaries": true,
+  "experimentalTernaries": false,
   "singleQuote": true,
   "quoteProps": "consistent",
   "singleAttributePerLine": false,
