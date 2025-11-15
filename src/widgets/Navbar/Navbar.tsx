@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import cn from 'classnames';
 import './Navbar.scss';
-import Logo from '../../../public/Logo.svg?react';
-import FavoriteIcon from '../../../public/icons/favorite.svg?react';
-import ShoppingBagIcon from '../../../public/icons/shopping-bag.svg?react';
-import ProfileIcon from '../../../public/icons/profile.svg?react';
+import Logo from '../../shared/assets/Logo.svg?react';
+import FavoriteIcon from '../../shared/assets/icons/favorite.svg?react';
+import ShoppingBagIcon from '../../shared/assets/icons/shopping-bag.svg?react';
+import ProfileIcon from '../../shared/assets/icons/profile.svg?react';
 import type { NavbarLink, NavButton } from './types';
 import { ThemeButton } from '../../shared/ui/ThemeButton';
 import { Link, NavLink } from 'react-router-dom';
