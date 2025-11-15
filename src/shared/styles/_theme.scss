@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use './vars' as *;
+
+/* We will probably modify those colors in the future */
+
+:root {
+  --nav-not-active-link: #{map.get($colors, 'gray')};
+
+  --bg-color: #{map.get($colors, 'white')};
+
+  // for card background
+  --bg-color-lighter: #{map.get($colors, 'light')};
+
+  --text-color: #{map.get($colors, 'dark')};
+  --icon-color: #{map.get($colors, 'dark')};
+  --btn-bg-color: #{map.get($colors, 'dark')};
+  --btn-text-color: #{map.get($colors, 'white')};
+  --border-color: #{map.get($colors, 'platinum')};
+}
+
+[data-theme='dark'] {
+  --nav-not-active-link: #{map.get($colors, 'gray')};
+
+  --bg-color: #{map.get($colors, 'black')};
+
+  // for card background
+  --bg-color-lighter: #{map.get($colors, 'deep-blue')};
+
+  --text-color: #{map.get($colors, 'white')};
+  --icon-color: #{map.get($colors, 'silver')};
+  --btn-bg-color: #{map.get($colors, 'white')};
+  --btn-text-color: #{map.get($colors, 'dark')};
+  --border-color: #{map.get($colors, 'platinum')};
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+* {
+  transition:
+    color $base-transition ease,
+    background-color $theme-transition ease,
+    border-color $theme-transition ease,
+    fill $theme-transition ease;
+}

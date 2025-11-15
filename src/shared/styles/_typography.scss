@@ -1,0 +1,113 @@
+@use "sass:map";
+@use "./vars" as *;
+@use "./mixins" as *;
+
+h1 {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "h1"), "font-weight");
+  font-size: map.get(map.get($typography, "h1"), "font-size-mobile");
+  line-height: map.get(map.get($typography, "h1"), "line-height-mobile");
+  letter-spacing: map.get(map.get($typography, "h1"), "letter-spacing-mobile");
+}
+
+h2 {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "h2"), "font-weight");
+  font-size: map.get(map.get($typography, "h2"), "font-size-mobile");
+  line-height: map.get(map.get($typography, "h2"), "line-height-mobile");
+  letter-spacing: map.get(map.get($typography, "h2"), "letter-spacing-mobile");
+}
+
+h3 {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "h3"), "font-weight-mobile");
+  font-size: map.get(map.get($typography, "h3"), "font-size-mobile");
+  line-height: map.get(map.get($typography, "h3"), "line-height-mobile");
+  letter-spacing: map.get(map.get($typography, "h3"), "letter-spacing-mobile");
+}
+
+h4 {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "h4"), "font-weight");
+  font-size: map.get(map.get($typography, "h4"), "font-size-mobile");
+  line-height: map.get(map.get($typography, "h4"), "line-height-mobile");
+  letter-spacing: map.get(map.get($typography, "h4"), "letter-spacing-mobile");
+}
+
+body {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "body"), "font-weight");
+  font-size: map.get(map.get($typography, "body"), "font-size");
+  line-height: map.get(map.get($typography, "body"), "line-height");
+  letter-spacing: map.get(map.get($typography, "body"), "letter-spacing");
+}
+
+button {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "button-text"), "font-weight");
+  font-size: map.get(map.get($typography, "button-text"), "font-size");
+  line-height: map.get(map.get($typography, "button-text"), "line-height");
+  letter-spacing: map.get(
+    map.get($typography, "button-text"),
+    "letter-spacing"
+  );
+}
+
+@mixin uppercase-text {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "uppercase-text"), "font-weight");
+  font-size: map.get(map.get($typography, "uppercase-text"), "font-size");
+  line-height: map.get(map.get($typography, "uppercase-text"), "line-height");
+  letter-spacing: map.get(
+    map.get($typography, "uppercase-text"),
+    "letter-spacing"
+  );
+  text-transform: uppercase;
+}
+
+@mixin small-text {
+  font-family: "Mont", sans-serif;
+  font-weight: map.get(map.get($typography, "small-text"), "font-weight");
+  font-size: map.get(map.get($typography, "small-text"), "font-size");
+  line-height: map.get(map.get($typography, "small-text"), "line-height");
+  letter-spacing: map.get(map.get($typography, "small-text"), "letter-spacing");
+}
+
+@include on-tablet {
+  h1 {
+    font-size: map.get(map.get($typography, "h1"), "font-size-desktop");
+    line-height: map.get(map.get($typography, "h1"), "line-height-desktop");
+    letter-spacing: map.get(
+      map.get($typography, "h1"),
+      "letter-spacing-desktop"
+    );
+  }
+
+  h2 {
+    font-size: map.get(map.get($typography, "h2"), "font-size-desktop");
+    line-height: map.get(map.get($typography, "h2"), "line-height-desktop");
+    letter-spacing: map.get(
+      map.get($typography, "h2"),
+      "letter-spacing-desktop"
+    );
+  }
+
+  h3 {
+    font-weight: map.get(map.get($typography, "h3"), "font-weight-desktop");
+    font-size: map.get(map.get($typography, "h3"), "font-size-desktop");
+    line-height: map.get(map.get($typography, "h3"), "line-height-desktop");
+    letter-spacing: map.get(
+      map.get($typography, "h3"),
+      "letter-spacing-desktop"
+    );
+  }
+
+  h4 {
+    font-size: map.get(map.get($typography, "h4"), "font-size-desktop");
+    line-height: map.get(map.get($typography, "h4"), "line-height-desktop");
+    letter-spacing: map.get(
+      map.get($typography, "h4"),
+      "letter-spacing-desktop"
+    );
+  }
+}
