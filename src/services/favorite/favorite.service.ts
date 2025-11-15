@@ -1,0 +1,38 @@
+import { productService } from "../product";
+import { favoriteRepository } from "./favorite.repository";
+import type { FavoriteItem, FavoriteItemCreate } from "./favorite.types";
+
+export const favoriteService = {
+  // return all favorites of the user
+  async fetchFavoritesByUser(userId: string): Promise<FavoriteItem[]> {
+    const favorites = await favoriteRepository.getByUserId(userId);
+
+    // Enrich each favorite with product details
+    const enriched = await Promise.all(
+      favorites.map(async (fav) => {
+        const product = await productService.fetchProductById(fav.productId);
+        return { ...fav, product };
+      })
+    );
+
+    return enriched;
+  },
+
+  // add a favorite item
+  async addFavorite(userId: string, productId: string): Promise<FavoriteItem> {
+    const data: FavoriteItemCreate = {
+      userId,
+      productId,
+      createdAt: new Date().toISOString(),
+    };
+
+    const ref = await favoriteRepository.add(data);
+
+    return { id: ref.id, ...data };
+  },
+
+  // remove a favorite by Firestore ID
+  async removeFavorite(favoriteId: string) {
+    return favoriteRepository.delete(favoriteId);
+  },
+};
