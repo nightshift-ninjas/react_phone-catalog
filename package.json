@@ -12,6 +12,11 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.1.15",
+    "@radix-ui/react-dropdown-menu": "^2.1.16",
+    "@radix-ui/react-navigation-menu": "^1.2.14",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-tooltip": "^1.2.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
   },
@@ -31,8 +36,10 @@
     "globals": "^16.5.0",
     "husky": "^9.1.7",
     "prettier": "^3.6.2",
+    "radix-ui": "^1.4.3",
     "react-router-dom": "^7.9.6",
     "sass": "^1.94.0",
+    "swiper": "^12.0.3",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.3",
     "vite": "^7.2.2",
