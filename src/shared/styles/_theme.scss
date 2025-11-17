@@ -5,6 +5,9 @@
 
 :root {
   --nav-not-active-link: #{map.get($colors, 'gray')};
+  --auth-input-bg: #{map.get($colors, 'light-purple')};
+  --auth-modal-bg: #{map.get($colors, 'lavender')};
+  --auth-bg-color: #{map.get($colors, "platinum")};
 
   --bg-color: #{map.get($colors, 'white')};
 
@@ -17,10 +20,14 @@
   --btn-text-color: #{map.get($colors, 'white')};
   --border-color: #{map.get($colors, 'platinum')};
   --btn-shadow-color: #{map.get($colors, 'blue-shadow')};
+  --link-color: #{map.get($colors, 'purple')};
 }
 
 [data-theme='dark'] {
   --nav-not-active-link: #{map.get($colors, 'gray')};
+  --auth-input-bg: #{map.get($colors, 'slight-purple')};
+  --auth-modal-bg: #{map.get($colors, 'imperial-purple')};
+  --auth-bg-color: #{map.get($colors, "black")};
 
   --bg-color: #{map.get($colors, 'black')};
 
@@ -33,7 +40,7 @@
   --btn-text-color: #{map.get($colors, 'dark')};
   --border-color: #{map.get($colors, 'platinum')};
   --btn-shadow-color: #{map.get($colors, 'white-shadow')};
-
+  --link-color: #{map.get($colors, 'purple')};
 }
 
 body {
