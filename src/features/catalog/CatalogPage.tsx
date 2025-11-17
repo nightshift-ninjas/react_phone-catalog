@@ -6,6 +6,8 @@ import {
 } from '../../services/product/';
 import { useEffect, useState } from 'react';
 import { ProductCard } from '../../widgets/ProductCard';
+import { Breadcrumb } from '../../shared/ui/Breadcrumb';
+import './CatalogPage.scss';
 
 const CatalogPage: React.FC = () => {
   const { category } = useParams<{ category: Category }>();
@@ -37,14 +39,26 @@ const CatalogPage: React.FC = () => {
   }, [category]);
 
   return (
-    <div>
+    <div className="catalog">
+      <div className="catalog__breadcrumbs">
+        <Breadcrumb
+          items={[{ text: category!, link: `/catalog/${category}` }]}
+        />
+      </div>
+
       <h1>{`This is page for the Catalog of ${category}`}</h1>
 
       {!isLoading && (
         <ul>
           {products.map((product) => (
-            <li key={product.id} >
-              <ProductCard product={product} isSelectedCart={false} isSelectedFav={false} onClickCart={() => { }} onClickFav={() => { }}/>
+            <li key={product.id}>
+              <ProductCard
+                product={product}
+                isSelectedCart={false}
+                isSelectedFav={false}
+                onClickCart={() => {}}
+                onClickFav={() => {}}
+              />
             </li>
           ))}
         </ul>

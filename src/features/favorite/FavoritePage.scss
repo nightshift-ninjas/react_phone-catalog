@@ -1,0 +1,14 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.favorite {
+  &__breadcrumbs {
+    margin-block: map.get($spacing, 'lg');
+    margin-block: map.get($spacing, 'xl');
+
+    @include on-tablet {
+      margin-bottom: map.get($spacing, '2xl');
+    }
+  }
+}

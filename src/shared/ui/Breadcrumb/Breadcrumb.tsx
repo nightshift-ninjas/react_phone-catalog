@@ -1,0 +1,37 @@
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import type { BreadcrumbItem } from './types';
+import HomeIcon from '../../assets/icons/home.svg?react';
+import './Breadcrumb.scss';
+
+type Props = {
+  items: BreadcrumbItem[];
+  separator?: string;
+};
+
+export const Breadcrumb: React.FC<Props> = ({
+  items = [],
+  separator = '>',
+}) => {
+  useEffect(() => {
+    console.log('Breadcrumb items:', items);
+  }, [items]);
+
+  return (
+    <nav className="bread-crumb">
+      <Link to="/">
+        <HomeIcon />
+      </Link>
+
+      {items.length > 0 && <span>{separator}</span>}
+
+      {items.map((item, index) => (
+        <React.Fragment key={index}>
+          <Link to={item.link} className='bread-crumb__link'>{item.text}</Link>
+
+          {index < items.length - 1 && <span>{separator}</span>}
+        </React.Fragment>
+      ))}
+    </nav>
+  );
+};

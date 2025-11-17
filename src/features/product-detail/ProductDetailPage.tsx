@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { productService, type Product } from "../../services/product";
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { productService, type Product } from '../../services/product';
+import { Breadcrumb } from '../../shared/ui/Breadcrumb';
+import './ProductDetailPage.scss';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!id) return;
 
     const loadProduct = async () => {
-      setError("");
+      setError('');
       setIsLoading(true);
 
       try {
@@ -30,7 +32,22 @@ const ProductDetailPage: React.FC = () => {
   }, [id]);
 
   return (
-    <div>
+    <div className="product-detail">
+      <div className="product-detail__breadcrumbs">
+        <Breadcrumb
+          items={[
+            {
+              text: `${product?.category}`,
+              link: `/catalog/${product?.category}`,
+            },
+            {
+              text: product?.name || 'loading',
+              link: `/catalog/${product?.category}/product/${product?.name}`,
+            },
+          ]}
+        />
+      </div>
+
       <h1>This is ProductDetailPage</h1>
 
       {!isLoading && product && <h3>{product.name}</h3>}

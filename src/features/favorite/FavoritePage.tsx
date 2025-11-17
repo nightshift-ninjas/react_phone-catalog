@@ -1,18 +1,71 @@
-import React, { useEffect } from "react";
-import { authClient } from "../../services/auth";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../shared/hooks';
+import { useNavigate } from 'react-router-dom';
+import { Breadcrumb } from '../../shared/ui/Breadcrumb';
+import { favoriteService } from '../../services/favorite/favorite.service';
+import type { FavoriteItem } from '../../services/favorite/favorite.types';
+import './FavoritePage.scss';
 
 const FavoritePage: React.FC = () => {
   const navigate = useNavigate();
-  const currentUser = authClient.getCurrentUser();
+  const { user, loading: authLoading } = useAuth();
+
+  const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    if (!currentUser) {
-      navigate("/auth/login");
-    }
-  }, [currentUser, navigate]);
+    if (authLoading) return;
 
-  return <h1>This is FavoritePage</h1>;
+    if (!user) {
+      navigate('/auth');
+      return;
+    }
+
+    const loadFavorites = async () => {
+      setIsLoading(true);
+      setError('');
+
+      try {
+        const favs = await favoriteService.fetchFavoritesByUser(user.uid);
+        setFavorites(favs);
+      } catch (err) {
+        setError(`Failed to load favorites: ${err}`);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadFavorites();
+  }, [user, authLoading, navigate]);
+
+  return (
+    <div className="favorite">
+      <div className="favorite__breadcrumbs">
+        <Breadcrumb items={[{ text: 'favorites', link: '/favorite' }]} />
+      </div>
+
+      <h1>Your Favorites</h1>
+
+      {isLoading && <p>Loading favorites...</p>}
+      {error && <p className="error">{error}</p>}
+
+      {!isLoading && favorites.length === 0 && (
+        <p>You have no favorite items yet.</p>
+      )}
+
+      {!isLoading && favorites.length > 0 && (
+        <ul className="favorite__list">
+          {favorites.map((fav) => (
+            <li key={fav.id} className="favorite__item">
+              <strong>{fav.product?.name}</strong>
+              <span>Product ID: {fav.productId}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
 };
 
 export default FavoritePage;

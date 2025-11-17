@@ -1,32 +1,33 @@
-import React, { useEffect, useState } from "react";
-import { authClient } from "../../services/auth";
-import { useNavigate } from "react-router-dom";
-import type { Cart } from "../../services/cart/cart.types";
-import type { CartItem } from "../../services/cart/cart.types";
-import { cartService } from "../../services/cart/cart.services";
+import React, { useEffect, useState } from 'react';
+import { useAuth } from '../../shared/hooks';
+import type { Cart, CartItem } from '../../services/cart/cart.types';
+import { cartService } from '../../services/cart/cart.services';
+import { useNavigate } from 'react-router-dom';
+import { Breadcrumb } from '../../shared/ui/Breadcrumb';
+import './CartPage.scss';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
-  const currentUser = authClient.getCurrentUser();
-
-  useEffect(() => {
-    if (!currentUser) {
-      navigate("/auth/login");
-    }
-  }, [currentUser, navigate]);
+  const { user, loading: authLoading } = useAuth();
 
   const [cart, setCart] = useState<Cart | null>(null);
   const [items, setItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   useEffect(() => {
+    if (authLoading) return;
+
+    if (!user) {
+      navigate('/auth');
+    }
+
     const loadCartAndItems = async () => {
       setIsLoading(true);
-      setError("");
+      setError('');
 
       try {
-        const response = await cartService.getOrCreateCart(currentUser!.uid);
+        const response = await cartService.getOrCreateCart(user!.uid);
         setCart(response);
 
         const cartItems = await cartService.fetchCartItems(response.id);
@@ -39,14 +40,16 @@ const CartPage: React.FC = () => {
     };
 
     loadCartAndItems();
-  }, [currentUser]);
-
-  if (isLoading) return <p>Loading cart...</p>;
-  if (error) return <p style={{ color: "red" }}>{error}</p>;
+  }, [user, authLoading, navigate]);
 
   return (
-    <div>
+    <div className="cart">
+      <div className="cart__breadcrumbs">
+        <Breadcrumb items={[{ text: 'cart', link: `/cart` }]} />
+      </div>
+
       <h1>Your Cart</h1>
+
       {cart && <p>Cart ID: {cart.id}</p>}
 
       {items.length === 0 ? (
@@ -55,7 +58,7 @@ const CartPage: React.FC = () => {
         <ul>
           {items.map((item) => (
             <li key={item.id}>
-              {item.product?.name} — Quantity: {item.quantity} — Price: $
+              {item.product?.name} — Quantity: {item.quantity}
             </li>
           ))}
         </ul>
