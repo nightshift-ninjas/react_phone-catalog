@@ -16,6 +16,7 @@
   --btn-bg-color: #{map.get($colors, 'dark')};
   --btn-text-color: #{map.get($colors, 'white')};
   --border-color: #{map.get($colors, 'platinum')};
+  --btn-shadow-color: #{map.get($colors, 'blue-shadow')};
 }
 
 [data-theme='dark'] {
@@ -31,6 +32,8 @@
   --btn-bg-color: #{map.get($colors, 'white')};
   --btn-text-color: #{map.get($colors, 'dark')};
   --border-color: #{map.get($colors, 'platinum')};
+  --btn-shadow-color: #{map.get($colors, 'white-shadow')};
+
 }
 
 body {

@@ -1,0 +1,31 @@
+@use 'sass:map';
+@import '../../styles/vars';
+
+.btn {
+  width: 100%;
+  padding: 9.5px 0;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 21px;
+  cursor: pointer;
+  transition: background $base-transition ease, box-shadow $base-transition ease;
+  border: 1px solid var(--btn-bg-color);
+
+  /* REGULAR (not selected) */
+  &--regular {
+    background: var(--btn-bg-color);
+    border-color: var(--btn-bg-color);
+    color: var(--btn-text-color);
+
+    &:hover {
+      box-shadow: 0px 3px 13px 0px var(--btn-shadow-color);
+    }
+  }
+
+  /* SELECTED (completed) */
+  &--selected {
+    background: #{map.get($colors, 'white')};
+    border-color: var(--border-color);
+    color: #{map.get($colors, 'green')};
+  }
+}
