@@ -1,21 +1,21 @@
-import type { User } from "../auth";
-import { firestoreClient } from "../../shared/config/firebase";
-import type { Cart, CartItem, CartItemCreate } from "./cart.types";
+import type { User } from '../auth';
+import { firestoreClient } from '../../shared/config/firebase';
+import type { Cart, CartItem, CartItemCreate } from './cart.types';
 
-const CART_COLLECTION = "carts";
-const CART_ITEM_COLLECTION = "cartItems";
+const CART_COLLECTION = 'carts';
+const CART_ITEM_COLLECTION = 'cartItems';
 
 export const cartRepository = {
   // --- Cart operations ---
-  async createCart(userId: User["id"]): Promise<Cart> {
-    const data: Omit<Cart, "id"> = {
+  async createCart(userId: User['id']): Promise<Cart> {
+    const data: Omit<Cart, 'id'> = {
       userId,
       createdAt: new Date().toISOString(),
     };
 
-    const ref = await firestoreClient.createDoc<Omit<Cart, "id">>(
+    const ref = await firestoreClient.createDoc<Omit<Cart, 'id'>>(
       CART_COLLECTION,
-      data
+      data,
     );
 
     return { id: ref.id, ...data };
@@ -24,8 +24,8 @@ export const cartRepository = {
   getCartByUserId(userId: string): Promise<Cart[]> {
     return firestoreClient.getCollectionByField<Cart>(
       CART_COLLECTION,
-      "userId",
-      userId
+      'userId',
+      userId,
     );
   },
 
@@ -33,15 +33,15 @@ export const cartRepository = {
   getItemsByCartId(cartId: string): Promise<CartItem[]> {
     return firestoreClient.getCollectionByField<CartItem>(
       CART_ITEM_COLLECTION,
-      "cartId",
-      cartId
+      'cartId',
+      cartId,
     );
   },
 
   async addItem(data: CartItemCreate): Promise<CartItem> {
     const ref = await firestoreClient.createDoc<CartItemCreate>(
       CART_ITEM_COLLECTION,
-      data
+      data,
     );
     return { id: ref.id, ...data };
   },
@@ -50,8 +50,18 @@ export const cartRepository = {
     return firestoreClient.updateDocById<CartItem>(
       CART_ITEM_COLLECTION,
       id,
-      data
+      data,
     );
+  },
+
+  async findItemByCartIdAndProductId(cartId: string, productId: string) {
+    const items = await firestoreClient.getCollectionByField<CartItem>(
+      CART_ITEM_COLLECTION,
+      'cartId',
+      cartId,
+    );
+
+    return items.find((item) => item.productId === productId) || null;
   },
 
   deleteItem(id: string) {

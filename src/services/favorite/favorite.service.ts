@@ -1,6 +1,6 @@
-import { productService } from "../product";
-import { favoriteRepository } from "./favorite.repository";
-import type { FavoriteItem, FavoriteItemCreate } from "./favorite.types";
+import { productService } from '../product';
+import { favoriteRepository } from './favorite.repository';
+import type { FavoriteItem, FavoriteItemCreate } from './favorite.types';
 
 export const favoriteService = {
   // return all favorites of the user
@@ -12,7 +12,7 @@ export const favoriteService = {
       favorites.map(async (fav) => {
         const product = await productService.fetchProductById(fav.productId);
         return { ...fav, product };
-      })
+      }),
     );
 
     return enriched;
@@ -31,8 +31,16 @@ export const favoriteService = {
     return { id: ref.id, ...data };
   },
 
+  async findFavorite(userId: string, productId: string) {
+    const items = await favoriteRepository.getByUserId(userId);
+    return items.find((item) => item.productId === productId) || null;
+  },
+
   // remove a favorite by Firestore ID
-  async removeFavorite(favoriteId: string) {
-    return favoriteRepository.delete(favoriteId);
+  async removeFavoriteByProduct(userId: string, productId: string) {
+    const existing = await this.findFavorite(userId, productId);
+    if (!existing) return;
+
+    return favoriteRepository.delete(existing.id);
   },
 };
