@@ -48,7 +48,7 @@ const FavoritePage: React.FC = () => {
       <h1>Your Favorites</h1>
 
       {isLoading && <p>Loading favorites...</p>}
-      {error && <p className="error">{error}</p>}
+      {error && <p className="favorite__error">{error}</p>}
 
       {!isLoading && favorites.length === 0 && (
         <p>You have no favorite items yet.</p>

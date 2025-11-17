@@ -29,6 +29,10 @@ export const cartRepository = {
     );
   },
 
+  async getItemById(id: string): Promise<CartItem | null> {
+    return firestoreClient.getDocById<CartItem>(CART_ITEM_COLLECTION, id);
+  },
+  
   // --- CartItem operations ---
   getItemsByCartId(cartId: string): Promise<CartItem[]> {
     return firestoreClient.getCollectionByField<CartItem>(
