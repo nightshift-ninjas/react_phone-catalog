@@ -1,10 +1,11 @@
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import {
   Category,
   productService,
   type Product,
 } from '../../services/product/';
 import { useEffect, useState } from 'react';
+import { ProductCard } from '../../widgets/ProductCard';
 
 const CatalogPage: React.FC = () => {
   const { category } = useParams<{ category: Category }>();
@@ -42,10 +43,8 @@ const CatalogPage: React.FC = () => {
       {!isLoading && (
         <ul>
           {products.map((product) => (
-            <li key={product.id} style={{ color: "#0000ff" }}>
-              <Link to={`/catalog/${category}/product/${product.id}`}>
-                {product.name}
-              </Link>
+            <li key={product.id} >
+              <ProductCard product={product} isSelectedCart={false} isSelectedFav={false} onClickCart={() => { }} onClickFav={() => { }}/>
             </li>
           ))}
         </ul>

@@ -32,8 +32,8 @@ export interface ProductBase {
 export interface Phone extends ProductBase {
   category: Category.PHONES;
   itemId?: string;
-  fullPrice?: number;
-  price?: number;
+  priceRegular?: number;
+  priceDiscount?: number;
   year?: number;
   image?: string;
 }
