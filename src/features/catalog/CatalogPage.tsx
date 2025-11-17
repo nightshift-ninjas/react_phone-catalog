@@ -52,13 +52,7 @@ const CatalogPage: React.FC = () => {
         <ul>
           {products.map((product) => (
             <li key={product.id}>
-              <ProductCard
-                product={product}
-                isSelectedCart={false}
-                isSelectedFav={false}
-                onClickCart={() => {}}
-                onClickFav={() => {}}
-              />
+              <ProductCard product={product} />
             </li>
           ))}
         </ul>
