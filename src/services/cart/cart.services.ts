@@ -1,11 +1,11 @@
-import { cartRepository } from "./cart.repository";
-import { productService } from "../product";
-import type { Cart, CartItem, CartItemCreate } from "./cart.types";
-import type { User } from "../auth";
+import { cartRepository } from './cart.repository';
+import { productService } from '../product';
+import type { Cart, CartItem, CartItemCreate } from './cart.types';
+import type { User } from '../auth';
 
 export const cartService = {
   // --- Cart operations ---
-  async getOrCreateCart(userId: User["id"]): Promise<Cart> {
+  async getOrCreateCart(userId: User['id']): Promise<Cart> {
     const carts = await cartRepository.getCartByUserId(userId);
     if (carts.length > 0) return carts[0];
 
@@ -21,7 +21,7 @@ export const cartService = {
       items.map(async (item) => {
         const product = await productService.fetchProductById(item.productId);
         return { ...item, product };
-      })
+      }),
     );
 
     return enriched;
@@ -30,7 +30,7 @@ export const cartService = {
   async addItemToCart(
     cartId: string,
     productId: string,
-    quantity = 1
+    quantity = 1,
   ): Promise<CartItem> {
     const data: CartItemCreate = {
       cartId,
@@ -49,7 +49,14 @@ export const cartService = {
     return cartRepository.updateItem(itemId, data);
   },
 
-  async removeCartItem(itemId: string) {
-    return cartRepository.deleteItem(itemId);
+  async removeCartItemByProduct(cartId: string, productId: string) {
+    const existing = await cartRepository.findItemByCartIdAndProductId(
+      cartId,
+      productId,
+    );
+
+    if (!existing) return;
+
+    return cartRepository.deleteItem(existing.id);
   },
 };

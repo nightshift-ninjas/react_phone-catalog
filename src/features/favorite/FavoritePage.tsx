@@ -59,7 +59,6 @@ const FavoritePage: React.FC = () => {
           {favorites.map((fav) => (
             <li key={fav.id} className="favorite__item">
               <strong>{fav.product?.name}</strong>
-              <span>Product ID: {fav.productId}</span>
             </li>
           ))}
         </ul>
