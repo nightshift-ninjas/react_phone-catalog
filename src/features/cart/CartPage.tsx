@@ -11,7 +11,7 @@ const CartPage: React.FC = () => {
   const { user, loading: authLoading } = useAuth();
 
   const [cart, setCart] = useState<Cart | null>(null);
-  const [items, setItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -31,7 +31,7 @@ const CartPage: React.FC = () => {
         setCart(response);
 
         const cartItems = await cartService.fetchCartItems(response.id);
-        setItems(cartItems);
+        setCartItems(cartItems);
       } catch (error) {
         setError(`Something went wrong while fetching cart: ${error}`);
       } finally {
@@ -52,11 +52,11 @@ const CartPage: React.FC = () => {
 
       {cart && <p>Cart ID: {cart.id}</p>}
 
-      {items.length === 0 ? (
+      {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
         <ul>
-          {items.map((item) => (
+          {cartItems.map((item) => (
             <li key={item.id}>
               {item.product?.name} — Quantity: {item.quantity}
             </li>

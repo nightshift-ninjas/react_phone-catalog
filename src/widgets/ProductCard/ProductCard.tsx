@@ -12,9 +12,9 @@ type Props = {
   product: Product;
 };
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
-  const BASE_URL = 'src/shared/assets/';
+const BASE_URL = 'src/shared/assets/';
 
+export const ProductCard: React.FC<Props> = ({ product }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 

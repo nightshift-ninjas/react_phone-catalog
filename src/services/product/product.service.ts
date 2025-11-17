@@ -1,9 +1,9 @@
-import { productRepository } from "./product.repository";
-import type { Category, Product } from "./product.types";
-import type { DocumentData } from "firebase/firestore";
+import { productRepository } from './product.repository';
+import { Category, type CategoryStats, type Product } from './product.types';
+import type { DocumentData } from 'firebase/firestore';
 
 export const productService = {
-  async fetchProductById(id: Product["id"]): Promise<Product> {
+  async fetchProductById(id: Product['id']): Promise<Product> {
     const product = await productRepository.getById(id);
 
     if (!product) {
@@ -23,11 +23,30 @@ export const productService = {
     return products;
   },
 
-  async updateProduct(id: Product["id"], data: Partial<Product>) {
+  async updateProduct(id: Product['id'], data: Partial<Product>) {
     return productRepository.update(id, data);
   },
 
   async fetchPaginated(pageSize: number, lastDoc?: DocumentData | null) {
     return productRepository.getPaginated(pageSize, lastDoc);
+  },
+
+  async getCategoryStats(): Promise<CategoryStats[]> {
+    const products = await productRepository.getAll();
+
+    const categoryCounts: Record<Category, number> = {
+      [Category.PHONES]: 0,
+      [Category.TABLETS]: 0,
+      [Category.Accessory]: 0,
+    };
+
+    for (const p of products) {
+      categoryCounts[p.category]++;
+    }
+
+    return Object.entries(categoryCounts).map(([category, numberOfModels]) => ({
+      category: category as Category,
+      numberOfModels,
+    }));
   },
 };
