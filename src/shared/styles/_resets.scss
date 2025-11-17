@@ -62,11 +62,14 @@ button:active {
 
 input,
 select,
-textarea {
+textarea,
+input:focus,
+textarea:focus {
   font: inherit;
   color: inherit;
   background: initial;
   border: initial;
+  outline: none;
 }
 
 textarea {
