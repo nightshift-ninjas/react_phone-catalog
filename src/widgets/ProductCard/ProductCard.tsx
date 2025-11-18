@@ -70,7 +70,10 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   }
 
   return (
-    <div className="product-card">
+  <div className="product-card">
+
+    <div className="product-card__top">
+
       <Link to={`/catalog/${product.category}/product/${product.id}`}>
         <div className="product-card__image-wrapper">
           <img
@@ -93,27 +96,22 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
       <div className="product-card__divider" />
 
       <ul className="product-card__specs">
-        <li>
-          <span className="spec-name">Screen</span>
-          <span className="spec-value">{product.screen}</span>
-        </li>
-        <li>
-          <span className="spec-name">Capacity</span>
-          <span className="spec-value">{product.capacity}</span>
-        </li>
-        <li>
-          <span className="spec-name">RAM</span>
-          <span className="spec-value">{product.ram}</span>
-        </li>
+        <li><span className="spec-name">Screen</span><span>{product.screen}</span></li>
+        <li><span className="spec-name">Capacity</span><span>{product.capacity}</span></li>
+        <li><span className="spec-name">RAM</span><span>{product.ram}</span></li>
       </ul>
 
-      <div className="product-card__actions">
-        <Button isSelected={isSelectedCart} onClick={onClickCart}>
-          {isSelectedCart ? 'Added' : 'Add to cart'}
-        </Button>
-
-        <FavoriteButton isSelected={isSelectedFav} onClick={onClickFav} />
-      </div>
     </div>
+
+    <div className="product-card__actions">
+      <Button isSelected={isSelectedCart} onClick={onClickCart}>
+        {isSelectedCart ? 'Added' : 'Add to cart'}
+      </Button>
+
+      <FavoriteButton isSelected={isSelectedFav} onClick={onClickFav} />
+    </div>
+
+  </div>
+
   );
 };

@@ -1,7 +1,7 @@
 import type { User } from "../auth";
 import type { Product } from "../product";
 
-export type FavoriteItem = {
+export type FavoriteItem  = {
   id: string;
   userId: User["id"];
   productId: Product["id"];

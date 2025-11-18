@@ -12,6 +12,7 @@ main {
 
   padding: map.get($spacing, "md");
   @include on-desktop {
-    padding: 0;
+    padding-inline: 32gipx;
+    padding-bottom: 80px;
   }
 }
