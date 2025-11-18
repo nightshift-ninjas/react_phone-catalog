@@ -7,6 +7,8 @@ import ProductDetailPage from '../../features/product-detail';
 import CatalogPage from '../../features/catalog';
 import HomePage from '../../features/home';
 import App from '../App';
+import { ContactsPage } from '../../features/contacts';
+import { RightsPage } from '../../features/rights';
 
 export const AppRoutes = () => (
   <Routes>
@@ -21,6 +23,8 @@ export const AppRoutes = () => (
       <Route path="cart" element={<CartPage />} />
 
       <Route path="favorite" element={<FavoritePage />} />
+      <Route path="contacts" element={<ContactsPage />} />
+      <Route path="rights" element={<RightsPage />} />
     </Route>
 
     <Route path="auth/" element={<AuthPage />}>
