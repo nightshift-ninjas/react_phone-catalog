@@ -5,175 +5,80 @@
 
 .nav {
   --height: 48px;
-  z-index: 100;
 
-  position: sticky;
-  top: 0;
-  width: 100vw;
-  border-bottom: $border;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: var(--bg-color);
-
-  height: var(--height);
-
-  @include on-desktop {
+  @include on-tablet {
     --height: 64px;
   }
 
-  &__block {
-    display: flex;
-    align-items: center;
-    gap: map.get($spacing, 'md');
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100vw;
+  height: var(--height);
+  background-color: var(--bg-color);
+  padding-inline: map.get($spacing, 'xl');
+  border-bottom: $border;
 
-    @include on-desktop {
-      gap: map.get($spacing, 'lg');
-    }
+  display: flex;
+  gap: map.get($spacing, 'xl');
+  justify-content: space-between;
+  align-items: center;
+
+  @include on-tablet {
+    justify-content: flex-start;
   }
 
   &__brand {
-    padding-inline: map.get($spacing, 'md');
-
-    @include on-desktop {
-      padding-inline: map.get($spacing, 'lg');
-    }
-
     svg {
-      width: 64px;
-      height: 22px;
-
-      @include on-desktop {
-        width: 80px;
-        height: 28px;
-      }
+      width: 80px;
 
       path:not(#no-fill) {
-        fill: var(--icon-color);
+        fill: var(--text-color);
       }
     }
   }
 
-  &__list {
-    display: none;
-    align-items: center;
-    gap: map.get($spacing, 'xl');
-
-    @include on-desktop {
-      display: flex;
-    }
-
-    @include on-desktop {
-      gap: map.get($spacing, '3xl');
-    }
-
-    @include uppercase-text;
-  }
-
-  &__link {
-    position: relative;
-    color: var(--nav-not-active-link);
-
-    &::before {
-      content: '';
-
-      position: absolute;
-      bottom: 0;
-      transform: translateY(10px);
-      height: 1.5px;
-      width: 0;
-
-      background-color: var(--nav-not-active-link);
-
-      transition:
-        width $base-transition ease,
-        left $base-transition ease,
-        right $base-transition ease;
-    }
-
-    &--active {
-      color: var(--text-color);
-
-      &::before {
-        background-color: var(--text-color);
-      }
-    }
-  }
-
-  &__link--active::before,
-  &__link:hover::before {
-    width: 100% !important;
-    left: 0;
-    right: auto;
-  }
-
-  &__link:not(:hover)::before {
-    width: 0;
-    right: 0;
-    left: auto;
-  }
-
-  &__btn {
-    position: relative;
-    display: none;
-    justify-content: center;
-    align-items: center;
-    border-left: $border;
-
-    width: var(--height);
-    height: var(--height);
-
-    @include on-desktop {
-      display: flex;
-    }
-
-    &:nth-last-child {
-      border: none;
-    }
-
-    svg {
-      width: 16px;
-      height: 16px;
-
-      path {
-        fill: var(--icon-color);
-      }
-    }
-  }
-
-  /* --- Mobile Menu --- */
-  &__humburger {
+  &__mobile-btn {
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: map.get($spacing, 'xs');
+    justify-content: space-between;
 
-    width: var(--height);
-    height: var(--height);
-    border-inline: $border;
-
-    @include on-desktop {
-      display: none;
-    }
+    width: 20px;
+    height: 13px;
 
     span {
-      width: 20px;
-      height: 2px;
+      width: 100%;
+      height: 1.6px;
       background-color: var(--icon-color);
       transition: transform $base-transition ease;
-      transform-origin: center center;
     }
 
-    &--active {
+    @include on-tablet {
+      display: none;
+    }
+  }
+
+  &__content {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    @include on-tablet {
+      display: flex;
+    }
+  }
+
+  &--collapsed {
+    .nav__mobile-btn {
       span {
         position: absolute;
         top: 50%;
+        transform: translateY(-50%);
 
         &:nth-child(1) {
-          transform: rotate(45deg);
+          transform: translateY(-50%) rotate(45deg);
         }
 
         &:nth-child(2) {
@@ -181,52 +86,210 @@
         }
 
         &:nth-child(3) {
-          transform: rotate(-45deg);
+          transform: translateY(-50%) rotate(-45deg);
         }
+      }
+    }
+
+    .nav__content {
+      display: flex;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      padding: map.get($spacing, 'md') map.get($spacing, 'xl');
+      flex-direction: column;
+      align-items: flex-start;
+      gap: map.get($spacing, 'lg');
+      background-color: var(--bg-color);
+      border-bottom: $border;
+
+      .nav__block:nth-child(1) {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav__block:nth-child(2) {
+        flex-direction: row-reverse;
       }
     }
   }
 
-  &__mobile {
-    transition:
-      height calc($base-transition * 1.5) ease,
-      background-color $theme-transition ease;
-    height: 0;
+  &__link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--nav-not-active-link);
 
-    &--active {
-      height: calc(100vh - var(--height));
+    position: relative;
+    height: var(--height);
+
+    svg {
+      width: 20px;
+      transition: transform $base-transition ease;
+
+      path {
+        fill: var(--text-color);
+      }
     }
 
-    position: fixed;
-    z-index: 1;
-    top: var(--height);
-    left: 0;
-    width: 100vw;
-    background-color: var(--bg-color);
-    overflow: hidden;
+    &:hover {
+      color: var(--text-color);
 
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+      svg {
+        transform: scale(1.1);
+      }
+    }
+
+    &--active {
+      color: var(--text-color);
+      font-weight: 600;
+
+      &::after {
+        content: '';
+
+        position: absolute;
+        top: 100%;
+        transform: translateY(-50%);
+        left: 0;
+
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-color);
+      }
+    }
   }
 
-  &__mobile .nav__list {
+  &__catalog-link {
+    position: relative;
+
+    &--active {
+      &::before {
+        content: '';
+
+        position: absolute;
+        top: calc(100% + map.get($spacing, 'sm'));
+        left: 0;
+
+        width: 100%;
+        height: 2px;
+        background-color: var(--text-color);
+      }
+    }
+  }
+
+  &__block {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: map.get($spacing, '2xl');
-    margin-top: map.get($spacing, '2xl');
-    font-size: 24px;
+    gap: map.get($spacing, 'lg');
+
+    &:nth-child(2) {
+      gap: 0px;
+
+      & > * {
+        padding-inline: map.get($spacing, 'md');
+      }
+    }
   }
 
-  &__btn-group {
+  &__dropdown {
+    position: relative;
     display: flex;
+    justify-content: center;
+    z-index: 1;
   }
 
-  &__mobile .nav__btn {
-    border-top: $border;
-    width: 100%;
-    height: 64px;
+  &__dropdown-list {
     display: flex;
+    justify-content: center;
+    background-color: var(--bg-color-lighter);
+    border-radius: 6px;
+    padding: 4px;
+  }
+
+  &__dropdown-btn {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'md');
+
+    padding: map.get($spacing, 'xs') map.get($spacing, 'sm');
+    outline: none;
+    user-select: none;
+    border-radius: 4px;
+    color: var(--text-color);
+
+    svg {
+      rotate: 90deg;
+      transition: transform $base-transition ease;
+
+      path {
+        fill: var(--text-color);
+      }
+    }
+
+    &[data-state='open'] svg {
+      transform: scale(-1);
+    }
+
+    &[data-state='closed'] svg {
+      transform: scale(1);
+    }
+  }
+
+  &__dropdown-content {
+    position: absolute;
+    top: calc(100% + map.get($spacing, 'sm'));
+    left: 0;
+    width: 200%;
+    animation-duration: 250ms;
+    animation-timing-function: ease;
+    background-color: var(--bg-color-lighter);
+    border-radius: 4px;
+    padding: map.get($spacing, 'md') map.get($spacing, 'md');
+
+    &[data-state='open'] {
+      animation-name: scaleIn;
+    }
+
+    &[data-state='closed'] {
+      animation-name: scaleOut;
+    }
+  }
+
+  &__dropdown-content-list {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'lg');
+    text-transform: capitalize;
+    font-weight: 600;
+  }
+
+  &__dropdown-content-item {
+    color: var(--nav-not-active-link);
+
+    &:hover {
+      color: var(--text-color);
+    }
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: rotateX(-30deg) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: rotateX(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotateX(-10deg) scale(0.95);
   }
 }
