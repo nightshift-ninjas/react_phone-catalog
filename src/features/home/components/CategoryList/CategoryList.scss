@@ -1,0 +1,24 @@
+.category-list {
+  margin: 0 auto;
+  padding: 40px 20px;
+  max-width: 1200px;
+}
+
+.category-list__title {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 24px;
+}
+
+.category-list__items {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+@media (max-width: 639px) {
+  .category-list__title {
+    font-size: 22px; 
+  }
+}
