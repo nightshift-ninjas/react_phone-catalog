@@ -1,7 +1,12 @@
 export enum Category {
-  PHONES = "phones",
-  TABLETS = "tablets",
-  Accessory = "accessories",
+  PHONES = 'phones',
+  TABLETS = 'tablets',
+  Accessory = 'accessories',
+}
+
+export interface CategoryStats {
+  category: Category;
+  numberOfModels: number;
 }
 
 export interface ProductDescriptionSection {

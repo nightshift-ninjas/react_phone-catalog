@@ -1,5 +1,5 @@
 import { cartRepository } from './cart.repository';
-import { productService } from '../product';
+import { productService, type Product } from '../product';
 import type { Cart, CartItem, CartItemCreate } from './cart.types';
 import type { User } from '../auth';
 
@@ -45,11 +45,18 @@ export const cartService = {
     return { id: ref.id, ...data, product };
   },
 
-  async updateCartItem(itemId: string, data: Partial<CartItem>) {
+  async updateCartItem(itemId: CartItem['id'], data: Partial<CartItem>) {
     return cartRepository.updateItem(itemId, data);
   },
 
-  async removeCartItemByProduct(cartId: string, productId: string) {
+  async removeCartItemById(itemId: CartItem['id']) {
+    const existing = await cartRepository.getItemById(itemId);
+    if (!existing) return;
+
+    return cartRepository.deleteItem(itemId);
+  },
+
+  async removeCartItemByProduct(cartId: Cart['id'], productId: Product['id']) {
     const existing = await cartRepository.findItemByCartIdAndProductId(
       cartId,
       productId,
