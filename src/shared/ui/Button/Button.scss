@@ -8,7 +8,9 @@
   font-weight: 700;
   line-height: 21px;
   cursor: pointer;
-  transition: background $base-transition ease, box-shadow $base-transition ease;
+  transition:
+    background $base-transition ease,
+    box-shadow $base-transition ease;
   border: 1px solid var(--btn-bg-color);
 
   /* REGULAR (not selected) */
@@ -24,8 +26,26 @@
 
   /* SELECTED (completed) */
   &--selected {
-    background: #{map.get($colors, 'white')};
+    background: map.get($colors, 'white');
     border-color: var(--border-color);
-    color: #{map.get($colors, 'green')};
+    color: map.get($colors, 'green');
+  }
+}
+
+[data-theme='dark'] {
+  .btn {
+    background-color: map.get($colors, 'gray-black');
+    border-color: map.get($colors, 'gray-black');
+    color: var(--text-color);
+
+    &:hover {
+      box-shadow: 1px 1px 5px 0px var(--btn-shadow-color);
+    }
+
+    &--selected {
+      background-color: map.get($colors, 'gray-black');
+      border-color: map.get($colors, 'gray-black');
+      color: map.get($colors, 'green');
+    }
   }
 }

@@ -11,4 +11,12 @@
       margin-bottom: map.get($spacing, '2xl');
     }
   }
+
+  &__total-items {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'sm');
+    margin-top: map.get($spacing, "sm");
+    color: var(--nav-not-active-link);
+  }
 }
