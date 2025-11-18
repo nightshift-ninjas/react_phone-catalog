@@ -1,0 +1,13 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.home {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, '2xl');
+
+  @include on-tablet {
+    gap: map.get($spacing, '4xl');
+  }
+}

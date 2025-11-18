@@ -8,6 +8,7 @@ import categoryPhones from '../../../../shared/assets/img/category-phones.webp';
 import categoryTablets from '../../../../shared/assets/img/category-tablets.webp';
 import categoryAccessories from '../../../../shared/assets/img/category-accessories.webp';
 import type { Category } from '../../../../services/product';
+import { Link } from 'react-router-dom';
 
 const CategoryList: React.FC = () => {
   const [categories, setCategories] = useState<
@@ -43,16 +44,19 @@ const CategoryList: React.FC = () => {
   return (
     <div className="category-list">
       <h2 className="category-list__title">Shop by category</h2>
-      <div className="category-list__items">
+      <ul className="category-list__list">
         {categories.map((category) => (
-          <CategoryItem
-            key={category.category}
-            categoryName={CategoryLabels[category.category as Category]}
-            categoryQuantity={category.numberOfModels}
-            categoryImg={getCategoryImage(category.category)}
-          />
+          <li className="category-list__item" key={category.category}>
+            <Link to={`/catalog/${category.category}`}>
+              <CategoryItem
+                categoryName={CategoryLabels[category.category as Category]}
+                categoryQuantity={category.numberOfModels}
+                categoryImg={getCategoryImage(category.category)}
+              />
+            </Link>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };

@@ -1,24 +1,25 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
 .category-list {
-  margin: 0 auto;
-  padding: 40px 20px;
-  max-width: 1200px;
-}
+  width: 100%;
 
-.category-list__title {
-  font-size: 32px;
-  font-weight: 800;
-  margin-bottom: 24px;
-}
+  &__title {
+    font-weight: 800;
+    margin-bottom: map.get($spacing, 'lg');
+  }
 
-.category-list__items {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 16px;
-}
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: map.get($spacing, 'md');
 
-@media (max-width: 639px) {
-  .category-list__title {
-    font-size: 22px; 
+    @include grid(1);
+
+    @include on-tablet {
+      @include grid(3);
+    }
   }
 }

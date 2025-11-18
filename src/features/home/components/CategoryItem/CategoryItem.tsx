@@ -13,17 +13,19 @@ const CategoryItem: React.FC<Props> = ({
   categoryName,
 }) => {
   return (
-    <div className="category-item">
-      <div className="category-item__image-container">
+    <article className="category-item">
+      <div className="category-item__img-wrapper">
         <img
           src={categoryImg}
           alt={categoryName}
-          className="category-item__image"
+          className="category-item__img"
         />
       </div>
-      <h3 className="category-item__name">{categoryName}</h3>
-      <p className="category-item__quantity">{categoryQuantity} models</p>
-    </div>
+
+      <h3 className="category-item__title">{categoryName}</h3>
+
+      <p className="category-item__count">{categoryQuantity} models</p>
+    </article>
   );
 };
 
