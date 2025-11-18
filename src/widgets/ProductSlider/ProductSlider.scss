@@ -1,5 +1,5 @@
-@use "sass:map";
-@use "../../shared/styles/vars" as *;
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
 
 .slider {
   position: relative;
@@ -9,7 +9,7 @@
     font-weight: 800;
     line-height: 41px;
 
-    margin-bottom: map.get($spacing, "lg");
+    margin-bottom: map.get($spacing, 'lg');
   }
 
   &__navigation-buttons {
@@ -17,6 +17,6 @@
     display: flex;
     top: 1%;
     right: 0%;
-    gap: 16px;
+    gap: map.get($spacing, 'md');
   }
 }

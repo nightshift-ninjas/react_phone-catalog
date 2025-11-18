@@ -1,6 +1,7 @@
 import React from 'react';
-import './ArrowButton.scss';
 import ArrowIcon from '../../assets/icons/arrow-icon-dark.svg?react';
+import cn from 'classnames';
+import './ArrowButton.scss';
 
 type ArrowButtonProps = {
   onClick: () => void;
@@ -32,7 +33,7 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({
 
   return (
     <button
-      className={`arrow-button ${isDisabled ? 'disabled' : ''}`}
+      className={cn('arrow-button', { 'arrow-button--disabled': isDisabled })}
       onClick={handleClick}
       disabled={isDisabled}
     >

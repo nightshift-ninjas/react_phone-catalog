@@ -6,26 +6,25 @@
 .product-card {
   width: 100%;
   height: 100%;
-  max-width: 288px;
   padding: 32px;
   background: var(--bg-color-lighter);
   border: $border;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-
-  @include on-desktop {
-    max-width: 272px;
-  }
+  gap: map.get($spacing, 'sm');
 
   &__image-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 130px;
+    height: 300px;
 
     @include on-tablet {
-      height: 196px;
+      height: 300px;
+    }
+
+    @include on-desktop {
+      height: 200px;
     }
   }
 
@@ -36,31 +35,30 @@
   }
 
   &__title {
-    padding-top: 16px;
+    padding-top: map.get($spacing, 'md');
     font-size: 14px;
     font-weight: 600;
     line-height: 21px;
     color: var(--text-color);
-
   }
 
   &__top {
-    flex: 1 1 auto; 
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: map.get($spacing, 'sm');
   }
 
   &__actions {
-    margin-top: auto; 
+    margin-top: auto;
     display: flex;
-    gap: 8px;
+    gap: map.get($spacing, 'sm');
   }
 
   &__price {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: map.get($spacing, 'sm');
 
     &-current {
       font-size: 22px;
@@ -84,8 +82,8 @@
 
   &__specs {
     list-style: none;
-    padding-block: 8px;
-    gap: 8px;
+    padding-block: map.get($spacing, 'sm');
+    gap: map.get($spacing, 'sm');
     margin: 0;
 
     li {
@@ -102,7 +100,7 @@
 
   &__actions {
     display: flex;
-    gap: 8px;
+    gap: map.get($spacing, 'sm');
   }
 }
 

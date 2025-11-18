@@ -70,48 +70,54 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
   }
 
   return (
-  <div className="product-card">
+    <article className="product-card">
+      <div className="product-card__top">
+        <Link to={`/catalog/${product.category}/product/${product.id}`}>
+          <div className="product-card__image-wrapper">
+            <img
+              src={`${BASE_URL}${product.images?.[0] ?? 'placeholder.png'}`}
+              alt={product.name || 'Product image'}
+              className="product-card__image"
+            />
+          </div>
+        </Link>
 
-    <div className="product-card__top">
+        <h6 className="product-card__title">{product.name}</h6>
 
-      <Link to={`/catalog/${product.category}/product/${product.id}`}>
-        <div className="product-card__image-wrapper">
-          <img
-            src={`${BASE_URL}${product.images?.[0] ?? 'placeholder.png'}`}
-            alt={product.name || 'Product image'}
-            className="product-card__image"
-          />
+        <div className="product-card__price">
+          <span className="product-card__price-current">
+            ${product.priceDiscount}
+          </span>
+          <span className="product-card__price-old">
+            ${product.priceRegular}
+          </span>
         </div>
-      </Link>
 
-      <h6 className="product-card__title">{product.name}</h6>
+        <div className="product-card__divider" />
 
-      <div className="product-card__price">
-        <span className="product-card__price-current">
-          ${product.priceDiscount}
-        </span>
-        <span className="product-card__price-old">${product.priceRegular}</span>
+        <ul className="product-card__specs">
+          <li>
+            <span className="spec-name">Screen</span>
+            <span>{product.screen}</span>
+          </li>
+          <li>
+            <span className="spec-name">Capacity</span>
+            <span>{product.capacity}</span>
+          </li>
+          <li>
+            <span className="spec-name">RAM</span>
+            <span>{product.ram}</span>
+          </li>
+        </ul>
       </div>
 
-      <div className="product-card__divider" />
+      <div className="product-card__actions">
+        <Button isSelected={isSelectedCart} onClick={onClickCart}>
+          {isSelectedCart ? 'Added' : 'Add to cart'}
+        </Button>
 
-      <ul className="product-card__specs">
-        <li><span className="spec-name">Screen</span><span>{product.screen}</span></li>
-        <li><span className="spec-name">Capacity</span><span>{product.capacity}</span></li>
-        <li><span className="spec-name">RAM</span><span>{product.ram}</span></li>
-      </ul>
-
-    </div>
-
-    <div className="product-card__actions">
-      <Button isSelected={isSelectedCart} onClick={onClickCart}>
-        {isSelectedCart ? 'Added' : 'Add to cart'}
-      </Button>
-
-      <FavoriteButton isSelected={isSelectedFav} onClick={onClickFav} />
-    </div>
-
-  </div>
-
+        <FavoriteButton isSelected={isSelectedFav} onClick={onClickFav} />
+      </div>
+    </article>
   );
 };

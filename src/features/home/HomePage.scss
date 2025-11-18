@@ -6,8 +6,10 @@
   display: flex;
   flex-direction: column;
   gap: map.get($spacing, '2xl');
+  margin-top: map.get($spacing, '2xl');
 
   @include on-tablet {
     gap: map.get($spacing, '4xl');
+    margin-top: map.get($spacing, '4xl');
   }
 }

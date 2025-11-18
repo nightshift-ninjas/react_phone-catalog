@@ -52,11 +52,11 @@ export const ProductSlider: React.FC<Props> = ({ layoutText, products }) => {
         breakpoints={{
           640: {
             slidesPerView: 2.5,
-            spaceBetween: 40,
+            spaceBetween: 20,
           },
           1200: {
             slidesPerView: 4,
-            spaceBetween: 50,
+            spaceBetween: 30,
           },
         }}
       >
