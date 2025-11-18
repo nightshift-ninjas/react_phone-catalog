@@ -1,6 +1,6 @@
-@use "../../shared/styles/mixins" as *; 
-@use "../../shared/styles/theme" as *;
-@use "../../shared/styles/_vars" as *;
+@use '../../shared/styles/mixins' as *;
+@use '../../shared/styles/theme' as *;
+@use '../../shared/styles/_vars' as *;
 @use 'sass:map';
 
 .product-card {
@@ -79,16 +79,20 @@
       font-size: 12px;
       font-weight: 600;
 
-
       .spec-name {
         color: #{map.get($colors, 'gray')};
       }
-
     }
   }
 
   &__actions {
     display: flex;
     gap: 8px;
+  }
+}
+
+[data-theme='dark'] {
+  .product-card {
+    border: none;
   }
 }

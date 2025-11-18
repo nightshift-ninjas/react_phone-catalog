@@ -4,15 +4,22 @@ import { productService } from '../../services/product/product.service';
 import type { Product } from '../../services/product';
 
 const HomePage: React.FC = () => {
-  const [products, setProducts] = useState<Product[] | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState('');
+
   useEffect(() => {
     const loadProducts = async () => {
+      setIsLoading(true);
+      setError('');
+
       try {
-        const productsFromServer = await productService.fetchAll(); 
+        const productsFromServer = await productService.fetchAll();
         setProducts(productsFromServer);
       } catch (error) {
-        console.log(error);
-        throw new Error("Something went wrong during loading data");
+        setError(`Something went wrong during loading data: ${error}`);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -21,7 +28,9 @@ const HomePage: React.FC = () => {
 
   return (
     <>
-      {products !== null && <ProductSlider layoutText='Default' products={products} />}
+      {products !== null && (
+        <ProductSlider layoutText="Default" products={products} />
+      )}
     </>
   );
 };

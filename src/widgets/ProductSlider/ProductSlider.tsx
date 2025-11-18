@@ -24,23 +24,24 @@ export const ProductSlider: React.FC<Props> = ({ layoutText, products }) => {
   return (
     <div className="slider">
       <div className="slider__layout">{layoutText}</div>
+
       <div className="slider__navigation-buttons">
-        <ArrowButton 
-          onClick={() => swiperRef.current?.slidePrev()} 
-          direction='left' 
-          isDisabled={isBeginning} 
+        <ArrowButton
+          onClick={() => swiperRef.current?.slidePrev()}
+          direction="left"
+          isDisabled={isBeginning}
         />
-        <ArrowButton 
-          onClick={() => swiperRef.current?.slideNext()} 
-          direction='right'
-          isDisabled={isEnd} 
+        <ArrowButton
+          onClick={() => swiperRef.current?.slideNext()}
+          direction="right"
+          isDisabled={isEnd}
         />
       </div>
+
       <Swiper
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
         }}
-
         onSlideChange={(swiper) => {
           setIsBeginning(swiper.isBeginning);
           setIsEnd(swiper.isEnd);
@@ -48,17 +49,16 @@ export const ProductSlider: React.FC<Props> = ({ layoutText, products }) => {
         modules={[Navigation]}
         slidesPerView={1.5}
         spaceBetween={16}
-
         breakpoints={{
-        640: {
-          slidesPerView: 2.5,
-          spaceBetween: 40,
-        },
-        1200: {
-          slidesPerView: 4,
-          spaceBetween: 50,
-        },
-      }}
+          640: {
+            slidesPerView: 2.5,
+            spaceBetween: 40,
+          },
+          1200: {
+            slidesPerView: 4,
+            spaceBetween: 50,
+          },
+        }}
       >
         {products.map((product) => {
           console.log(product.id);

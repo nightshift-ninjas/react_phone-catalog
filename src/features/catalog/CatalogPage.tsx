@@ -1,42 +1,17 @@
 import { useParams } from 'react-router-dom';
-import {
-  Category,
-  productService,
-  type Product,
-} from '../../services/product/';
-import { useEffect, useState } from 'react';
+import { Category } from '../../services/product/';
 import { ProductCard } from '../../widgets/ProductCard';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
+import { CatalogFilter } from './components/CatalogFilter';
+import { useCatalogProducts } from './hooks/useCatalogProducts';
 import './CatalogPage.scss';
+import { CategoryLabels } from './types';
 
 const CatalogPage: React.FC = () => {
   const { category } = useParams<{ category: Category }>();
-  const [products, setProducts] = useState<Product[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
 
-  useEffect(() => {
-    if (!category) return;
-
-    const loadProducts = async () => {
-      try {
-        setIsLoading(true);
-        setError('');
-
-        const response = await productService.fetchByCategory(category);
-
-        setProducts(response);
-      } catch (error) {
-        setError(
-          `Something went wrong while fetching products by categories: ${error}`,
-        );
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadProducts();
-  }, [category]);
+  const { products, isLoading, error, page, perPage, total } =
+    useCatalogProducts(category);
 
   return (
     <div className="catalog">
@@ -46,9 +21,15 @@ const CatalogPage: React.FC = () => {
         />
       </div>
 
-      <h1>{`This is page for the Catalog of ${category}`}</h1>
+      <h1>{CategoryLabels[category || Category.PHONES]}</h1>
 
-      {!isLoading && (
+      <CatalogFilter />
+
+      {isLoading && <div>Loading products...</div>}
+
+      {!isLoading && error && <div>{error}</div>}
+
+      {!isLoading && !error && (
         <ul>
           {products.map((product) => (
             <li key={product.id}>
@@ -57,8 +38,6 @@ const CatalogPage: React.FC = () => {
           ))}
         </ul>
       )}
-
-      {!isLoading && error && <div>{error}</div>}
     </div>
   );
 };

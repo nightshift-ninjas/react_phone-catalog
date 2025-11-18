@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.catalog-filter {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'md');
+  margin-bottom: map.get($spacing, 'lg');
+  margin-top: map.get($spacing, 'xl');
+
+  @include on-tablet {
+    margin-top: map.get($spacing, '2xl');
+    flex-direction: row;
+  }
+}
