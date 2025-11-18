@@ -5,6 +5,7 @@ import { Breadcrumb } from '../../shared/ui/Breadcrumb';
 import { favoriteService } from '../../services/favorite/favorite.service';
 import type { FavoriteItem } from '../../services/favorite/favorite.types';
 import './FavoritePage.scss';
+import { ProductCard } from '../../widgets/ProductCard';
 
 const FavoritePage: React.FC = () => {
   const navigate = useNavigate();
@@ -45,7 +46,7 @@ const FavoritePage: React.FC = () => {
         <Breadcrumb items={[{ text: 'favorites', link: '/favorite' }]} />
       </div>
 
-      <h1>Your Favorites</h1>
+      <h1>Favorites</h1>
 
       {isLoading && <p>Loading favorites...</p>}
       {error && <p className="favorite__error">{error}</p>}
@@ -55,13 +56,16 @@ const FavoritePage: React.FC = () => {
       )}
 
       {!isLoading && favorites.length > 0 && (
-        <ul className="favorite__list">
+        <>
+          <p className="favorite__count">{favorites.length} items</p>
+          <ul className="favorite__list">
           {favorites.map((fav) => (
             <li key={fav.id} className="favorite__item">
-              <strong>{fav.product?.name}</strong>
+              {fav.product && <ProductCard product={fav.product} />}
             </li>
           ))}
-        </ul>
+          </ul>
+        </>
       )}
     </div>
   );

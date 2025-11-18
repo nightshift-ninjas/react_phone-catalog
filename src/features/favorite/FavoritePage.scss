@@ -11,4 +11,31 @@
       margin-bottom: map.get($spacing, '2xl');
     }
   }
+
+  &__count {
+    margin-top: 8px;
+    margin-bottom: 32px;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 21px;
+    color: map.get($colors, 'gray-light');
+
+    @include on-tablet {
+      margin-bottom: 40px;
+    }
+  }
+
+  &__list {
+    @include grid(1);
+    
+    @include on-tablet {
+      @include grid(2);
+      align-items: stretch;
+    }
+
+    @include on-desktop {
+      @include grid(4);
+    }
+
+  }
 }
