@@ -1,0 +1,22 @@
+@use "sass:map";
+@use "../../shared/styles/vars" as *;
+
+.slider {
+  position: relative;
+
+  &__layout {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 41px;
+
+    margin-bottom: map.get($spacing, "lg");
+  }
+
+  &__navigation-buttons {
+    position: absolute;
+    display: flex;
+    top: 1%;
+    right: 0%;
+    gap: 16px;
+  }
+}

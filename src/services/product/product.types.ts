@@ -32,29 +32,23 @@ export interface ProductBase {
   capacityAvailable?: string[];
   images?: string[];
   type: string;
+  priceRegular: number;
+  priceDiscount?: number;
 }
 
 export interface Phone extends ProductBase {
   category: Category.PHONES;
-  itemId?: string;
-  priceRegular?: number;
-  priceDiscount?: number;
   year?: number;
-  image?: string;
 }
 
 export interface Tablet extends ProductBase {
   category: Category.TABLETS;
   namespaceId: string;
-  priceRegular: number;
-  priceDiscount: number;
 }
 
 export interface Accessory extends ProductBase {
   category: Category.Accessory;
   namespaceId: string;
-  priceRegular: number;
-  priceDiscount: number;
 }
 
 export type Product = Phone | Tablet | Accessory;

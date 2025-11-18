@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import type { BreadcrumbItem } from './types';
 import HomeIcon from '../../assets/icons/home.svg?react';
@@ -13,10 +13,6 @@ export const Breadcrumb: React.FC<Props> = ({
   items = [],
   separator = '>',
 }) => {
-  useEffect(() => {
-    console.log('Breadcrumb items:', items);
-  }, [items]);
-
   return (
     <nav className="bread-crumb">
       <Link to="/">

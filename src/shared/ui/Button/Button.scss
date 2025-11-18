@@ -1,5 +1,5 @@
 @use 'sass:map';
-@import '../../styles/vars';
+@use '../../styles/vars' as *;
 
 .btn {
   width: 100%;

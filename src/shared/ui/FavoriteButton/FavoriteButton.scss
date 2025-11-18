@@ -44,8 +44,8 @@
 
 [data-theme='dark'] {
   .favorite-button {
-    background-color: #323542;
-    border-color: #323542;
+    background-color: map.get($colors, "gray-black");
+    border-color: map.get($colors, "gray-black");
 
     &:hover {
       background-color: #4A4D58;
