@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../shared/hooks';
-import type { Cart, CartItem } from '../../services/cart/cart.types';
+import type { Cart, CartItem as CartItemType} from '../../services/cart/cart.types';
 import { cartService } from '../../services/cart/cart.services';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
 import './CartPage.scss';
+import { CartItem } from './components/CartItem';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
   const { user, loading: authLoading } = useAuth();
 
   const [cart, setCart] = useState<Cart | null>(null);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [cartItems, setCartItems] = useState<CartItemType[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -55,10 +56,10 @@ const CartPage: React.FC = () => {
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <ul>
+        <ul className='cart__items-wrapper'>
           {cartItems.map((item) => (
             <li key={item.id}>
-              {item.product?.name} — Quantity: {item.quantity}
+              <CartItem item={ item } />
             </li>
           ))}
         </ul>
