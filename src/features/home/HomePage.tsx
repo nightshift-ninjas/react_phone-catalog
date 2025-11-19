@@ -10,6 +10,7 @@ import {
 } from '../../services/product';
 import CategoryList from './components/CategoryList/CategoryList';
 import './HomePage.scss';
+import ImageSlider from './components/ImageSlider/ImageSlider';
 
 const HomePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -43,7 +44,7 @@ const HomePage: React.FC = () => {
     <div className="home">
       <h1>Welcome to Nice Gadgets store!</h1>
 
-      {/* PLACE YOUR SLIDER HERE */}
+      <ImageSlider />
 
       {products && (
         <ProductSlider layoutText="Brand new models" products={random} />
