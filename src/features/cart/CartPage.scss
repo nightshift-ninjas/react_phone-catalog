@@ -11,4 +11,11 @@
       margin-bottom: map.get($spacing, '2xl');
     }
   }
+
+  &__items-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+
+  }
 }

@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+
+.pagination {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: map.get($spacing, "sm");
+  flex-wrap: wrap;
+}
