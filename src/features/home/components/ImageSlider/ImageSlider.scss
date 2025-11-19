@@ -46,6 +46,12 @@
     display: none;
   }
 
+  body[data-theme='dark'] & {
+    &__button {
+      background-color: map.get($colors, 'light');
+    }
+  }
+
   @include on-tablet {
     &__img {
       height: 400px;
