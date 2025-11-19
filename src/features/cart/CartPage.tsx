@@ -8,6 +8,7 @@ import { cartService } from '../../services/cart/cart.services';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
 import { CartItem } from './components/CartItem';
+import { CartInfo } from './components/CartInfo';
 import './CartPage.scss';
 
 const CartPage: React.FC = () => {
@@ -46,6 +47,12 @@ const CartPage: React.FC = () => {
     loadCartAndItems();
   }, [user, authLoading, navigate]);
 
+  const totalAmount = cartItems.reduce((sum, item) => {
+    const price =
+      item.product?.priceDiscount ?? item.product?.priceRegular ?? 0;
+    return sum + price * item.quantity;
+  }, 0);
+
   return (
     <div className="cart">
       <div className="cart__breadcrumbs">
@@ -54,17 +61,25 @@ const CartPage: React.FC = () => {
 
       <h1 className="cart__title">Your Cart</h1>
 
-      {cartItems.length === 0 ? (
-        <p>Your cart is empty.</p>
-      ) : (
-        <ul className="cart__items-wrapper">
-          {cartItems.map((item) => (
-            <li key={item.id}>
-              <CartItem item={item} />
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="cart__grid">
+        <div className="cart__block">
+          {cartItems.length === 0 ? (
+            <p>Your cart is empty.</p>
+          ) : (
+            <ul className="cart__items-wrapper">
+              {cartItems.map((item) => (
+                <li key={item.id}>
+                  <CartItem item={item} />
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+
+        <div className="cart__block">
+          <CartInfo total={totalAmount} itemsCount={cartItems.length} />
+        </div>
+      </div>
     </div>
   );
 };

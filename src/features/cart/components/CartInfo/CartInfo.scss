@@ -3,6 +3,11 @@
 @use '../../../../shared/styles/mixins' as *;
 
 .cart-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
   border: $border;
   padding: map.get($spacing, "lg");
 
