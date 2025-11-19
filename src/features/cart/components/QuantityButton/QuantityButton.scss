@@ -1,0 +1,37 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+
+.quantity-button {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border: $border;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-color);
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  &:hover:not(:disabled) {
+    border-color: var(--btn-bg-color);
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+[data-theme='dark'] {
+  .quantity-button {
+    background-color: map.get($colors, 'gray-black');
+    border-color: #313237;
+    &:hover {
+      background-color: #4a4d58;
+      border-color: #313237;
+    }
+  }
+}
