@@ -61,7 +61,6 @@ export const ProductSlider: React.FC<Props> = ({ layoutText, products }) => {
         }}
       >
         {products.map((product) => {
-          console.log(product.id);
           return (
             <SwiperSlide key={product.id}>
               <ProductCard product={product} />

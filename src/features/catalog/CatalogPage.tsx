@@ -1,17 +1,24 @@
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { Category } from '../../services/product/';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
 import { CatalogFilter } from './components/CatalogFilter';
 import { useCatalogProducts } from './hooks/useCatalogProducts';
 import { CategoryLabels } from './types';
 import { CatalogList } from './components/CatalogList';
+import { PaginationList } from './components/PaginationList';
 import './CatalogPage.scss';
 
 const CatalogPage: React.FC = () => {
   const { category } = useParams<{ category: Category }>();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const { products, isLoading, error, page, perPage, total } =
     useCatalogProducts(category);
+
+  const handlePageSelect = (pageNumber: number) => {
+    searchParams.set('page', String(pageNumber));
+    setSearchParams(searchParams);
+  };
 
   return (
     <div className="catalog">
@@ -34,7 +41,17 @@ const CatalogPage: React.FC = () => {
 
       {!isLoading && error && <div>{error}</div>}
 
-      {!isLoading && !error && <CatalogList products={products} />}
+      {!isLoading && !error && (
+        <>
+          <CatalogList products={products} /> 
+          <PaginationList 
+            onPageSelect={handlePageSelect} 
+            total={total} 
+            perPage={perPage} 
+            currentPage={page}
+          />
+        </>
+      )}
     </div>
   );
 };
