@@ -9,6 +9,7 @@ import HomePage from '../../features/home';
 import App from '../App';
 import { ContactsPage } from '../../features/contacts';
 import { RightsPage } from '../../features/rights';
+import { CheckoutPage } from '../../features/checkout';
 
 export const AppRoutes = () => (
   <Routes>
@@ -25,6 +26,7 @@ export const AppRoutes = () => (
       <Route path="favorite" element={<FavoritePage />} />
       <Route path="contacts" element={<ContactsPage />} />
       <Route path="rights" element={<RightsPage />} />
+      <Route path="checkout" element={<CheckoutPage />} />
     </Route>
 
     <Route path="auth/" element={<AuthPage />}>
