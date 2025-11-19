@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '../../../shared/styles/mixins' as *;
+@use '../../../shared/styles/vars' as *;
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: map.get($spacing, 'md');
+
+  &--disabled {
+    opacity: 0.7;
+    pointer-events: no-allowed;
+  }
+
+  &__input,
+  &__textarea {
+    width: 100%;
+    padding: 14px 18px;
+    box-shadow: inset 0 0 0 1px map.get($colors, 'platinum');
+    color: var(--text-color);
+    border-radius: 4px;
+    border: 1px solid transparent;
+    font-size: 14px;
+    transition: box-shadow $base-transition ease;
+
+    &:disabled {
+      background: map.get($colors, 'platinum');
+      color: var(--text-color-muted);
+      opacity: 0.6;
+      cursor: not-allowed;
+      box-shadow: inset 0 0 0 1px map.get($colors, 'silver');
+    }
+  }
+
+  &__textarea {
+    height: 120px;
+    resize: none;
+  }
+
+  &__label {
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: map.get($spacing, 'sm');
+  }
+
+  &__message {
+    margin-top: map.get($spacing, 'sm');
+    font-size: 13px;
+    color: map.get($colors, 'red');
+  }
+}
+
+[data-theme='dark'] {
+  .form-input__input,
+  .form-input__textarea {
+    background: var(--bg-color-lighter);
+  }
+}

@@ -2,7 +2,7 @@ export interface UserData {
   uid: string;
   email: string;
   displayName?: string;
-  photoURL?: string; // idk, maybe we will use it
+  photoURL?: string; // idk, maybe we will use it later
   createdAt: number;
 }
 

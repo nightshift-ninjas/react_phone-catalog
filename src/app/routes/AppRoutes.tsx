@@ -1,14 +1,16 @@
 import { Navigate, Route, Routes } from 'react-router-dom';
-import NotFound from '../../features/not-found';
+import App from '../App';
 import AuthPage, { LoginPage, SignupPage } from '../../features/auth';
+import NotFound from '../../features/not-found';
 import CartPage from '../../features/cart';
 import FavoritePage from '../../features/favorite';
 import ProductDetailPage from '../../features/product-detail';
 import CatalogPage from '../../features/catalog';
 import HomePage from '../../features/home';
-import App from '../App';
 import { ContactsPage } from '../../features/contacts';
 import { RightsPage } from '../../features/rights';
+import { CheckoutPage } from '../../features/checkout';
+import { ProfilePage } from '../../features/profile';
 
 export const AppRoutes = () => (
   <Routes>
@@ -25,6 +27,8 @@ export const AppRoutes = () => (
       <Route path="favorite" element={<FavoritePage />} />
       <Route path="contacts" element={<ContactsPage />} />
       <Route path="rights" element={<RightsPage />} />
+      <Route path="checkout" element={<CheckoutPage />} />
+      <Route path="profile" element={<ProfilePage />} />
     </Route>
 
     <Route path="auth/" element={<AuthPage />}>

@@ -60,18 +60,6 @@ button:active {
   box-shadow: none;
 }
 
-input,
-select,
-textarea,
-input:focus,
-textarea:focus {
-  font: inherit;
-  color: inherit;
-  background: initial;
-  border: initial;
-  outline: none;
-}
-
 textarea {
   resize: vertical;
 }
@@ -81,6 +69,7 @@ input,
 textarea,
 select {
   line-height: normal;
+  font: unset;
 }
 
 body {

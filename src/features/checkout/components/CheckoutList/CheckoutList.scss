@@ -1,0 +1,13 @@
+@use "sass:map";
+@use "../../../../shared/styles/vars" as *;
+
+.checkout-list {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, "md");
+
+  .cart-item {
+    border: none;
+    padding: 0;
+  }
+}

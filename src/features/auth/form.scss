@@ -19,6 +19,16 @@
     margin-bottom: map.get($spacing, 'md');
   }
 
+  &__field-group {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'md');
+
+    .form__field {
+      width: 100%;
+    }
+  }
+
   &__message {
     display: block;
     margin-top: map.get($spacing, 'sm');
@@ -29,8 +39,12 @@
 
   &__input {
     padding: 0 map.get($spacing, 'sm');
-    height: 35px;
     line-height: 1;
+  }
+
+  input {
+    height: 45px;
+    font-size: 14px;
   }
 
   &__textarea {
@@ -78,11 +92,11 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: map.get($spacing, "xs") map.get($spacing, "md");
+    padding: map.get($spacing, 'xs') map.get($spacing, 'md');
     width: 100%;
     color: var(--text-color);
 
-    gap: map.get($spacing, "md");
+    gap: map.get($spacing, 'md');
     border-radius: 4px;
     border: $border;
 
@@ -95,7 +109,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: map.get($spacing, "md");
+    gap: map.get($spacing, 'md');
     margin-block: map.get($spacing, 'lg');
 
     span {
