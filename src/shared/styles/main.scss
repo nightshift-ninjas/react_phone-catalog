@@ -11,6 +11,7 @@ main {
   margin-inline: auto;
 
   padding: map.get($spacing, "md");
+  
   @include on-desktop {
     padding-inline: 32gipx;
     padding-bottom: 80px;

@@ -50,19 +50,21 @@ export const CartItem: React.FC<Props> = ({ item }) => {
           ×
         </button>
 
-        <div className="cart-item__image_wrapper">
-          <img
-            src={`${BASE_URL}${item.product?.images?.[0] ?? 'placeholder.png'}`}
-            alt={item.product?.name || 'Product image'}
-            className="cart-item__image"
-          />
-        </div>
-
         <Link
           to={`/catalog/${item.product?.category}/product/${item.product?.id}`}
           className="cart-item__title"
         >
-          {item.product?.name}
+          <div className="cart-item__link-wrapper">
+            <div className="cart-item__image_wrapper">
+              <img
+                src={`${BASE_URL}${item.product?.images?.[0] ?? 'placeholder.png'}`}
+                alt={item.product?.name || 'Product image'}
+                className="cart-item__image"
+              />
+            </div>
+
+            <p>{item.product?.name}</p>
+          </div>
         </Link>
       </div>
 

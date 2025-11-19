@@ -6,13 +6,25 @@ import {
   GoogleAuthProvider,
   signInWithPopup,
   type User,
-} from "firebase/auth";
-import { auth } from "../../shared/config/firebase";
+  updateProfile,
+} from 'firebase/auth';
+import { auth } from '../../shared/config/firebase';
 
 export const authClient = {
   // Register new user
-  async register(email: string, password: string) {
-    return await createUserWithEmailAndPassword(auth, email, password);
+  async register(email: string, password: string, displayName?: string) {
+    const { user } = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password,
+    );
+
+    // Update Firebase Auth profile
+    if (displayName) {
+      await updateProfile(user, { displayName });
+    }
+
+    return user;
   },
 
   // Login

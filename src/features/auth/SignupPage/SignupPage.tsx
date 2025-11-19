@@ -9,6 +9,8 @@ import '../form.scss';
 export function SignupPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [loading, setLoading] = useState(false);
   const [agreement, setAgreement] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -19,11 +21,13 @@ export function SignupPage() {
     setLoading(true);
     setError(null);
 
+    const displayName = `${firstName} ${lastName}`.trim();
+
     try {
-      await authClient.register(email, password);
+      await authClient.register(email, password, displayName);
       navigate('/auth/login');
     } catch (error) {
-      setError(`Someting went wrong while trying to signup ${error}`);
+      setError(`Something went wrong while trying to sign up: ${error}`);
     } finally {
       setLoading(false);
     }
@@ -51,6 +55,48 @@ export function SignupPage() {
           Log in
         </Link>
       </p>
+
+      <div className="form__field-group">
+        {/* First Name */}
+        <Form.Field className="form__field" name="firstName">
+          <Form.Control asChild>
+            <input
+              className="form__input"
+              type="text"
+              placeholder="First name..."
+              value={firstName}
+              onChange={(event) => setFirstName(event.target.value)}
+              required
+            />
+          </Form.Control>
+
+          <div>
+            <Form.Message className="form__message" match="valueMissing">
+              Please provide your first name
+            </Form.Message>
+          </div>
+        </Form.Field>
+
+        {/* Last Name */}
+        <Form.Field className="form__field" name="lastName">
+          <Form.Control asChild>
+            <input
+              className="form__input"
+              type="text"
+              placeholder="Last name..."
+              value={lastName}
+              onChange={(event) => setLastName(event.target.value)}
+              required
+            />
+          </Form.Control>
+
+          <div>
+            <Form.Message className="form__message" match="valueMissing">
+              Please provide your last name
+            </Form.Message>
+          </div>
+        </Form.Field>
+      </div>
 
       <Form.Field className="form__field" name="email">
         <Form.Control asChild>

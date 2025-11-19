@@ -1,0 +1,37 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.user-info {
+  min-height: 300px;
+
+  &--center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+
+    gap: map.get($spacing, 'md');
+    margin-bottom: map.get($spacing, 'md');
+  }
+
+  &__item {
+    @include grid(2);
+
+    span:nth-child(1) {
+      font-weight: 600;
+    }
+
+    &--capitalize {
+      text-transform: capitalize;
+    }
+  }
+
+  &__button {
+    max-width: 200px;
+  }
+}
