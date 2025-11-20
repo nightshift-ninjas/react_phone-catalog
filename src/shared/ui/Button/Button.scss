@@ -26,7 +26,7 @@
 
   /* SELECTED (completed) */
   &--selected {
-    background: map.get($colors, 'purple');
+    background: map.get($colors, 'white');
     border-color: var(--border-color);
     color: map.get($colors, 'green');
   }
@@ -45,7 +45,7 @@
     &--selected {
       background-color: map.get($colors, 'purple');
       border-color: map.get($colors, 'gray-black');
-      color: map.get($colors, 'green');
+      color: map.get($colors, 'white');
     }
   }
 }
