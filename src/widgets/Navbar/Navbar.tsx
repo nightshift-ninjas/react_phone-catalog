@@ -25,9 +25,9 @@ const catalogLinks: NavbarLink[] = [
 
 const navButtons: NavButton[] = [
   { component: ThemeButton as React.ComponentType },
-  { path: 'favorite', icon: <FavoriteIcon /> },
-  { path: 'cart', icon: <ShoppingBagIcon /> },
-  { path: 'auth', icon: <ProfileIcon /> },
+  { path: '/favorite', icon: <FavoriteIcon /> },
+  { path: '/cart', icon: <ShoppingBagIcon /> },
+  { path: '/profile', icon: <ProfileIcon /> },
 ];
 
 export const Navbar: React.FC = () => {

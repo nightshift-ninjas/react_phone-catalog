@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '../../shared/hooks';
-import type { Cart, CartItem as CartItemType} from '../../services/cart/cart.types';
+import type {
+  Cart,
+  CartItem as CartItemType,
+} from '../../services/cart/cart.types';
 import { cartService } from '../../services/cart/cart.services';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
-import './CartPage.scss';
 import { CartItem } from './components/CartItem';
+import './CartPage.scss';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -49,17 +52,15 @@ const CartPage: React.FC = () => {
         <Breadcrumb items={[{ text: 'cart', link: `/cart` }]} />
       </div>
 
-      <h1>Your Cart</h1>
-
-      {cart && <p>Cart ID: {cart.id}</p>}
+      <h1 className="cart__title">Your Cart</h1>
 
       {cartItems.length === 0 ? (
         <p>Your cart is empty.</p>
       ) : (
-        <ul className='cart__items-wrapper'>
+        <ul className="cart__items-wrapper">
           {cartItems.map((item) => (
             <li key={item.id}>
-              <CartItem item={ item } />
+              <CartItem item={item} />
             </li>
           ))}
         </ul>

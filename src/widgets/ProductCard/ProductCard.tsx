@@ -71,8 +71,8 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
 
   return (
     <article className="product-card">
-      <div className="product-card__top">
-        <Link to={`/catalog/${product.category}/product/${product.id}`}>
+      <Link to={`/catalog/${product.category}/product/${product.id}`}>
+        <div className="product-card__top">
           <div className="product-card__image-wrapper">
             <img
               src={`${BASE_URL}${product.images?.[0] ?? 'placeholder.png'}`}
@@ -80,36 +80,36 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
               className="product-card__image"
             />
           </div>
-        </Link>
 
-        <h6 className="product-card__title">{product.name}</h6>
+          <h6 className="product-card__title">{product.name}</h6>
 
-        <div className="product-card__price">
-          <span className="product-card__price-current">
-            ${product.priceDiscount}
-          </span>
-          <span className="product-card__price-old">
-            ${product.priceRegular}
-          </span>
+          <div className="product-card__price">
+            <span className="product-card__price-current">
+              ${product.priceDiscount}
+            </span>
+            <span className="product-card__price-old">
+              ${product.priceRegular}
+            </span>
+          </div>
+
+          <div className="product-card__divider" />
+
+          <ul className="product-card__specs">
+            <li>
+              <span className="spec-name">Screen</span>
+              <span>{product.screen}</span>
+            </li>
+            <li>
+              <span className="spec-name">Capacity</span>
+              <span>{product.capacity}</span>
+            </li>
+            <li>
+              <span className="spec-name">RAM</span>
+              <span>{product.ram}</span>
+            </li>
+          </ul>
         </div>
-
-        <div className="product-card__divider" />
-
-        <ul className="product-card__specs">
-          <li>
-            <span className="spec-name">Screen</span>
-            <span>{product.screen}</span>
-          </li>
-          <li>
-            <span className="spec-name">Capacity</span>
-            <span>{product.capacity}</span>
-          </li>
-          <li>
-            <span className="spec-name">RAM</span>
-            <span>{product.ram}</span>
-          </li>
-        </ul>
-      </div>
+      </Link>
 
       <div className="product-card__actions">
         <Button isSelected={isSelectedCart} onClick={onClickCart}>
