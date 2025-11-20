@@ -1,0 +1,154 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.about-section {
+  margin-bottom: map.get($spacing, '2xl');
+
+  &__title {
+    font-size: 20px;
+    color: map.get($colors, 'dark');
+    font-weight: 700;
+    border-bottom: 1px solid #e2e6e9;
+    padding-bottom: map.get($spacing, 'md');
+    margin-bottom: map.get($spacing, 'xl');
+  }
+
+  &__section-title {
+    font-size: map.get($spacing, 'md');
+    font-weight: 700;
+    color: map.get($colors, 'dark');
+    margin-bottom: map.get($spacing, 'md');
+  }
+
+  &__text {
+    font-size: 14px;
+    font-weight: 600;
+    color: map.get($colors, 'gray-light');
+    margin-bottom: map.get($spacing, 'xl');
+    line-height: 21px;
+  }
+
+  &__text-item {
+    margin-bottom: 12px;
+  }
+
+  body[data-theme='dark'] & {
+    &__title {
+      color: map.get($colors, 'light');
+    }
+
+    &__section-title {
+      color: map.get($colors, 'light');
+    }
+
+    &__text-item {
+      color: map.get($colors, 'gray');
+    }
+  }
+
+  @include on-tablet {
+    margin-bottom: map.get($spacing, '3xl');
+
+    &__title {
+      font-size: 22px;
+      font-weight: 800;
+    }
+
+    &__section-title {
+      font-size: 20px;
+      margin-bottom: map.get($spacing, 'md');
+    }
+  }
+
+  @include on-desktop {
+    .product-description & {
+      margin-bottom: 0;
+      flex-basis: 65%;
+      flex-shrink: 1;
+    }
+  }
+}
+
+.tech-specs-section {
+  margin-bottom: map.get($spacing, '2xl');
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  &__title {
+    font-size: 20px;
+    color: map.get($colors, 'dark');
+    font-weight: 700;
+    border-bottom: 1px solid #e2e6e9;
+    padding-bottom: map.get($spacing, 'md');
+    margin-bottom: 30px;
+  }
+
+  &__item {
+    font-size: 14px;
+    color: map.get($colors, 'dark');
+    margin-bottom: map.get($spacing, 'sm');
+  }
+
+  &__label {
+    color: map.get($colors, 'gray-light');
+    font-weight: 500;
+    min-width: 40%;
+  }
+
+  &__value {
+    font-weight: 500;
+    text-align: right;
+  }
+
+  body[data-theme='dark'] & {
+    &__title {
+      color: map.get($colors, 'light');
+    }
+
+    &__label {
+      color: map.get($colors, 'gray');
+    }
+
+    &__value {
+      color: map.get($colors, 'light');
+    }
+  }
+
+  @include on-tablet {
+    margin-bottom: map.get($spacing, '2xl');
+
+    &__row {
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+
+    &__title {
+      font-size: 22px;
+      font-weight: 800;
+      border-bottom: 1px solid #e2e6e9;
+      margin-bottom: 25px;
+    }
+  }
+
+  @include on-desktop {
+    .product-description & {
+      flex-basis: 35%;
+      flex-shrink: 0;
+      margin-bottom: map.get($spacing, '4xl');
+    }
+  }
+}
+
+@include on-desktop {
+  .product-description {
+    display: flex;
+    gap: map.get($spacing, '3xl');
+    align-items: flex-start;
+  }
+}

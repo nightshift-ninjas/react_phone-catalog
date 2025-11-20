@@ -20,6 +20,16 @@ const CartPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const handleRemoveFromCart = (itemId: string) => {
+    setCartItems((prev) => prev.filter((item) => item.id !== itemId));
+  };
+
+  const totalAmount = cartItems.reduce((sum, item) => {
+    const price =
+      item.product?.priceDiscount ?? item.product?.priceRegular ?? 0;
+    return sum + price * item.quantity;
+  }, 0);
+
   useEffect(() => {
     if (authLoading) return;
 
@@ -47,12 +57,6 @@ const CartPage: React.FC = () => {
     loadCartAndItems();
   }, [user, authLoading, navigate]);
 
-  const totalAmount = cartItems.reduce((sum, item) => {
-    const price =
-      item.product?.priceDiscount ?? item.product?.priceRegular ?? 0;
-    return sum + price * item.quantity;
-  }, 0);
-
   return (
     <div className="cart">
       <div className="cart__breadcrumbs">
@@ -69,7 +73,10 @@ const CartPage: React.FC = () => {
             <ul className="cart__items-wrapper">
               {cartItems.map((item) => (
                 <li key={item.id}>
-                  <CartItem item={item} />
+                  <CartItem
+                    item={item}
+                    onRemove={() => handleRemoveFromCart(item.id)}
+                  />
                 </li>
               ))}
             </ul>
