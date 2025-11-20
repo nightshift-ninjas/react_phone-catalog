@@ -19,6 +19,11 @@ const CartPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const handleRemoveFromCart = (itemId: string) => {
+  setCartItems(prev => prev.filter(item => item.id !== itemId));
+};
+
+
   useEffect(() => {
     if (authLoading) return;
 
@@ -60,7 +65,7 @@ const CartPage: React.FC = () => {
         <ul className="cart__items-wrapper">
           {cartItems.map((item) => (
             <li key={item.id}>
-              <CartItem item={item} />
+              <CartItem item={item}  onRemove={() => handleRemoveFromCart(item.id)} />
             </li>
           ))}
         </ul>
