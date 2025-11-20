@@ -15,6 +15,10 @@ const FavoritePage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
 
+  const handleRemoveFavorite = (id: string) => {
+    setFavorites(prev => prev.filter(f => f.id !== id));
+  };
+
   useEffect(() => {
     if (authLoading) return;
 
@@ -61,7 +65,7 @@ const FavoritePage: React.FC = () => {
           <ul className="favorite__list">
           {favorites.map((fav) => (
             <li key={fav.id} className="favorite__item">
-              {fav.product && <ProductCard product={fav.product} />}
+              {fav.product && <ProductCard product={fav.product} onRemove={() => handleRemoveFavorite(fav.id)}/>}
             </li>
           ))}
           </ul>
