@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { productService, type Product } from '../../services/product';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
 import './ProductDetailPage.scss';
+import ProductDescription from './components/ProductDescription/ProductDescription';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -53,6 +54,8 @@ const ProductDetailPage: React.FC = () => {
       {!isLoading && product && <h3>{product.name}</h3>}
 
       {!isLoading && error && <p>{error}</p>}
+
+      {product && <ProductDescription product={product} />}
     </div>
   );
 };
