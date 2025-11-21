@@ -1,0 +1,86 @@
+import React from 'react';
+import ReactApexChart from 'react-apexcharts';
+import { type Order } from '../../../../services/order';
+import './OrderCharts.scss';
+import {
+  getCategoryStats,
+  getSalesPerDayThisWeek,
+  getOrdersPerDayByStatus,
+  getStatusStats,
+  getWeekDayLabels,
+} from './OrderChartUtils';
+
+type Props = {
+  orders: Order[];
+};
+
+export const OrderCharts: React.FC<Props> = ({ orders }) => {
+  const ordersPerDayByStatus = getOrdersPerDayByStatus(orders);
+  const salesPerDay = getSalesPerDayThisWeek(orders);
+  const categoryStats = getCategoryStats(orders);
+  const statusStats = getStatusStats(orders);
+  const daysLabels = getWeekDayLabels();
+
+  return (
+    <div className="order-charts">
+      <div className="chart">
+        <h3>Orders Per Day (This Week) by Status</h3>
+        <ReactApexChart
+          type="line"
+          series={[
+            { name: 'Fulfilled', data: ordersPerDayByStatus.fulfilled },
+            { name: 'Pending', data: ordersPerDayByStatus.pending },
+            { name: 'Canceled', data: ordersPerDayByStatus.canceled },
+          ]}
+          options={{
+            chart: { height: 350 },
+            xaxis: { categories: daysLabels },
+            stroke: { curve: 'smooth' },
+            markers: { size: 5 },
+            colors: ['#28a745', '#ffc107', '#dc3545'],
+            legend: { position: 'top' },
+          }}
+        />
+      </div>
+
+      <div className="chart">
+        <h3>Total Sales Per Day (This Month)</h3>
+        <ReactApexChart
+          type="line"
+          series={[
+            {
+              name: 'Sales $',
+              data: salesPerDay,
+            },
+          ]}
+          options={{
+            chart: { height: 350 },
+            xaxis: { categories: daysLabels },
+          }}
+        />
+      </div>
+
+      <div className="chart">
+        <h3>Products Ordered by Category</h3>
+        <ReactApexChart
+          type="pie"
+          series={categoryStats.series}
+          options={{
+            labels: categoryStats.labels,
+          }}
+        />
+      </div>
+
+      <div className="chart">
+        <h3>Order Status</h3>
+        <ReactApexChart
+          type="donut"
+          series={statusStats.series}
+          options={{
+            labels: statusStats.labels,
+          }}
+        />
+      </div>
+    </div>
+  );
+};

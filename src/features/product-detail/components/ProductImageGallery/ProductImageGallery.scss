@@ -9,14 +9,9 @@
 
   &__main {
     order: 1;
-    width: 288px;
-    height: 288px;
+    width: 350px;
+    height: 350px;
     overflow: hidden;
-
-    @include on-tablet {
-      width: 350px;
-      height: 350px;
-    }
 
     @include on-desktop {
       width: 464px;
@@ -55,15 +50,15 @@
     }
 
     .swiper-slide {
-        opacity: 0.6;
-        cursor: pointer;
-        transition: 0.2s ease;
+      opacity: 0.6;
+      cursor: pointer;
+      transition: 0.2s ease;
 
-        &-thumb-active {
-          border-color: var(--text-color);
-          opacity: 1;
-        }
+      &-thumb-active {
+        border-color: var(--text-color);
+        opacity: 1;
       }
+    }
 
     @include on-tablet {
       height: 80px;
@@ -97,7 +92,6 @@
     @include on-desktop {
       width: 80px;
       height: 80px !important;
-
     }
   }
 

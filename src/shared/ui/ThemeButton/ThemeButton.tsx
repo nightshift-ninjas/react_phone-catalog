@@ -20,8 +20,8 @@ export const ThemeButton: React.FC = () => {
   }, [isDark]);
 
   return (
-    <div className="theme-btn" onClick={toggleTheme}>
+    <button className="theme-btn" onClick={toggleTheme}>
       {isDark ? <SunIcon /> : <MoonIcon />}
-    </div>
+    </button>
   );
 };

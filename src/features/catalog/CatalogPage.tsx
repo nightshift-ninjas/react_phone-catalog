@@ -18,6 +18,10 @@ const CatalogPage: React.FC = () => {
   const handlePageSelect = (pageNumber: number) => {
     searchParams.set('page', String(pageNumber));
     setSearchParams(searchParams);
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
   };
 
   return (
@@ -43,11 +47,11 @@ const CatalogPage: React.FC = () => {
 
       {!isLoading && !error && (
         <>
-          <CatalogList products={products} /> 
-          <PaginationList 
-            onPageSelect={handlePageSelect} 
-            total={total} 
-            perPage={perPage} 
+          <CatalogList products={products} />
+          <PaginationList
+            onPageSelect={handlePageSelect}
+            total={total}
+            perPage={perPage}
             currentPage={page}
           />
         </>

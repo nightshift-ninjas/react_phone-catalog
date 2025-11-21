@@ -1,6 +1,6 @@
-import type React from "react";
-import "./CapacityButton.scss";
-import cn from "classnames";
+import type React from 'react';
+import './CapacityButton.scss';
+import cn from 'classnames';
 
 type Props = {
   ram: string;
@@ -9,10 +9,11 @@ type Props = {
 
 export const CapacityButton: React.FC<Props> = ({ ram, isSelected }) => {
   return (
-    <div className={cn({
-      "capacity-button": isSelected === false,
-      "capacity-button--selected": isSelected === true,
-    })}>
+    <div
+      className={cn('capacity-button', {
+        'capacity-button--selected': isSelected,
+      })}
+    >
       <p className="capacity-button__value">{ram}</p>
     </div>
   );

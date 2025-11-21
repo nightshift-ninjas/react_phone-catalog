@@ -4,12 +4,16 @@ import './PayPalCheckout.scss';
 
 type PayPalCheckoutProps = {
   totalAmount: number;
+  onSuccess: () => void;
 };
 
 const CLIENT_ID = import.meta.env.VITE_PAYPAL_CLIENT_ID;
 const CURRENCY = 'USD';
 
-const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ totalAmount }) => {
+const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({
+  totalAmount,
+  onSuccess,
+}) => {
   return (
     <div className="paypal-btn-wrapper">
       <PayPalScriptProvider
@@ -40,15 +44,7 @@ const PayPalCheckout: React.FC<PayPalCheckoutProps> = ({ totalAmount }) => {
                 return;
               }
 
-              const details = await actions.order.capture();
-
-              // Access payer info safely
-              const payerName =
-                details?.payer?.name?.given_name ??
-                details?.payer?.name?.full_name ??
-                'Customer';
-
-              alert(`Transaction completed by ${payerName}`);
+              onSuccess();
             }}
             onError={(err) => {
               console.error(err);

@@ -4,48 +4,45 @@
 
 .product-navigation {
   position: relative;
-
-  width: 288px;
-
-  @include on-tablet {
-    width: 237px;
-  }
-
-  @include on-desktop {
-    width: 320px;
-  }
+  width: 100%;
 
   &__label {
-    color: map.get($colors, "gray");
+    color: map.get($colors, 'gray');
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;
     letter-spacing: 0;
 
-    margin-bottom: map.get($spacing, "sm");
+    &--color {
+      width: 100%;
+    }
+
+    margin-bottom: map.get($spacing, 'sm');
   }
 
   &__color-items {
     display: flex;
-    gap: map.get($spacing, "sm");
+    gap: map.get($spacing, 'sm');
 
-    margin-bottom: map.get($spacing, "lg");
+    margin-bottom: map.get($spacing, 'lg');
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    gap: map.get($spacing, 'md');
   }
 
   &__id {
-    position: absolute;
-    top: 0%;
-    right: 0%;
-
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-
-    color: map.get($colors, "silver");
+    color: map.get($colors, 'silver');
     font-weight: 600;
     font-size: 12px;
     line-height: 15px;
     letter-spacing: 0;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   &__divider {
@@ -53,26 +50,26 @@
   }
 
   &__capacity {
-    margin-block: map.get($spacing, "lg");
+    margin-block: map.get($spacing, 'lg');
   }
 
   &__capacity-items {
     display: flex;
-    gap: map.get($spacing, "sm");
+    gap: map.get($spacing, 'sm');
 
     flex-wrap: wrap;
   }
 
   &__inner-wrapper {
-    margin-block: map.get($spacing, "xl");
+    margin-block: map.get($spacing, 'xl');
   }
 
   &__price-wrapper {
     display: flex;
     align-items: center;
-    gap: map.get($spacing, "sm");
+    gap: map.get($spacing, 'sm');
 
-    margin-bottom: map.get($spacing, "md");
+    margin-bottom: map.get($spacing, 'md');
   }
 
   &__price {
@@ -88,7 +85,7 @@
   }
 
   &__price-regular {
-    color: map.get($colors, "silver");
+    color: map.get($colors, 'silver');
     font-size: 22px;
     font-weight: 500;
     text-decoration: line-through;
@@ -96,7 +93,7 @@
 
   &__buttons {
     display: flex;
-    gap: map.get($spacing, "sm");
+    gap: map.get($spacing, 'sm');
   }
 
   &__screen,
@@ -113,6 +110,6 @@
     line-height: 15px;
     letter-spacing: 0;
 
-    margin-bottom: map.get($spacing, "sm");
+    margin-bottom: map.get($spacing, 'sm');
   }
 }

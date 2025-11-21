@@ -1,20 +1,23 @@
 import React from 'react';
-import type { CartItem } from '../../../../services/cart';
 import './CheckoutInfo.scss';
 import PayPalCheckout from '../PayPalCheckout/PayPalCheckout';
-import { PaymentMethod } from '../CheckoutForm';
+import { Button } from '../../../../shared/ui/Button';
+import { PaymentMethod } from '../../../../services/order';
 
 type Props = {
-  cartItems: CartItem[];
+  totalAmount: number;
   paymentMethod: PaymentMethod;
+  formRef: React.RefObject<HTMLFormElement | null>;
 };
 
-export const CheckoutInfo: React.FC<Props> = ({ cartItems, paymentMethod }) => {
-  const totalAmount = cartItems.reduce((sum, item) => {
-    const price =
-      item.product?.priceDiscount ?? item.product?.priceRegular ?? 0;
-    return sum + price * item.quantity;
-  }, 0);
+export const CheckoutInfo: React.FC<Props> = ({
+  paymentMethod,
+  formRef,
+  totalAmount,
+}) => {
+  const submitOrder = () => {
+    formRef.current?.requestSubmit();
+  };
 
   return (
     <section className="checkout-info" aria-labelledby="checkout-summary-title">
@@ -39,8 +42,10 @@ export const CheckoutInfo: React.FC<Props> = ({ cartItems, paymentMethod }) => {
         </div>
       </dl>
 
-      {paymentMethod === PaymentMethod.ONLINE_PAYMENT && (
-        <PayPalCheckout totalAmount={totalAmount} />
+      {paymentMethod === PaymentMethod.ONLINE_PAYMENT ? (
+        <PayPalCheckout totalAmount={totalAmount} onSuccess={submitOrder} />
+      ) : (
+        <Button onClick={submitOrder}>Confirm Order</Button>
       )}
     </section>
   );

@@ -20,7 +20,7 @@ export const AppRoutes = () => (
 
       <Route path="catalog" element={<CatalogPage />} />
       <Route path="catalog/:category" element={<CatalogPage />} />
-      <Route path="catalog/:type/product/:id" element={<ProductDetailPage />} />
+      <Route path="catalog/:category/product/:id" element={<ProductDetailPage />} />
 
       <Route path="cart" element={<CartPage />} />
 

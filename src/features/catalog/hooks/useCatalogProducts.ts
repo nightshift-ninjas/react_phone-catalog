@@ -18,30 +18,21 @@ export const useCatalogProducts = (category: Category | undefined) => {
   const sortType = searchParams.get('sort') as ProductSortTypes | null;
   const perPage = Number(searchParams.get('perPage')) || 10;
 
-  useEffect(() => {
+  const load = async () => {
     if (!category) return;
 
-    if (cache[category]) {
-      setProducts(cache[category]);
-      return;
+    try {
+      setIsLoading(true);
+      setError('');
+      const fetched = await productService.fetchByCategory(category);
+      cache[category] = fetched;
+      setProducts(fetched);
+    } catch (err) {
+      setError(String(err));
+    } finally {
+      setIsLoading(false);
     }
-
-    const load = async () => {
-      try {
-        setIsLoading(true);
-        setError('');
-        const fetched = await productService.fetchByCategory(category);
-        cache[category] = fetched;
-        setProducts(fetched);
-      } catch (err) {
-        setError(String(err));
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    load();
-  }, [category]);
+  };
 
   const sorted = useMemo(() => {
     const copy = [...products];
@@ -84,6 +75,17 @@ export const useCatalogProducts = (category: Category | undefined) => {
   const end = start + perPage;
 
   const paginated = sorted.slice(start, end);
+
+  useEffect(() => {
+    if (!category) return;
+
+    if (cache[category]) {
+      setProducts(cache[category]);
+      return;
+    }
+
+    load();
+  }, [category]);
 
   return {
     products: paginated,

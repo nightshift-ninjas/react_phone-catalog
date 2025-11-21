@@ -1,20 +1,23 @@
-import React from "react";
-import "./ProductImageGallery.scss";
-import type { Product } from "../../../../services/product";
+import React from 'react';
+import './ProductImageGallery.scss';
+import type { Product } from '../../../../services/product';
+import { BASE_URL } from '../../../../widgets/ProductCard';
 
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Thumbs } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Thumbs } from 'swiper/modules';
+import type { Swiper as SwiperType } from 'swiper';
 
-import "swiper/css";
-import "swiper/css/navigation";
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 type Props = {
-  images: Product["images"];
+  images: Product['images'];
 };
 
 export const ProductImageGallery: React.FC<Props> = ({ images }) => {
-  const [thumbsSwiper, setThumbsSwiper] = React.useState<SwiperType | null>(null);
+  const [thumbsSwiper, setThumbsSwiper] = React.useState<SwiperType | null>(
+    null,
+  );
 
   if (!images || images.length === 0) {
     return null;
@@ -22,7 +25,6 @@ export const ProductImageGallery: React.FC<Props> = ({ images }) => {
 
   return (
     <div className="product-gallery">
-
       <Swiper
         onSwiper={setThumbsSwiper}
         direction="vertical"
@@ -34,7 +36,11 @@ export const ProductImageGallery: React.FC<Props> = ({ images }) => {
       >
         {images.map((img, index) => (
           <SwiperSlide key={index} className="product-gallery__thumb">
-            <img src={img} alt={`thumb-${index}`} className="product-gallery__thumb-image" />
+            <img
+              src={BASE_URL + img}
+              alt={`thumb-${index}`}
+              className="product-gallery__thumb-image"
+            />
           </SwiperSlide>
         ))}
       </Swiper>
@@ -47,11 +53,14 @@ export const ProductImageGallery: React.FC<Props> = ({ images }) => {
       >
         {images.map((img, index) => (
           <SwiperSlide key={index} className="product-gallery__main-slide">
-            <img src={img} alt={`image-${index}`} className="product-gallery__image" />
+            <img
+              src={BASE_URL + img}
+              alt={`image-${index}`}
+              className="product-gallery__image"
+            />
           </SwiperSlide>
         ))}
       </Swiper>
-
     </div>
   );
 };
