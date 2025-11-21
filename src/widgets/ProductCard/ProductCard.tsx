@@ -4,9 +4,11 @@ import { Button } from '../../shared/ui/Button';
 import FavoriteButton from '../../shared/ui/FavoriteButton/FavoriteButton';
 import { cartService } from '../../services/cart/cart.services';
 import { favoriteService } from '../../services/favorite';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useAuth } from '../../shared/hooks';
 import { Link, useNavigate } from 'react-router-dom';
+import { ROUTES } from '../../shared/config/routes';
+import { LanguageContext } from '../../shared/context/language';
 
 type Props = {
   product: Product;
@@ -18,6 +20,7 @@ export const BASE_URL = 'src/shared/assets/';
 export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { language: lng } = useContext(LanguageContext)!;
 
   const [isSelectedCart, setIsSelectedCart] = useState(false);
   const [isSelectedFav, setIsSelectedFav] = useState(false);
@@ -28,7 +31,6 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
     (async () => {
       const cart = await cartService.getOrCreateCart(user.uid);
       const items = await cartService.fetchCartItems(cart.id);
-
       setIsSelectedCart(items.some((item) => item.productId === product.id));
 
       const favs = await favoriteService.fetchFavoritesByUser(user.uid);
@@ -38,7 +40,7 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
 
   function requireLogin() {
     if (!user) {
-      navigate('/auth/login');
+      navigate(`/${lng}/${ROUTES.login}`);
       return false;
     }
     return true;
@@ -71,11 +73,11 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
     }
   }
 
-  
+  const productLink = `/${lng}/${ROUTES.catalog}/${product.category}/product/${product.id}`;
 
   return (
     <article className="product-card">
-      <Link to={`/catalog/${product.category}/product/${product.id}`}>
+      <Link to={productLink}>
         <div className="product-card__top">
           <div className="product-card__image-wrapper">
             <img

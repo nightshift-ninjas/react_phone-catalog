@@ -1,18 +1,21 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { authClient } from '../../../services/auth/auth.service';
 import { Link, useNavigate } from 'react-router-dom';
 import { Form } from 'radix-ui';
 import { PasswordField } from '../../../shared/ui/PasswordField';
 import GoogleIcon from '../../../shared/assets/icons/google.svg?react';
 import '../form.scss';
+import { LanguageContext } from '../../../shared/context/language';
+import { ROUTES } from '../../../shared/config/routes';
 
 export function LoginPage() {
+  const { language: lng } = useContext(LanguageContext)!;
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [agreement, setAgreement] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const navigate = useNavigate();
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -21,15 +24,13 @@ export function LoginPage() {
 
     try {
       await authClient.login(email, password);
-
       const currentUser = authClient.getCurrentUser();
       if (currentUser) {
         console.log('Logged in user:', currentUser.uid, currentUser.email);
       }
-
-      navigate('/');
-    } catch (error) {
-      setError(`Something went wrong while trying to login: ${error}`);
+      navigate(`/${lng}/`);
+    } catch (err) {
+      setError(`Something went wrong while trying to login: ${err}`);
     } finally {
       setLoading(false);
     }
@@ -39,9 +40,9 @@ export function LoginPage() {
     setLoading(true);
     try {
       await authClient.loginWithGoogle();
-      navigate('/');
-    } catch (error) {
-      setError(`Google login failed. Please try again: ${error}`);
+      navigate(`/${lng}/`);
+    } catch (err) {
+      setError(`Google login failed. Please try again: ${err}`);
     } finally {
       setLoading(false);
     }
@@ -52,8 +53,8 @@ export function LoginPage() {
       <h2 className="form__title">Log in your account</h2>
 
       <p className="form__text">
-        Don&apos;t have an account?
-        <Link to="/auth/signup" className="form__link">
+        Don&apos;t have an account?{' '}
+        <Link to={`/${lng}/${ROUTES.signup}`} className="form__link">
           Create account
         </Link>
       </p>
@@ -65,11 +66,10 @@ export function LoginPage() {
             type="email"
             placeholder="Email..."
             value={email}
-            onChange={(event) => setEmail(event.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </Form.Control>
-
         <div>
           <Form.Message className="form__message" match="typeMismatch">
             Please provide a valid email
@@ -81,13 +81,12 @@ export function LoginPage() {
         <Form.Control asChild>
           <PasswordField
             value={password}
-            onChange={(event) => setPassword(event.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             placeholder="Password..."
             name="password"
             required
           />
         </Form.Control>
-
         <div>
           <Form.Message className="form__message" match="typeMismatch">
             Please provide a valid password
@@ -101,10 +100,10 @@ export function LoginPage() {
           className="form__checkbox"
           type="checkbox"
           checked={agreement}
-          onChange={(event) => setAgreement(event.target.checked)}
+          onChange={(e) => setAgreement(e.target.checked)}
         />
         <label htmlFor="agreement">
-          I agree
+          I agree{' '}
           <a href="#" target="_blank" className="form__link">
             Terms & Conditions
           </a>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import Logo from '../../shared/assets/Logo.svg?react';
 import { Link, NavLink } from 'react-router-dom';
 import type { NavbarLink, NavButton } from './types';
@@ -11,6 +11,8 @@ import ArrowIcon from '../../shared/assets/icons/arrow-icon-dark.svg?react';
 import cn from 'classnames';
 import './Navbar.scss';
 import { LanguageButton } from '../LanguageButton';
+import { ROUTES } from '../../shared/config/routes';
+import { LanguageContext } from '../../shared/context/language';
 
 const getClasses = ({ isActive }: { isActive: boolean }) =>
   cn('nav__link', { 'nav__link--active': isActive });
@@ -18,33 +20,35 @@ const getClasses = ({ isActive }: { isActive: boolean }) =>
 const getClassesCatalog = ({ isActive }: { isActive: boolean }) =>
   cn('nav__catalog-link', { 'nav__catalog-link--active': isActive });
 
-const catalogLinks: NavbarLink[] = [
-  { label: 'phones', path: 'catalog/phones' },
-  { label: 'tablets', path: 'catalog/tablets' },
-  { label: 'accessories', path: 'catalog/accessories' },
-];
-
-const navButtons: NavButton[] = [
-  { component: LanguageButton as React.ComponentType },
-  { component: ThemeButton as React.ComponentType },
-  { path: '/favorite', icon: <FavoriteIcon /> },
-  { path: '/cart', icon: <ShoppingBagIcon /> },
-  { path: '/profile', icon: <ProfileIcon /> },
-];
-
 export const Navbar: React.FC = () => {
+  const { language: lng } = useContext(LanguageContext)!;
   const [isCollapsed, setIsCollapsed] = useState(false);
+
   const toggleMobileMenu = () => setIsCollapsed((prev) => !prev);
+
+  const catalogLinks: NavbarLink[] = [
+    { label: 'phones', path: `/${lng}/${ROUTES.catalog}/phones` },
+    { label: 'tablets', path: `/${lng}/${ROUTES.catalog}/tablets` },
+    { label: 'accessories', path: `/${lng}/${ROUTES.catalog}/accessories` },
+  ];
+
+  const navButtons: NavButton[] = [
+    { component: LanguageButton as React.ComponentType },
+    { component: ThemeButton as React.ComponentType },
+    { path: `/${lng}/${ROUTES.favorite}`, icon: <FavoriteIcon /> },
+    { path: `/${lng}/${ROUTES.cart}`, icon: <ShoppingBagIcon /> },
+    { path: `/${lng}/${ROUTES.profile}`, icon: <ProfileIcon /> },
+  ];
 
   return (
     <nav className={cn('nav', { 'nav--collapsed': isCollapsed })}>
-      <Link to="/" className="nav__brand">
+      <Link to={`/${lng}`} className="nav__brand">
         <Logo />
       </Link>
 
       <div className="nav__content">
         <div className="nav__block">
-          <NavLink to="/" className={getClasses}>
+          <NavLink to={`/${lng}`} end className={getClasses}>
             Home
           </NavLink>
 

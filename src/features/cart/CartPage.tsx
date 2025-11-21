@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useAuth } from '../../shared/hooks';
 import type {
   Cart,
@@ -9,16 +9,19 @@ import { useNavigate } from 'react-router-dom';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
 import { CartItem } from './components/CartItem';
 import { CartInfo } from './components/CartInfo';
+import { LanguageContext } from '../../shared/context/language';
+import { ROUTES } from '../../shared/config/routes';
 import './CartPage.scss';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
+  const { language: lng } = useContext(LanguageContext)!;
   const { user, loading: authLoading } = useAuth();
 
-  const [cart, setCart] = useState<Cart | null>(null);
+  const [, setCart] = useState<Cart | null>(null);
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const [, setIsLoading] = useState(false);
+  const [, setError] = useState('');
 
   const handleRemoveFromCart = (itemId: string) => {
     setCartItems((prev) => prev.filter((item) => item.id !== itemId));
@@ -34,7 +37,7 @@ const CartPage: React.FC = () => {
     if (authLoading) return;
 
     if (!user) {
-      navigate('/auth');
+      navigate(`/${lng}/${ROUTES.auth}`);
     }
 
     const loadCartAndItems = async () => {
@@ -45,22 +48,24 @@ const CartPage: React.FC = () => {
         const response = await cartService.getOrCreateCart(user!.uid);
         setCart(response);
 
-        const cartItems = await cartService.fetchCartItems(response.id);
-        setCartItems(cartItems);
-      } catch (error) {
-        setError(`Something went wrong while fetching cart: ${error}`);
+        const items = await cartService.fetchCartItems(response.id);
+        setCartItems(items);
+      } catch (err) {
+        setError(`Something went wrong while fetching cart: ${err}`);
       } finally {
         setIsLoading(false);
       }
     };
 
     loadCartAndItems();
-  }, [user, authLoading, navigate]);
+  }, [user, authLoading, navigate, lng]);
 
   return (
     <div className="cart">
       <div className="cart__breadcrumbs">
-        <Breadcrumb items={[{ text: 'cart', link: `/cart` }]} />
+        <Breadcrumb
+          items={[{ text: 'cart', link: `/${lng}/${ROUTES.cart}` }]}
+        />
       </div>
 
       <h1 className="cart__title">Your Cart</h1>

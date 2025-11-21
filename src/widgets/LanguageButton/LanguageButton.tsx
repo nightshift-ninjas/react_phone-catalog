@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { IconDropdown } from '../../shared/ui/IconDropdown';
 import { Language, LanguageFlags, LanguageLabels } from './types';
+import { useLanguage } from '../../shared/context/language';
 import './LanguageButton.scss';
 
 const languageOptions = [
@@ -19,14 +20,18 @@ const languageOptions = [
 ];
 
 export const LanguageButton: React.FC = () => {
-  const [currentLanguage, setCurrentLanguage] = useState(Language.EN);
+  const { language, setLanguage } = useLanguage();
+
+  const handleChange = (lng: string) => {
+    setLanguage(lng as Language);
+  };
 
   return (
     <div className="lng-btn">
       <IconDropdown
         options={languageOptions}
-        icon={LanguageFlags[currentLanguage]}
-        onChange={(val) => setCurrentLanguage(val as Language)}
+        icon={LanguageFlags[language]}
+        onChange={handleChange}
         themeIcon={false}
       />
     </div>

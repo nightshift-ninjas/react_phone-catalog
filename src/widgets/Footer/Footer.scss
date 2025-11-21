@@ -4,14 +4,14 @@
 
 .footer {
   box-shadow: 0px -1px 0px 0px #{map.get($colors, 'platinum')};
-  padding-block: 32px;
-  padding-inline: 16px;
+  padding-block: map.get($spacing, "xl");
+  padding-inline: map.get($spacing, "md");
 
   @include on-tablet {
-    padding-inline: 24px;
+    padding-inline: map.get($spacing, "lg");
   }
   @include on-desktop {
-    padding-inline: 32px;
+    padding-inline: map.get($spacing, "xl");
   }
 
   
@@ -22,7 +22,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 32px;
+    gap: map.get($spacing, "xl");
 
     @include on-tablet {
       flex-direction: row;
@@ -52,7 +52,7 @@
   &__nav {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: map.get($spacing, "md");
     font-weight: 700;
     font-size: 12px;
     line-height: 11px;
@@ -97,4 +97,10 @@
       width: auto;
     }
   }
+}
+
+
+.footer-map {
+  width: 100%;
+  height: 400px;
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../../shared/hooks';
 import { ProfileInfo } from './components/ProfileInfo';
@@ -9,11 +9,14 @@ import {
   OrderSortFields,
 } from './components/OrderFilter/types';
 import { useUserOrders } from './hooks';
+import { LanguageContext } from '../../shared/context/language';
+import { ROUTES } from '../../shared/config/routes';
 import './ProfilePage.scss';
 import { OrderCharts } from './components/OrderCharts';
 
 export const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
+  const { language: lng } = useContext(LanguageContext)!;
   const { user, loading: authLoading } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -30,8 +33,8 @@ export const ProfilePage: React.FC = () => {
   const { orders } = useUserOrders(user?.uid, filter, sort);
 
   useEffect(() => {
-    if (!authLoading && !user) navigate('/auth');
-  }, [authLoading, user, navigate]);
+    if (!authLoading && !user) navigate(`/${lng}/${ROUTES.auth}`);
+  }, [authLoading, user, navigate, lng]);
 
   useEffect(() => {
     setSearchParams({ filter, sort });
