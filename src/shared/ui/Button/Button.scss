@@ -43,9 +43,9 @@
     }
 
     &--selected {
-      background-color: map.get($colors, 'gray-black');
+      background-color: map.get($colors, 'purple');
       border-color: map.get($colors, 'gray-black');
-      color: map.get($colors, 'green');
+      color: map.get($colors, 'white');
     }
   }
 }

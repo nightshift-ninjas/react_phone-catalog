@@ -10,11 +10,12 @@ import { Link, useNavigate } from 'react-router-dom';
 
 type Props = {
   product: Product;
+  onRemove?: () => void;
 };
 
 export const BASE_URL = 'src/shared/assets/';
 
-export const ProductCard: React.FC<Props> = ({ product }) => {
+export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
 
@@ -66,8 +67,11 @@ export const ProductCard: React.FC<Props> = ({ product }) => {
     } else {
       await favoriteService.removeFavoriteByProduct(user!.uid, product.id);
       setIsSelectedFav(false);
+      onRemove?.();
     }
   }
+
+  
 
   return (
     <article className="product-card">

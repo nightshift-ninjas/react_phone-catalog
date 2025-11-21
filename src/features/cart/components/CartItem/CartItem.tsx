@@ -8,14 +8,16 @@ import { Link } from 'react-router-dom';
 
 export type Props = {
   item: CartItemType;
+  onRemove?: () => void;
 };
 
-export const CartItem: React.FC<Props> = ({ item }) => {
+export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
   const handleRemove = async () => {
     try {
       await cartService.removeCartItemById(item.id);
+      onRemove?.();
     } catch (error) {
       console.error('Failed to remove cart item:', error);
     }
