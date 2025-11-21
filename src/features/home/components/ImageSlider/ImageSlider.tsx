@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './ImageSlider.scss';
 
-import img1 from '../../../../shared/assets/img/home-slider-1.webp';
+import video1 from '../../../../shared/assets/video/video-slider.webm';
 import img2 from '../../../../shared/assets/img/home-slider-2.webp';
 import img3 from '../../../../shared/assets/img/home-slider-3.webp';
 import ArrowButton from '../../../../shared/ui/ArrowButton/ArrowButton';
@@ -17,11 +17,11 @@ const ImageSlider = () => {
   const [isEnd, setIsEnd] = useState(false);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const images = [img1, img2, img3];
+  const mediaFiles = [video1, img2, img3];
   const swiperRef = useRef<SwiperType | null>(null);
 
   const handleButtonClick = (index: number) => {
-    swiperRef.current?.slideTo(index); 
+    swiperRef.current?.slideTo(index);
     setActiveIndex(index);
   };
 
@@ -45,9 +45,19 @@ const ImageSlider = () => {
           modules={[Navigation, Pagination]}
           slidesPerView={1}
         >
-          {images.map((img, index) => (
+          {mediaFiles.map((file, index) => (
             <SwiperSlide key={index}>
-              <img className="image-slider__img" src={img} alt={`Slide ${index + 1}`} />
+              {file.endsWith('.webm') ? (
+                <video className="image-slider__media" autoPlay loop muted>
+                  <source src={file} type="video/webm" />
+                </video>
+              ) : (
+                <img
+                  className="image-slider__img"
+                  src={file}
+                  alt={`Slide ${index + 1}`}
+                />
+              )}
             </SwiperSlide>
           ))}
         </Swiper>
@@ -58,13 +68,12 @@ const ImageSlider = () => {
         />
       </div>
       <div className="image-slider__navigation">
-        {images.map((_, index) => (
+        {mediaFiles.map((_, index) => (
           <button
             key={index}
             className={`image-slider__button ${activeIndex === index ? 'active' : ''}`}
             onClick={() => handleButtonClick(index)}
-          >
-          </button>
+          ></button>
         ))}
       </div>
     </div>
