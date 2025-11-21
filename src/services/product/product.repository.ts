@@ -1,18 +1,18 @@
-import { firestoreClient } from "../../shared/config/firebase";
-import type { Category, Product } from "./product.types";
+import { firestoreClient } from '../../shared/config/firebase';
+import type { Category, Product } from './product.types';
 
-const COLLECTION = "products";
+const COLLECTION = 'products';
 
 export const productRepository = {
-  getById(id: Product["id"]) {
+  getById(id: Product['id']) {
     return firestoreClient.getDocById<Product>(COLLECTION, id);
   },
 
   getByCategory(category: Category) {
     return firestoreClient.getCollectionByField<Product>(
       COLLECTION,
-      "category",
-      category
+      'category',
+      category,
     );
   },
 
@@ -25,11 +25,19 @@ export const productRepository = {
     return firestoreClient.getCollectionPaginated<Product>(
       COLLECTION,
       pageSize,
-      lastDoc
+      lastDoc,
     );
   },
 
-  update(id: Product["id"], data: Partial<Product>) {
+  update(id: Product['id'], data: Partial<Product>) {
     return firestoreClient.updateDocById<Product>(COLLECTION, id, data);
+  },
+
+  getByNamespaceId(namespaceId: string) {
+    return firestoreClient.getCollectionByField<Product>(
+      COLLECTION,
+      'namespaceId',
+      namespaceId,
+    );
   },
 };

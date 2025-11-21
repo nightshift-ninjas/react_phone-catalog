@@ -4,6 +4,7 @@ import { productService, type Product } from '../../services/product';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
 import './ProductDetailPage.scss';
 import ProductDescription from './components/ProductDescription/ProductDescription';
+import { ProductSlider } from '../../widgets/ProductSlider';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -11,6 +12,7 @@ const ProductDetailPage: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     if (!id) return;
@@ -22,6 +24,15 @@ const ProductDetailPage: React.FC = () => {
       try {
         const response = await productService.fetchProductById(id);
         setProduct(response);
+
+        if (response.namespaceId) {
+          const relatedResponse = await productService.fetchByNamespaceId(
+            response.namespaceId,
+          );
+          setRelatedProducts(relatedResponse);
+        } else {
+          setRelatedProducts([]);
+        }
       } catch (err) {
         setError(`Something went wrong: ${err}`);
       } finally {
@@ -56,6 +67,13 @@ const ProductDetailPage: React.FC = () => {
       {!isLoading && error && <p>{error}</p>}
 
       {product && <ProductDescription product={product} />}
+
+      {relatedProducts.length > 0 && (
+        <ProductSlider
+          layoutText="You may also like"
+          products={relatedProducts}
+        />
+      )}
     </div>
   );
 };
