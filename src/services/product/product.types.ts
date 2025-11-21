@@ -39,6 +39,7 @@ export interface ProductBase {
 export interface Phone extends ProductBase {
   category: Category.PHONES;
   year?: number;
+  namespaceId: string;
 }
 
 export interface Tablet extends ProductBase {
