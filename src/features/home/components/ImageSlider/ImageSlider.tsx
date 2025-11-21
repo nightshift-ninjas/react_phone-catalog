@@ -7,7 +7,7 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import './ImageSlider.scss';
 
-import video1 from '../../../../shared/assets/video/video-slider.mp4';
+import video1 from '../../../../shared/assets/video/video-slider.webm';
 import img2 from '../../../../shared/assets/img/home-slider-2.webp';
 import img3 from '../../../../shared/assets/img/home-slider-3.webp';
 import ArrowButton from '../../../../shared/ui/ArrowButton/ArrowButton';
@@ -47,9 +47,9 @@ const ImageSlider = () => {
         >
           {mediaFiles.map((file, index) => (
             <SwiperSlide key={index}>
-              {file.endsWith('.mp4') ? (
+              {file.endsWith('.webm') ? (
                 <video className="image-slider__media" autoPlay loop muted>
-                  <source src={file} type="video/mp4" />
+                  <source src={file} type="video/webm" />
                 </video>
               ) : (
                 <img
