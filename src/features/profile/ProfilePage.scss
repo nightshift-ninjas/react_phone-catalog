@@ -8,20 +8,21 @@
   gap: map.get($spacing, 'md');
 
   &__section {
-    &--top {
-      display: flex;
-      gap: map.get($spacing, 'md');
-    }
-  }
-
-  &__subsection {
-    width: 100%;
-  }
-
-  &__section:nth-child(2),
-  &__subsection {
     border-radius: 6px;
     background-color: var(--bg-color-lighter);
     padding: map.get($spacing, 'md');
+
+    &:nth-child(1) {
+      width: 100%;
+      margin-left: auto;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: map.get($spacing, "md");
   }
 }

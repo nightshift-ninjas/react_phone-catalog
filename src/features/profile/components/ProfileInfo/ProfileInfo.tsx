@@ -32,29 +32,29 @@ export const ProfileInfo: React.FC<Props> = ({ user }) => {
 
   return (
     <div className="user-info">
-      <h2>{`Hello ${user.displayName}`}</h2>
+      <h2 className="user-info__welcome">{`Hello ${user.displayName}`}</h2>
 
-      <ul className="user-info__list">
-        <li className="user-info__item">
-          <span>ID:</span>
-          <span>{user.uid}</span>
-        </li>
+      <dl className="user-info__list">
+        <div className="user-info__item">
+          <dt>ID:</dt>
+          <dd>{user.uid}</dd>
+        </div>
 
-        <li className="user-info__item">
-          <span>Email:</span>
-          <span>{user.email}</span>
-        </li>
+        <div className="user-info__item">
+          <dt>Email:</dt>
+          <dd>{user.email}</dd>
+        </div>
 
-        <li className="user-info__item user-info__item--capitalize">
-          <span>Created at:</span>
-          <span>{user.metadata.creationTime}</span>
-        </li>
+        <div className="user-info__item user-info__item--capitalize">
+          <dt>Created at:</dt>
+          <dd>{user.metadata.creationTime}</dd>
+        </div>
 
-        <li className="user-info__item user-info__item--capitalize">
-          <span>Last sign:</span>
-          <span>{user.metadata.lastSignInTime}</span>
-        </li>
-      </ul>
+        <div className="user-info__item user-info__item--capitalize">
+          <dt>Last sign:</dt>
+          <dd>{user.metadata.lastSignInTime}</dd>
+        </div>
+      </dl>
 
       <div className="user-info__button">
         <Button onClick={logout}>Logout</Button>

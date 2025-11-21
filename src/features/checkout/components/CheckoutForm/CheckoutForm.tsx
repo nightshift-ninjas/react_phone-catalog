@@ -3,7 +3,7 @@ import { FormInput } from '../../../../shared/ui/FormInput';
 import * as Form from '@radix-ui/react-form';
 import ToggleSwitch from '../../../../shared/ui/ToggleSwitch/ToggleSwitch';
 import './CheckoutForm.scss';
-import { PaymentMethod } from './types';
+import { PaymentMethod } from '../../../../services/order';
 import RadioGroupComponent from '../../../../shared/ui/RadioGroup/RadioGroup';
 import type { User } from 'firebase/auth';
 

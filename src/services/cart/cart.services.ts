@@ -66,4 +66,16 @@ export const cartService = {
 
     return cartRepository.deleteItem(existing.id);
   },
+
+  async clearCartItems(cartId: Cart['id']): Promise<void> {
+    const items = await cartRepository.getItemsByCartId(cartId);
+
+    if (!items.length) return;
+
+    const deletePromises = items.map((item) =>
+      cartRepository.deleteItem(item.id),
+    );
+
+    await Promise.all(deletePromises);
+  },
 };

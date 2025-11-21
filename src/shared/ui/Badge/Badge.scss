@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+
+.badge {
+  display: inline-block;
+  padding: map.get($spacing, 'xs') map.get($spacing, 'sm');
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+
+  &--success {
+    background: #e7f7ee;
+    border: 1px solid #1c8c4f;
+    color: #1c8c4f;
+  }
+
+  &--pending {
+    background: #fff4d9;
+    border: 1px solid #a16b00;
+    color: #a16b00;
+  }
+
+  &--error {
+    background: #ffe5e5;
+    border: 1px solid #b40000;
+    color: #b40000;
+  }
+}

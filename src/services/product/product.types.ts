@@ -34,22 +34,20 @@ export interface ProductBase {
   type: string;
   priceRegular: number;
   priceDiscount?: number;
+  namespaceId: string;
+  year?: number;
 }
 
 export interface Phone extends ProductBase {
   category: Category.PHONES;
-  year?: number;
-  namespaceId: string;
 }
 
 export interface Tablet extends ProductBase {
   category: Category.TABLETS;
-  namespaceId: string;
 }
 
 export interface Accessory extends ProductBase {
   category: Category.Accessory;
-  namespaceId: string;
 }
 
 export type Product = Phone | Tablet | Accessory;

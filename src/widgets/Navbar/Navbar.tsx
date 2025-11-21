@@ -10,6 +10,7 @@ import ProfileIcon from '../../shared/assets/icons/profile.svg?react';
 import ArrowIcon from '../../shared/assets/icons/arrow-icon-dark.svg?react';
 import cn from 'classnames';
 import './Navbar.scss';
+import { LanguageButton } from '../LanguageButton';
 
 const getClasses = ({ isActive }: { isActive: boolean }) =>
   cn('nav__link', { 'nav__link--active': isActive });
@@ -24,6 +25,7 @@ const catalogLinks: NavbarLink[] = [
 ];
 
 const navButtons: NavButton[] = [
+  { component: LanguageButton as React.ComponentType },
   { component: ThemeButton as React.ComponentType },
   { path: '/favorite', icon: <FavoriteIcon /> },
   { path: '/cart', icon: <ShoppingBagIcon /> },
