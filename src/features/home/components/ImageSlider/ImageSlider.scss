@@ -24,10 +24,11 @@
   }
 
   &__button {
-    width: 30px;
-    height: 3px;
+    transition: transform $base-transition ease;
+    width: 25px;
+    height: 5px;
     background-color: map.get($colors, 'black');
-    opacity: 0.7;
+    opacity: 0.5;
   }
 
   &__navigation {

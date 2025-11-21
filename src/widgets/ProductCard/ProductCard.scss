@@ -40,6 +40,10 @@
     font-weight: 600;
     line-height: 21px;
     color: var(--text-color);
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
 
   &__top {
@@ -89,8 +93,19 @@
     li {
       display: flex;
       justify-content: space-between;
+      gap: map.get($spacing, "md");
       font-size: 12px;
       font-weight: 600;
+
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+
+      span:nth-child(2) {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
 
       .spec-name {
         color: #{map.get($colors, 'gray')};

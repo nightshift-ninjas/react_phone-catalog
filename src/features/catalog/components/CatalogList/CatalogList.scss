@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../../../../shared/styles/mixins' as *;
+@use '../../../../shared/styles/vars' as *;
 
 .catalog-list {
   &__list {

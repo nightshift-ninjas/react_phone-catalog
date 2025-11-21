@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { productService, type Product } from '../../services/product';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
-import './ProductDetailPage.scss';
 import ProductDescription from './components/ProductDescription/ProductDescription';
 import { ProductSlider } from '../../widgets/ProductSlider';
+import { ProductImageGallery } from './components/ProductImageGallery';
+import { ProductNavigation } from './components/ProductNavigation';
+import './ProductDetailPage.scss';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -60,19 +62,30 @@ const ProductDetailPage: React.FC = () => {
         />
       </div>
 
-      <h1>This is ProductDetailPage</h1>
+      {!isLoading && product && (
+        <h1 className="product-detail__title">{product.name}</h1>
+      )}
 
-      {!isLoading && product && <h3>{product.name}</h3>}
+      {product && (
+        <>
+          <div className="product-detail__section">
+            <ProductImageGallery images={product.images} />
+            <ProductNavigation product={product} />
+          </div>
+        </>
+      )}
 
       {!isLoading && error && <p>{error}</p>}
 
       {product && <ProductDescription product={product} />}
 
       {relatedProducts.length > 0 && (
-        <ProductSlider
-          layoutText="You may also like"
-          products={relatedProducts}
-        />
+        <div className="product-detail__related">
+          <ProductSlider
+            layoutText="You may also like"
+            products={relatedProducts}
+          />
+        </div>
       )}
     </div>
   );

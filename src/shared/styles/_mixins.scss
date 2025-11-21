@@ -2,7 +2,7 @@
 @use "../styles/vars" as *;
 
 @mixin on-tablet {
-  @media (min-width: map.get($breakpoints, "tabet")) {
+  @media (min-width: map.get($breakpoints, "tablet")) {
     @content;
   }
 }
@@ -16,5 +16,5 @@
 @mixin grid($cols) {
   display: grid;
   gap: map.get($spacing, "md");
-  grid-template-columns: repeat($cols, 1fr);
+  grid-template-columns: repeat($cols, minmax(0, 1fr));
 }

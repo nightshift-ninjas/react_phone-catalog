@@ -1,61 +1,69 @@
 import React, { useEffect, useRef, useState } from 'react';
-import type { Cart, CartItem } from '../../services/cart';
 import { useAuth } from '../../shared/hooks';
 import { useNavigate } from 'react-router-dom';
-import { cartService } from '../../services/cart/cart.services';
-import { CheckoutForm, PaymentMethod } from './components/CheckoutForm';
+
+import { CheckoutForm } from './components/CheckoutForm';
 import { CheckoutList } from './components/CheckoutList';
 import { CheckoutInfo } from './components/CheckoutInfo';
+
+import { PaymentMethod } from '../../services/order';
+import { useCheckoutCart } from './hooks/useCheckoutCart';
+import { useSubmitOrder } from './hooks/useSubmitOrder';
+
 import './CheckoutPage.scss';
 
 export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
+  const formRef = useRef<HTMLFormElement>(null);
 
   const { user, loading: authLoading } = useAuth();
 
-  const [cart, setCart] = useState<Cart | null>(null);
-  const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  const {
+    cart,
+    cartItems,
+    loading: cartLoading,
+    error,
+    setCartItems,
+  } = useCheckoutCart(user?.uid);
 
-  useEffect(() => {
-    if (authLoading) return;
-
-    if (!user) {
-      navigate('/auth');
-    }
-
-    const loadCartAndItems = async () => {
-      setIsLoading(true);
-      setError('');
-
-      try {
-        const response = await cartService.getOrCreateCart(user!.uid);
-        setCart(response);
-
-        const cartItems = await cartService.fetchCartItems(response.id);
-        setCartItems(cartItems);
-      } catch (error) {
-        setError(`Something went wrong while fetching cart: ${error}`);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    loadCartAndItems();
-  }, [user, authLoading, navigate]);
-
-  const formRef = useRef<HTMLFormElement>(null);
-
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const formData = new FormData(event.currentTarget);
-    const dataObject = Object.fromEntries(formData.entries());
-    console.log('Checkout form data:', dataObject);
-  };
+  const { submitOrder } = useSubmitOrder();
 
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>(
     PaymentMethod.ONLINE_PAYMENT,
+  );
+
+  // Redirect if user is not logged in
+  useEffect(() => {
+    if (!authLoading && !user) navigate('/auth');
+  }, [user, authLoading, navigate]);
+
+  // Redirect if cart is empty after loading
+  useEffect(() => {
+    if (!cartLoading && cart && cartItems.length === 0) {
+      navigate('/');
+    }
+  }, [cartLoading, cart, cartItems, navigate]);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!cart) return;
+
+    try {
+      await submitOrder(cart, cartItems, new FormData(event.currentTarget));
+      setCartItems([]);
+      event.currentTarget.reset();
+      navigate('/profile');
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  const totalAmount = cartItems.reduce(
+    (sum, item) =>
+      sum +
+      (item.product?.priceDiscount ?? item.product?.priceRegular ?? 0) *
+        item.quantity,
+    0,
   );
 
   return (
@@ -70,11 +78,19 @@ export const CheckoutPage: React.FC = () => {
       </div>
 
       <div className="checkout__section">
-        <CheckoutList cartItems={cartItems} />
+        <CheckoutList
+          cartItems={cartItems}
+          noProducts={!cartItems.length || !!error}
+          isLoading={cartLoading}
+        />
       </div>
 
       <div className="checkout__section">
-        <CheckoutInfo cartItems={cartItems} paymentMethod={paymentMethod} />
+        <CheckoutInfo
+          totalAmount={totalAmount}
+          paymentMethod={paymentMethod}
+          formRef={formRef}
+        />
       </div>
     </section>
   );

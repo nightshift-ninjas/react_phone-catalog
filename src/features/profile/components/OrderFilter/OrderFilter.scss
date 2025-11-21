@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.order-filter {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: map.get($spacing, 'sm');
+  max-width: 100%;
+  margin-bottom: map.get($spacing, 'sm');
+
+  @include on-tablet {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__filter {
+    width: 100%;
+    overflow: auto;
+  }
+
+  .icon-dropdown__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px;
+    height: 45px;
+  }
+}
