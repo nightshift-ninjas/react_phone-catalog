@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useAuth } from '../../shared/hooks';
 import { useNavigate } from 'react-router-dom';
 import { Breadcrumb } from '../../shared/ui/Breadcrumb';
@@ -6,9 +6,12 @@ import { favoriteService } from '../../services/favorite/favorite.service';
 import type { FavoriteItem } from '../../services/favorite/favorite.types';
 import './FavoritePage.scss';
 import { ProductCard } from '../../widgets/ProductCard';
+import { LanguageContext } from '../../shared/context/language';
+import { ROUTES } from '../../shared/config/routes';
 
 const FavoritePage: React.FC = () => {
   const navigate = useNavigate();
+  const { language: lng } = useContext(LanguageContext)!;
   const { user, loading: authLoading } = useAuth();
 
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
@@ -16,14 +19,14 @@ const FavoritePage: React.FC = () => {
   const [error, setError] = useState('');
 
   const handleRemoveFavorite = (id: string) => {
-    setFavorites(prev => prev.filter(f => f.id !== id));
+    setFavorites((prev) => prev.filter((f) => f.id !== id));
   };
 
   useEffect(() => {
     if (authLoading) return;
 
     if (!user) {
-      navigate('/auth');
+      navigate(`/${lng}/${ROUTES.auth}`);
       return;
     }
 
@@ -42,12 +45,14 @@ const FavoritePage: React.FC = () => {
     };
 
     loadFavorites();
-  }, [user, authLoading, navigate]);
+  }, [user, authLoading, navigate, lng]);
 
   return (
     <div className="favorite">
       <div className="favorite__breadcrumbs">
-        <Breadcrumb items={[{ text: 'favorites', link: '/favorite' }]} />
+        <Breadcrumb
+          items={[{ text: 'favorites', link: `/${lng}/${ROUTES.favorite}` }]}
+        />
       </div>
 
       <h1>Favorites</h1>
@@ -63,11 +68,16 @@ const FavoritePage: React.FC = () => {
         <>
           <p className="favorite__count">{favorites.length} items</p>
           <ul className="favorite__list">
-          {favorites.map((fav) => (
-            <li key={fav.id} className="favorite__item">
-              {fav.product && <ProductCard product={fav.product} onRemove={() => handleRemoveFavorite(fav.id)}/>}
-            </li>
-          ))}
+            {favorites.map((fav) => (
+              <li key={fav.id} className="favorite__item">
+                {fav.product && (
+                  <ProductCard
+                    product={fav.product}
+                    onRemove={() => handleRemoveFavorite(fav.id)}
+                  />
+                )}
+              </li>
+            ))}
           </ul>
         </>
       )}

@@ -1,10 +1,12 @@
 import type { User } from 'firebase/auth';
-import React from 'react';
+import React, { useContext } from 'react';
 import './ProfileInfo.scss';
 import { Button } from '../../../../shared/ui/Button';
 import { authClient } from '../../../../services/auth';
 import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../shared/ui/Spinner/Spinner';
+import { LanguageContext } from '../../../../shared/context/language';
+import { ROUTES } from '../../../../shared/config/routes';
 
 type Props = {
   user: User | null;
@@ -12,11 +14,12 @@ type Props = {
 
 export const ProfileInfo: React.FC<Props> = ({ user }) => {
   const navigate = useNavigate();
+  const { language: lng } = useContext(LanguageContext)!;
 
   const logout = async () => {
     try {
       await authClient.logout();
-      navigate('/login');
+      navigate(`/${lng}/${ROUTES.login}`);
     } catch (error) {
       console.error('Logout failed:', error);
     }

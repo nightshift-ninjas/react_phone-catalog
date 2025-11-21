@@ -2,16 +2,17 @@ import type React from 'react';
 import type { Product } from '../../../../services/product';
 import { Button } from '../../../../shared/ui/Button';
 import FavoriteButton from '../../../../shared/ui/FavoriteButton/FavoriteButton';
-
 import './ProductNavigation.scss';
 import { ColorButton } from '../ColorButton';
 import type { Colors } from '../ColorButton/ColorTypes';
 import { CapacityButton } from '../CapacityButton';
 import { useAuth } from '../../../../shared/hooks';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { cartService } from '../../../../services/cart/cart.services';
 import { favoriteService } from '../../../../services/favorite';
+import { ROUTES } from '../../../../shared/config/routes';
+import { LanguageContext } from '../../../../shared/context/language';
 
 type Props = {
   product: Product;
@@ -21,15 +22,25 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
   const { category } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { language: lng } = useContext(LanguageContext)!;
 
   const [isSelectedCart, setIsSelectedCart] = useState(false);
   const [isSelectedFav, setIsSelectedFav] = useState(false);
+
+  const normalize = (str: string | undefined) => str?.toLowerCase();
+
+  function requireLogin() {
+    if (!user) {
+      navigate(`/${lng}/${ROUTES.login}`);
+      return false;
+    }
+    return true;
+  }
 
   async function onClickCart() {
     if (!requireLogin()) return;
 
     const cart = await cartService.getOrCreateCart(user!.uid);
-
     if (!isSelectedCart) {
       await cartService.addItemToCart(cart.id, product.id, 1);
       setIsSelectedCart(true);
@@ -51,29 +62,18 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
     }
   }
 
-  function requireLogin() {
-    if (!user) {
-      navigate('/auth/login');
-      return false;
-    }
-    return true;
-  }
-
   useEffect(() => {
     if (!user) return;
 
     (async () => {
       const cart = await cartService.getOrCreateCart(user.uid);
       const items = await cartService.fetchCartItems(cart.id);
-
       setIsSelectedCart(items.some((item) => item.productId === product.id));
 
       const favs = await favoriteService.fetchFavoritesByUser(user.uid);
       setIsSelectedFav(favs.some((fav) => fav.productId === product.id));
     })();
   }, [user, product.id]);
-
-  const normalize = (str: string | undefined) => str?.toLowerCase();
 
   return (
     <div className="product-navigation">
@@ -86,21 +86,18 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
         </div>
 
         <div className="product-navigation__color-items">
-          {product.colorsAvailable?.map((color) => {
-            return (
-              <Link
-                key={color}
-                to={`/catalog/${category}/product/${product.namespaceId}-${normalize(product.capacity)}-${normalize(color)}`}
-              >
-                <ColorButton
-                  key={color}
-                  onClick={() => {}}
-                  isSelected={product.color === color}
-                  color={color as Colors}
-                />
-              </Link>
-            );
-          })}
+          {product.colorsAvailable?.map((color) => (
+            <Link
+              key={color}
+              to={`/${lng}/${ROUTES.catalog}/${category}/product/${product.namespaceId}-${normalize(product.capacity)}-${normalize(color)}`}
+            >
+              <ColorButton
+                onClick={() => {}}
+                isSelected={product.color === color}
+                color={color as Colors}
+              />
+            </Link>
+          ))}
         </div>
       </div>
 
@@ -109,19 +106,17 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
       <div className="product-navigation__capacity">
         <div className="product-navigation__label">Select capacity</div>
         <div className="product-navigation__capacity-items">
-          {product.capacityAvailable?.map((capacity) => {
-            return (
-              <Link
-                key={capacity}
-                to={`/catalog/${category}/product/${product.namespaceId}-${normalize(capacity)}-${normalize(product.color)}`}
-              >
-                <CapacityButton
-                  ram={capacity}
-                  isSelected={product.capacity === capacity}
-                />
-              </Link>
-            );
-          })}
+          {product.capacityAvailable?.map((capacity) => (
+            <Link
+              key={capacity}
+              to={`/${lng}/${ROUTES.catalog}/${category}/product/${product.namespaceId}-${normalize(capacity)}-${normalize(product.color)}`}
+            >
+              <CapacityButton
+                ram={capacity}
+                isSelected={product.capacity === capacity}
+              />
+            </Link>
+          ))}
         </div>
       </div>
 
@@ -142,6 +137,7 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
             ${product.priceRegular}
           </div>
         )}
+
         <div className="product-navigation__buttons">
           <Button onClick={onClickCart} isSelected={isSelectedCart}>
             Add to cart

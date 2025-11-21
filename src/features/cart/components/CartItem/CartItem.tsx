@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import './CartItem.scss';
 import type { CartItem as CartItemType } from '../../../../services/cart';
 import { cartService } from '../../../../services/cart/cart.services';
 import { QuantityControl } from '../QuantityControl/QuantityControl';
 import { BASE_URL } from '../../../../widgets/ProductCard';
 import { Link } from 'react-router-dom';
+import { LanguageContext } from '../../../../shared/context/language';
+import { ROUTES } from '../../../../shared/config/routes';
 
 export type Props = {
   item: CartItemType;
@@ -13,6 +15,7 @@ export type Props = {
 
 export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
   const [quantity, setQuantity] = useState(item.quantity);
+  const { language: lng } = useContext(LanguageContext)!;
 
   const handleRemove = async () => {
     try {
@@ -45,6 +48,8 @@ export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
     }
   };
 
+  const productLink = `/${lng}/${ROUTES.catalog}/${item.product?.category}/product/${item.product?.id}`;
+
   return (
     <div className="cart-item">
       <div className="cart-item__top">
@@ -52,10 +57,7 @@ export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
           ×
         </button>
 
-        <Link
-          to={`/catalog/${item.product?.category}/product/${item.product?.id}`}
-          className="cart-item__title"
-        >
+        <Link to={productLink} className="cart-item__title">
           <div className="cart-item__link-wrapper">
             <div className="cart-item__image_wrapper">
               <img
