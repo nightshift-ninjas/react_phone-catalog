@@ -37,8 +37,7 @@
     color: var(--text-color);
 
     &--selected {
-      color: map.get($colors, "dark");
-      background-color: map.get($colors, "white");
+      background-color: map.get($colors, "purple");
       padding: 8px 7px 8px 4px;
     }
   }
