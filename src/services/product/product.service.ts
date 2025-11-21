@@ -49,4 +49,9 @@ export const productService = {
       numberOfModels,
     }));
   },
+
+  async fetchByNamespaceId(namespaceId: string): Promise<Product[]> {
+    const products = await productRepository.getByNamespaceId(namespaceId);
+    return products;
+  },
 };
