@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+
+.text-skeleton {
+  display: flex;
+  flex-wrap: wrap;
+  gap: map.get($spacing, 'md');
+}

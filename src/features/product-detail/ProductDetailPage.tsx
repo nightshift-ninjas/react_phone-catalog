@@ -6,21 +6,23 @@ import ProductDescription from './components/ProductDescription/ProductDescripti
 import { ProductSlider } from '../../widgets/ProductSlider';
 import { ProductImageGallery } from './components/ProductImageGallery';
 import { ProductNavigation } from './components/ProductNavigation';
+import { ImageGallerySkeleton } from './components/ImageGallerySkeleton';
 import './ProductDetailPage.scss';
+import { TextSkeleton } from '../../shared/ui/TextSkeleton';
+import { NavigationSkeleton } from './components/NavigationSkeleton';
+import { ProductDescriptionSkeleton } from './components/ProductDescriptionSkeleton';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
 
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
 
   useEffect(() => {
     if (!id) return;
 
     const loadProduct = async () => {
-      setError('');
       setIsLoading(true);
 
       try {
@@ -36,7 +38,7 @@ const ProductDetailPage: React.FC = () => {
           setRelatedProducts([]);
         }
       } catch (err) {
-        setError(`Something went wrong: ${err}`);
+        console.log(`Something went wrong: ${err}`);
       } finally {
         setIsLoading(false);
       }
@@ -62,22 +64,33 @@ const ProductDetailPage: React.FC = () => {
         />
       </div>
 
-      {!isLoading && product && (
+      {!isLoading && product ? (
         <h1 className="product-detail__title">{product.name}</h1>
+      ) : (
+        <TextSkeleton height={'40px'} widths={['40%', '15%', '5%', '20%']} />
       )}
 
-      {product && (
-        <>
-          <div className="product-detail__section">
-            <ProductImageGallery images={product.images} />
-            <ProductNavigation product={product} />
-          </div>
-        </>
+      <>
+        <div className="product-detail__section">
+          {!isLoading && product ? (
+            <>
+              <ProductImageGallery images={product.images} />
+              <ProductNavigation product={product} />
+            </>
+          ) : (
+            <>
+              <ImageGallerySkeleton />
+              <NavigationSkeleton />
+            </>
+          )}
+        </div>
+      </>
+
+      {!isLoading && product ? (
+        <ProductDescription product={product} />
+      ) : (
+        <ProductDescriptionSkeleton />
       )}
-
-      {!isLoading && error && <p>{error}</p>}
-
-      {product && <ProductDescription product={product} />}
 
       {relatedProducts.length > 0 && (
         <div className="product-detail__related">

@@ -9,11 +9,14 @@ import categoryTablets from '../../../../shared/assets/img/category-tablets.webp
 import categoryAccessories from '../../../../shared/assets/img/category-accessories.webp';
 import type { Category } from '../../../../services/product';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../../../shared/context/language';
 
 const CategoryList: React.FC = () => {
   const [categories, setCategories] = useState<
     { category: string; numberOfModels: number }[]
   >([]);
+
+  const { language: lng } = useLanguage();
 
   useEffect(() => {
     const fetchCategoryStats = async () => {
@@ -47,7 +50,7 @@ const CategoryList: React.FC = () => {
       <ul className="category-list__list">
         {categories.map((category) => (
           <li className="category-list__item" key={category.category}>
-            <Link to={`/catalog/${category.category}`}>
+            <Link to={`/${lng}/catalog/${category.category}`}>
               <CategoryItem
                 categoryName={CategoryLabels[category.category as Category]}
                 categoryQuantity={category.numberOfModels}

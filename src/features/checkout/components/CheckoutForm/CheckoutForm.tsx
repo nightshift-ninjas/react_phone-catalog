@@ -34,7 +34,7 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
     const [lastName, setLastName] = useState(initialLast);
     const [email, setEmail] = useState(user?.email || '');
     const [mobile, setMobile] = useState(user?.phoneNumber || '');
-    const [isScheduled, setIsScheduled] = useState(false);
+    const [isScheduled, setIsScheduled] = useState(true);
 
     return (
       <Form.Root ref={ref} className="checkout-form" onSubmit={onSubmit}>

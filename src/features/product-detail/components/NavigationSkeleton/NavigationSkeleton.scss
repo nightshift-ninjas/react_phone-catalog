@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.navigation-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'lg');
+  margin-top: map.get($spacing, "2xl");
+  width: 100%;
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'sm');
+
+    &--between {
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
+
+  &__rounded {
+    border-radius: 50%;
+  }
+}
