@@ -9,12 +9,14 @@ type Props = {
   cartItems: CartItemType[];
   noProducts?: boolean;
   isLoading: boolean;
+  onQuantityChange?: (id: string, qty: number) => void;
 };
 
 export const CheckoutList: React.FC<Props> = ({
   cartItems,
   isLoading,
   noProducts = false,
+  onQuantityChange,
 }) => {
   return (
     <div className="checkout-list">
@@ -24,7 +26,7 @@ export const CheckoutList: React.FC<Props> = ({
         <ul className="checkout-list__list">
           {cartItems.map((item) => (
             <li key={item.id} className="checkout-list__item">
-              <CartItem item={item} />
+              <CartItem item={item} onQuantityChange={onQuantityChange} />
             </li>
           ))}
         </ul>

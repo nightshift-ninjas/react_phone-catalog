@@ -27,6 +27,12 @@ const CartPage: React.FC = () => {
     setCartItems((prev) => prev.filter((item) => item.id !== itemId));
   };
 
+  const handleQuantityChange = (id: string, qty: number) => {
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity: qty } : item)),
+    );
+  };
+
   const totalAmount = cartItems.reduce((sum, item) => {
     const price =
       item.product?.priceDiscount ?? item.product?.priceRegular ?? 0;
@@ -81,6 +87,7 @@ const CartPage: React.FC = () => {
                   <CartItem
                     item={item}
                     onRemove={() => handleRemoveFromCart(item.id)}
+                    onQuantityChange={handleQuantityChange}
                   />
                 </li>
               ))}

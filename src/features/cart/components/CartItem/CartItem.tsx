@@ -14,9 +14,14 @@ import type { Currency } from '../../../../widgets/CurrencyButton';
 export type Props = {
   item: CartItemType;
   onRemove?: () => void;
+  onQuantityChange?: (id: string, quantity: number) => void;
 };
 
-export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
+export const CartItem: React.FC<Props> = ({
+  item,
+  onRemove,
+  onQuantityChange,
+}) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const { language: lng } = useContext(LanguageContext)!;
   const { rates, currentCurrency } = useCurrency();
@@ -38,9 +43,12 @@ export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
 
   const handleIncrease = async () => {
     try {
-      const updated = { ...item, quantity: quantity + 1 };
+      const newQty = quantity + 1;
+      const updated = { ...item, quantity: newQty };
       await cartService.updateCartItem(item.id, updated);
-      setQuantity((q) => q + 1);
+
+      setQuantity(newQty);
+      onQuantityChange?.(item.id, newQty);
     } catch (error) {
       console.error('Failed to increase quantity:', error);
     }
@@ -50,9 +58,12 @@ export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
     if (quantity === 1) return;
 
     try {
-      const updated = { ...item, quantity: quantity - 1 };
+      const newQty = quantity - 1;
+      const updated = { ...item, quantity: newQty };
       await cartService.updateCartItem(item.id, updated);
-      setQuantity((q) => q - 1);
+
+      setQuantity(newQty);
+      onQuantityChange?.(item.id, newQty);
     } catch (error) {
       console.error('Failed to decrease quantity:', error);
     }

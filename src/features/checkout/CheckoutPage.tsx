@@ -34,17 +34,11 @@ export const CheckoutPage: React.FC = () => {
     PaymentMethod.ONLINE_PAYMENT,
   );
 
-  // Redirect if user is not logged in
-  useEffect(() => {
-    if (!authLoading && !user) navigate('/auth');
-  }, [user, authLoading, navigate]);
-
-  // Redirect if cart is empty after loading
-  useEffect(() => {
-    if (!cartLoading && cart && cartItems.length === 0 && !showAnimation) {
-      navigate('/');
-    }
-  }, [cartLoading, cart, cartItems, navigate, showAnimation]);
+  const handleQuantityChange = (id: string, qty: number) => {
+    setCartItems((prev) =>
+      prev.map((item) => (item.id === id ? { ...item, quantity: qty } : item)),
+    );
+  };
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -68,6 +62,18 @@ export const CheckoutPage: React.FC = () => {
     0,
   );
 
+  // Redirect if user is not logged in
+  useEffect(() => {
+    if (!authLoading && !user) navigate('/auth');
+  }, [user, authLoading, navigate]);
+
+  // Redirect if cart is empty after loading
+  useEffect(() => {
+    if (!cartLoading && cart && cartItems.length === 0 && !showAnimation) {
+      navigate('/');
+    }
+  }, [cartLoading, cart, cartItems, navigate, showAnimation]);
+
   return (
     <section className="checkout">
       {showAnimation && (
@@ -90,6 +96,7 @@ export const CheckoutPage: React.FC = () => {
           cartItems={cartItems}
           noProducts={!cartItems.length || !!error}
           isLoading={cartLoading}
+          onQuantityChange={handleQuantityChange}
         />
       </div>
 
