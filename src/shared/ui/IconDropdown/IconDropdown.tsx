@@ -60,7 +60,9 @@ export const IconDropdown: React.FC<Props> = ({
             >
               {option.icon && (
                 <span
-                  className="icon-dropdown__item-icon"
+                  className={cn('icon-dropdown__item-icon', {
+                    'icon-dropdown__item-icon--theme': themeIcon,
+                  })}
                   style={{ width: option.optionIconWidth ?? 40 }}
                 >
                   {option.icon}

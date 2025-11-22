@@ -1,20 +1,22 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuth } from '../../shared/hooks';
 import { useNavigate } from 'react-router-dom';
-
 import { CheckoutForm } from './components/CheckoutForm';
 import { CheckoutList } from './components/CheckoutList';
 import { CheckoutInfo } from './components/CheckoutInfo';
-
+import { SuccessAnimation } from './components/SuccessAnimation';
 import { PaymentMethod } from '../../services/order';
 import { useCheckoutCart } from './hooks/useCheckoutCart';
 import { useSubmitOrder } from './hooks/useSubmitOrder';
-
+import { ROUTES } from '../../shared/config/routes';
 import './CheckoutPage.scss';
+import { useLanguage } from '../../shared/context/language';
 
 export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
+  const [showAnimation, setShowAnimation] = useState(false);
+  const { language: lng } = useLanguage();
 
   const { user, loading: authLoading } = useAuth();
 
@@ -39,10 +41,10 @@ export const CheckoutPage: React.FC = () => {
 
   // Redirect if cart is empty after loading
   useEffect(() => {
-    if (!cartLoading && cart && cartItems.length === 0) {
+    if (!cartLoading && cart && cartItems.length === 0 && !showAnimation) {
       navigate('/');
     }
-  }, [cartLoading, cart, cartItems, navigate]);
+  }, [cartLoading, cart, cartItems, navigate, showAnimation]);
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -51,8 +53,8 @@ export const CheckoutPage: React.FC = () => {
     try {
       await submitOrder(cart, cartItems, new FormData(event.currentTarget));
       setCartItems([]);
+      setShowAnimation(true);
       event.currentTarget.reset();
-      navigate('/profile');
     } catch (err) {
       console.error(err);
     }
@@ -68,6 +70,12 @@ export const CheckoutPage: React.FC = () => {
 
   return (
     <section className="checkout">
+      {showAnimation && (
+        <SuccessAnimation
+          onBackToCatalog={() => navigate(`/${lng}/${ROUTES.profile}`)}
+        />
+      )}
+
       <div className="checkout__section">
         <CheckoutForm
           ref={formRef}

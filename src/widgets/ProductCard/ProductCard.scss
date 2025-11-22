@@ -64,6 +64,10 @@
     align-items: center;
     gap: map.get($spacing, 'sm');
 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
     &-current {
       font-size: 22px;
       font-weight: 700;
@@ -93,7 +97,7 @@
     li {
       display: flex;
       justify-content: space-between;
-      gap: map.get($spacing, "md");
+      gap: map.get($spacing, 'md');
       font-size: 12px;
       font-weight: 600;
 

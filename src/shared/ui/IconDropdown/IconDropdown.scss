@@ -62,6 +62,16 @@
       color: map.get($colors, 'green');
     }
   }
+
+  &__item-icon {
+    &--theme {
+      svg {
+        path {
+          fill: var(--text-color);
+        }
+      }
+    }
+  }
 }
 
 [data-theme='dark'] {

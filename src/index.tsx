@@ -5,12 +5,15 @@ import { HashRouter } from 'react-router-dom';
 import { AppRoutes } from './app/routes/AppRoutes.tsx';
 import './shared/styles/main.scss';
 import { LanguageProvider } from './app/providers/LanguageProvider.tsx';
+import { CurrencyProvider } from './app/providers/CurrencyProvider.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
       <LanguageProvider>
-        <AppRoutes />
+        <CurrencyProvider>
+          <AppRoutes />
+        </CurrencyProvider>
       </LanguageProvider>
     </HashRouter>
   </StrictMode>,

@@ -13,6 +13,7 @@ import './Navbar.scss';
 import { LanguageButton } from '../LanguageButton';
 import { ROUTES } from '../../shared/config/routes';
 import { LanguageContext } from '../../shared/context/language';
+import { CurrencyButton } from '../CurrencyButton';
 
 const getClasses = ({ isActive }: { isActive: boolean }) =>
   cn('nav__link', { 'nav__link--active': isActive });
@@ -34,6 +35,7 @@ export const Navbar: React.FC = () => {
 
   const navButtons: NavButton[] = [
     { component: LanguageButton as React.ComponentType },
+    { component: CurrencyButton as React.ComponentType },
     { component: ThemeButton as React.ComponentType },
     { path: `/${lng}/${ROUTES.favorite}`, icon: <FavoriteIcon /> },
     { path: `/${lng}/${ROUTES.cart}`, icon: <ShoppingBagIcon /> },
