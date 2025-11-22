@@ -7,6 +7,9 @@ import { BASE_URL } from '../../../../widgets/ProductCard';
 import { Link } from 'react-router-dom';
 import { LanguageContext } from '../../../../shared/context/language';
 import { ROUTES } from '../../../../shared/config/routes';
+import { useCurrency } from '../../../../shared/context/currency';
+import { convertPrice } from '../../../../shared/utils';
+import type { Currency } from '../../../../widgets/CurrencyButton';
 
 export type Props = {
   item: CartItemType;
@@ -16,6 +19,13 @@ export type Props = {
 export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
   const [quantity, setQuantity] = useState(item.quantity);
   const { language: lng } = useContext(LanguageContext)!;
+  const { rates, currentCurrency } = useCurrency();
+
+  const totalPrice = convertPrice(
+    (item.product?.priceDiscount ?? item.product?.priceRegular ?? 0) * quantity,
+    rates,
+    currentCurrency as Currency,
+  );
 
   const handleRemove = async () => {
     try {
@@ -81,9 +91,7 @@ export const CartItem: React.FC<Props> = ({ item, onRemove }) => {
           />
         </div>
 
-        <div className="cart-item__price">
-          ${(item.product?.priceDiscount ?? 0) * quantity}
-        </div>
+        <div className="cart-item__price">{totalPrice}</div>
       </div>
     </div>
   );

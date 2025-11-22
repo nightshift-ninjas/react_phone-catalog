@@ -9,6 +9,9 @@ import { useAuth } from '../../shared/hooks';
 import { Link, useNavigate } from 'react-router-dom';
 import { ROUTES } from '../../shared/config/routes';
 import { LanguageContext } from '../../shared/context/language';
+import { useCurrency } from '../../shared/context/currency';
+import { convertPrice } from '../../shared/utils';
+import type { Currency } from '../CurrencyButton';
 
 type Props = {
   product: Product;
@@ -75,6 +78,20 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
 
   const productLink = `/${lng}/${ROUTES.catalog}/${product.category}/product/${product.id}`;
 
+  const { rates, currentCurrency } = useCurrency();
+
+  const convertedPriceDiscount = convertPrice(
+    product.priceDiscount,
+    rates,
+    currentCurrency as Currency,
+  );
+
+  const convertedPriceRegular = convertPrice(
+    product.priceRegular,
+    rates,
+    currentCurrency as Currency,
+  );
+
   return (
     <article className="product-card">
       <Link to={productLink}>
@@ -91,10 +108,10 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
 
           <div className="product-card__price">
             <span className="product-card__price-current">
-              ${product.priceDiscount}
+              {convertedPriceDiscount}
             </span>
             <span className="product-card__price-old">
-              ${product.priceRegular}
+              {convertedPriceRegular}
             </span>
           </div>
 

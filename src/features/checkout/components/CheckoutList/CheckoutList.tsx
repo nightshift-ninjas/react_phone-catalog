@@ -3,6 +3,7 @@ import type { CartItem as CartItemType } from '../../../../services/cart';
 import { CartItem } from '../../../cart/components/CartItem';
 import './CheckoutList.scss';
 import Spinner from '../../../../shared/ui/Spinner/Spinner';
+import { CurrencyRatesChart } from '../CurrencyRatesChart';
 
 type Props = {
   cartItems: CartItemType[];
@@ -34,6 +35,10 @@ export const CheckoutList: React.FC<Props> = ({
           It seems like you have no products in your cart yet
         </h4>
       )}
+
+      <div className="checkout-list__currency-chart">
+        <CurrencyRatesChart />
+      </div>
     </div>
   );
 };

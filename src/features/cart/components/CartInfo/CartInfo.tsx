@@ -6,6 +6,9 @@ import { LanguageContext } from '../../../../shared/context/language';
 import { ROUTES } from '../../../../shared/config/routes';
 
 import './CartInfo.scss';
+import { useCurrency } from '../../../../shared/context/currency';
+import { convertPrice } from '../../../../shared/utils';
+import type { Currency } from '../../../../widgets/CurrencyButton';
 
 type Props = {
   total: number;
@@ -15,13 +18,19 @@ type Props = {
 export const CartInfo: React.FC<Props> = ({ total, itemsCount }) => {
   const navigate = useNavigate();
   const { language: lng } = useContext(LanguageContext)!;
+  const { rates, currentCurrency } = useCurrency();
+  const totalFormatted = convertPrice(
+    total,
+    rates,
+    currentCurrency as Currency,
+  );
 
   const handleClick = () => navigate(`/${lng}/${ROUTES.checkout}`);
 
   return (
     <div className="cart-info">
       <div className="cart-info__wrapper">
-        <div className="cart-info__total-price">${total}</div>
+        <div className="cart-info__total-price">{totalFormatted}</div>
         <div className="cart-info__total-items">
           Total for {itemsCount} items
         </div>

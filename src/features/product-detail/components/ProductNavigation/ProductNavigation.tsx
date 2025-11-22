@@ -13,6 +13,9 @@ import { cartService } from '../../../../services/cart/cart.services';
 import { favoriteService } from '../../../../services/favorite';
 import { ROUTES } from '../../../../shared/config/routes';
 import { LanguageContext } from '../../../../shared/context/language';
+import { useCurrency } from '../../../../shared/context/currency';
+import { convertPrice } from '../../../../shared/utils';
+import type { Currency } from '../../../../widgets/CurrencyButton';
 
 type Props = {
   product: Product;
@@ -23,6 +26,17 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   const { language: lng } = useContext(LanguageContext)!;
+  const { rates, currentCurrency } = useCurrency();
+
+  const convertedPriceDiscount = product.priceDiscount
+    ? convertPrice(product.priceDiscount, rates, currentCurrency as Currency)
+    : undefined;
+
+  const convertedPriceRegular = convertPrice(
+    product.priceRegular,
+    rates,
+    currentCurrency as Currency,
+  );
 
   const [isSelectedCart, setIsSelectedCart] = useState(false);
   const [isSelectedFav, setIsSelectedFav] = useState(false);
@@ -126,10 +140,10 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
         {product.priceDiscount ? (
           <div className="product-navigation__price-wrapper">
             <div className="product-navigation__price-discount">
-              ${product.priceDiscount}
+              {convertedPriceDiscount}
             </div>
             <div className="product-navigation__price-regular">
-              ${product.priceRegular}
+              {convertedPriceRegular}
             </div>
           </div>
         ) : (

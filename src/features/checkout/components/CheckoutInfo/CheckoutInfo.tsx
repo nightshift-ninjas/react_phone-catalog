@@ -3,6 +3,9 @@ import './CheckoutInfo.scss';
 import PayPalCheckout from '../PayPalCheckout/PayPalCheckout';
 import { Button } from '../../../../shared/ui/Button';
 import { PaymentMethod } from '../../../../services/order';
+import type { Currency } from '../../../../widgets/CurrencyButton';
+import { convertPrice } from '../../../../shared/utils';
+import { useCurrency } from '../../../../shared/context/currency';
 
 type Props = {
   totalAmount: number;
@@ -15,6 +18,13 @@ export const CheckoutInfo: React.FC<Props> = ({
   formRef,
   totalAmount,
 }) => {
+  const { rates, currentCurrency } = useCurrency();
+  const formattedTotal = convertPrice(
+    totalAmount,
+    rates,
+    currentCurrency as Currency,
+  );
+
   const submitOrder = () => {
     formRef.current?.requestSubmit();
   };
@@ -26,7 +36,7 @@ export const CheckoutInfo: React.FC<Props> = ({
       <dl className="checkout-info__list">
         <div className="checkout-info__row">
           <dt>Subtotal</dt>
-          <dd>${totalAmount}</dd>
+          <dd>{formattedTotal}</dd>
         </div>
 
         <div className="checkout-info__row">
@@ -38,7 +48,7 @@ export const CheckoutInfo: React.FC<Props> = ({
 
         <div className="checkout-info__row checkout-info__row--total">
           <dt>Total (USD)</dt>
-          <dd>${totalAmount}</dd>
+          <dd>{formattedTotal}</dd>
         </div>
       </dl>
 
