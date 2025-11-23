@@ -9,12 +9,14 @@ import {
   getStatusStats,
   getWeekDayLabels,
 } from './OrderChartUtils';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   orders: Order[];
 };
 
 export const OrderCharts: React.FC<Props> = ({ orders }) => {
+  const { t } = useTranslation('profile');
   const ordersPerDayByStatus = getOrdersPerDayByStatus(orders);
   const salesPerDay = getSalesPerDayThisWeek(orders);
   const categoryStats = getCategoryStats(orders);
@@ -24,7 +26,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
   return (
     <div className="order-charts">
       <div className="chart">
-        <h3>Orders Per Day (This Week) by Status</h3>
+        <h3>{t('chart.ordersPerDay')}</h3>
         <ReactApexChart
           type="line"
           series={[
@@ -44,7 +46,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
       </div>
 
       <div className="chart">
-        <h3>Total Sales Per Day (This Month)</h3>
+        <h3>{t('chart.salesPerDay')}</h3>
         <ReactApexChart
           type="line"
           series={[
@@ -61,7 +63,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
       </div>
 
       <div className="chart">
-        <h3>Products Ordered by Category</h3>
+        <h3>{t('chart.ordersByCategory')}</h3>
         <ReactApexChart
           type="pie"
           series={categoryStats.series}
@@ -72,7 +74,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
       </div>
 
       <div className="chart">
-        <h3>Order Status</h3>
+        <h3>{t('chart.orderStatus')}</h3>
         <ReactApexChart
           type="donut"
           series={statusStats.series}

@@ -15,18 +15,21 @@ import ImageSlider from './components/ImageSlider/ImageSlider';
 const HomePage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState('');
+  
+  const hot = getHotProducts(products);
+  const premium = getPremiumProducts(products);
+  const popular = getPopularProducts(products);
+  const random = getRandomProducts(products);
 
   useEffect(() => {
     const loadProducts = async () => {
       setIsLoading(true);
-      setError('');
 
       try {
         const productsFromServer = await productService.fetchAll();
         setProducts(productsFromServer);
       } catch (error) {
-        setError(`Something went wrong during loading data: ${error}`);
+        console.log(`Something went wrong during loading data: ${error}`);
       } finally {
         setIsLoading(false);
       }
@@ -34,11 +37,6 @@ const HomePage: React.FC = () => {
 
     loadProducts();
   }, []);
-
-  const hot = getHotProducts(products);
-  const premium = getPremiumProducts(products);
-  const popular = getPopularProducts(products);
-  const random = getRandomProducts(products);
 
   return (
     <div className="home">

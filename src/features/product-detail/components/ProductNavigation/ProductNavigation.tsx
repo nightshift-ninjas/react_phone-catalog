@@ -16,17 +16,19 @@ import { LanguageContext } from '../../../../shared/context/language';
 import { useCurrency } from '../../../../shared/context/currency';
 import { convertPrice } from '../../../../shared/utils';
 import type { Currency } from '../../../../widgets/CurrencyButton';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: Product;
 };
 
 export const ProductNavigation: React.FC<Props> = ({ product }) => {
+  const navigate = useNavigate();
   const { category } = useParams();
   const { user } = useAuth();
-  const navigate = useNavigate();
-  const { language: lng } = useContext(LanguageContext)!;
   const { rates, currentCurrency } = useCurrency();
+  const { language: lng } = useContext(LanguageContext)!;
+  const { t } = useTranslation(['productDetail', 'common']);
 
   const convertedPriceDiscount = product.priceDiscount
     ? convertPrice(product.priceDiscount, rates, currentCurrency as Currency)
@@ -94,8 +96,9 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
       <div className="product-navigation__color">
         <div className="product-navigation__header">
           <div className="product-navigation__label product-navigation__label--color">
-            Available colors
+            {t('productDetail:availableColors')}
           </div>
+
           <div className="product-navigation__id">{`ID: ${product.id}`}</div>
         </div>
 
@@ -118,7 +121,10 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
       <div className="product-navigation__divider" />
 
       <div className="product-navigation__capacity">
-        <div className="product-navigation__label">Select capacity</div>
+        <div className="product-navigation__label">
+          {t('productDetail:selectCapacity')}
+        </div>
+
         <div className="product-navigation__capacity-items">
           {product.capacityAvailable?.map((capacity) => (
             <Link
@@ -154,7 +160,7 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
 
         <div className="product-navigation__buttons">
           <Button onClick={onClickCart} isSelected={isSelectedCart}>
-            Add to cart
+            {t('common:addToCart')}
           </Button>
           <FavoriteButton onClick={onClickFav} isSelected={isSelectedFav} />
         </div>
@@ -162,19 +168,27 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
 
       <div className="product-navigation__details">
         <div className="product-navigation__screen">
-          <div className="product-navigation__label">Screen</div>
+          <div className="product-navigation__label">
+            {t('productDetail:productInfo.screen')}
+          </div>
           <div className="product-navigation__value">{product.screen}</div>
         </div>
         <div className="product-navigation__resolution">
-          <div className="product-navigation__label">Resolution</div>
+          <div className="product-navigation__label">
+            {t('productDetail:productInfo.resolution')}
+          </div>
           <div className="product-navigation__value">{product.resolution}</div>
         </div>
         <div className="product-navigation__processor">
-          <div className="product-navigation__label">Processor</div>
+          <div className="product-navigation__label">
+            {t('productDetail:productInfo.processor')}
+          </div>
           <div className="product-navigation__value">{product.processor}</div>
         </div>
         <div className="product-navigation__ram">
-          <div className="product-navigation__label">RAM</div>
+          <div className="product-navigation__label">
+            {t('productDetail:productInfo.ram')}
+          </div>
           <div className="product-navigation__value">{product.ram}</div>
         </div>
       </div>

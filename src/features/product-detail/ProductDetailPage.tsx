@@ -11,6 +11,9 @@ import './ProductDetailPage.scss';
 import { TextSkeleton } from '../../shared/ui/TextSkeleton';
 import { NavigationSkeleton } from './components/NavigationSkeleton';
 import { ProductDescriptionSkeleton } from './components/ProductDescriptionSkeleton';
+import { BlurReveal } from './components/BlurReveal';
+import { useLanguage } from '../../shared/context/language';
+import { Language } from '../../widgets/LanguageButton';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -18,6 +21,7 @@ const ProductDetailPage: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const { language: lng } = useLanguage();
 
   useEffect(() => {
     if (!id) return;
@@ -87,7 +91,15 @@ const ProductDetailPage: React.FC = () => {
       </>
 
       {!isLoading && product ? (
-        <ProductDescription product={product} />
+        <>
+          {lng !== Language.EN ? (
+            <BlurReveal>
+              <ProductDescription product={product} />
+            </BlurReveal>
+          ) : (
+            <ProductDescription product={product} />
+          )}
+        </>
       ) : (
         <ProductDescriptionSkeleton />
       )}

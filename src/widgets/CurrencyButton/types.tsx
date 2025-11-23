@@ -15,15 +15,6 @@ export enum Currency {
   GBP = 'GBP',
 }
 
-export const CurrencyLabels: Record<Currency, string> = {
-  [Currency.USD]: 'Dollar',
-  [Currency.PLN]: 'Polish złoty',
-  [Currency.EUR]: 'Euro',
-  [Currency.CAD]: 'Canadian dollar',
-  [Currency.JPY]: 'Japanese Yen',
-  [Currency.GBP]: 'British Pound',
-};
-
 export const CurrencyIcons: Record<Currency, React.ReactNode> = {
   [Currency.USD]: <USDSVG />,
   [Currency.PLN]: <PLNSVG />,
@@ -41,12 +32,3 @@ export const CurrencySymbols: Record<Currency, string> = {
   [Currency.GBP]: '£',
   [Currency.JPY]: '¥',
 };
-
-const ICON_WIDTH = 20;
-
-export const currencyOptions = Object.values(Currency).map((currency) => ({
-  label: CurrencyLabels[currency],
-  icon: CurrencyIcons[currency],
-  value: currency,
-  optionIconWidth: ICON_WIDTH,
-}));

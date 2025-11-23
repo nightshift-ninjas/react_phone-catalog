@@ -14,6 +14,7 @@ import { LanguageButton } from '../LanguageButton';
 import { ROUTES } from '../../shared/config/routes';
 import { LanguageContext } from '../../shared/context/language';
 import { CurrencyButton } from '../CurrencyButton';
+import { useTranslation } from 'react-i18next';
 
 const getClasses = ({ isActive }: { isActive: boolean }) =>
   cn('nav__link', { 'nav__link--active': isActive });
@@ -24,13 +25,17 @@ const getClassesCatalog = ({ isActive }: { isActive: boolean }) =>
 export const Navbar: React.FC = () => {
   const { language: lng } = useContext(LanguageContext)!;
   const [isCollapsed, setIsCollapsed] = useState(false);
+  const { t } = useTranslation('navbar');
 
   const toggleMobileMenu = () => setIsCollapsed((prev) => !prev);
 
   const catalogLinks: NavbarLink[] = [
-    { label: 'phones', path: `/${lng}/${ROUTES.catalog}/phones` },
-    { label: 'tablets', path: `/${lng}/${ROUTES.catalog}/tablets` },
-    { label: 'accessories', path: `/${lng}/${ROUTES.catalog}/accessories` },
+    { label: t('navLinks.phones'), path: `/${lng}/${ROUTES.catalog}/phones` },
+    { label: t('navLinks.tablets'), path: `/${lng}/${ROUTES.catalog}/tablets` },
+    {
+      label: t('navLinks.accessories'),
+      path: `/${lng}/${ROUTES.catalog}/accessories`,
+    },
   ];
 
   const navButtons: NavButton[] = [
@@ -51,14 +56,14 @@ export const Navbar: React.FC = () => {
       <div className="nav__content">
         <div className="nav__block">
           <NavLink to={`/${lng}`} end className={getClasses}>
-            Home
+            {t('navLinks.home')}
           </NavLink>
 
           <NavigationMenu.Root className="nav__dropdown">
             <NavigationMenu.List className="nav__dropdown-list">
               <NavigationMenu.Item>
                 <NavigationMenu.Trigger className="nav__dropdown-btn">
-                  Catalog
+                  {t('navLinks.catalog')}
                   <ArrowIcon />
                 </NavigationMenu.Trigger>
 

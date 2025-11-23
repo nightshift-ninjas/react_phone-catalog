@@ -7,12 +7,14 @@ import { useNavigate } from 'react-router-dom';
 import Spinner from '../../../../shared/ui/Spinner/Spinner';
 import { LanguageContext } from '../../../../shared/context/language';
 import { ROUTES } from '../../../../shared/config/routes';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   user: User | null;
 };
 
 export const ProfileInfo: React.FC<Props> = ({ user }) => {
+  const { t } = useTranslation(['profile', 'common']);
   const navigate = useNavigate();
   const { language: lng } = useContext(LanguageContext)!;
 
@@ -35,32 +37,34 @@ export const ProfileInfo: React.FC<Props> = ({ user }) => {
 
   return (
     <div className="user-info">
-      <h2 className="user-info__welcome">{`Hello ${user.displayName}`}</h2>
+      <h2 className="user-info__welcome">
+        {t('profile:welcome', { name: user.displayName })}
+      </h2>
 
       <dl className="user-info__list">
         <div className="user-info__item">
-          <dt>ID:</dt>
+          <dt>{t('profile:profileInfo.id')}</dt>
           <dd>{user.uid}</dd>
         </div>
 
         <div className="user-info__item">
-          <dt>Email:</dt>
+          <dt>{t('profile:profileInfo.email')}</dt>
           <dd>{user.email}</dd>
         </div>
 
         <div className="user-info__item user-info__item--capitalize">
-          <dt>Created at:</dt>
+          <dt>{t('profile:profileInfo.createdAt')}</dt>
           <dd>{user.metadata.creationTime}</dd>
         </div>
 
         <div className="user-info__item user-info__item--capitalize">
-          <dt>Last sign:</dt>
+          <dt>{t('profile:profileInfo.lastSign')}</dt>
           <dd>{user.metadata.lastSignInTime}</dd>
         </div>
       </dl>
 
       <div className="user-info__button">
-        <Button onClick={logout}>Logout</Button>
+        <Button onClick={logout}>{t('common:logout')}</Button>
       </div>
     </div>
   );

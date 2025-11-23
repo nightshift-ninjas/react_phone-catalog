@@ -1,0 +1,48 @@
+{
+  "welcome": "Ласкаво просимо, {{name}}!",
+  "items": "{{count}} товарів",
+  "profileInfo": {
+    "id": "ID:",
+    "email": "Пошта:",
+    "createdAt": "Створено:",
+    "lastSign": "Останній вхід:"
+  },
+  "chart": {
+    "ordersPerDay": "Замовлення за день (цього тижня) за статусом",
+    "salesPerDay": "Загальний обсяг продажів за день (цього місяця)",
+    "ordersByCategory": "Замовлені товари за категоріями",
+    "orderStatus": "Статус замовлення"
+  },
+  "table": {
+    "order": "Замовлення",
+    "date": "Дата",
+    "customer": "Клієнт",
+    "payment": "Платіж",
+    "total": "Разом",
+    "delivery": "Доставка",
+    "items": "Товари",
+    "fulfilment": "Виконання"
+  },
+  "orderStatus": {
+    "canceled": "Скасовано",
+    "pending": "Очікується",
+    "fulfilled": "Виконано"
+  },
+  "paymentMethod": {
+    "online_payment": "Онлайн-платіж",
+    "cash_on_delivery": "Готівка при доставці",
+    "pos_on_delivery": "Оплата при доставці"
+  },
+  "orderFilterMethods": {
+    "all": "Всі",
+    "unfulfilled": "Не виконані",
+    "unpaid": "Не оплачені",
+    "open": "Відкриті",
+    "closed": "Закриті"
+  },
+  "orderSortFields": {
+    "created_at": "Дата створення",
+    "items": "Товари",
+    "total": "Разом"
+  }
+}

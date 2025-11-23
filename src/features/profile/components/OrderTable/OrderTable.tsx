@@ -7,6 +7,7 @@ import {
 import { Badge, BadgeStatus } from '../../../../shared/ui/Badge';
 import './OrderTable.scss';
 import { formatDate, formatShortName } from '../../../../shared/utils';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
   orders: Order[];
@@ -25,19 +26,21 @@ const OrderPaymentBadgeMap: Record<PaymentMethod, BadgeStatus> = {
 };
 
 export const OrderTable: React.FC<Props> = ({ orders }) => {
+  const { t } = useTranslation('profile');
+
   return (
     <div className="order-table">
       <table className="order-table__table">
         <thead className="order-table__head">
           <tr className="order-table__row">
-            <th className="order-table__heading">Order</th>
-            <th className="order-table__heading">Date</th>
-            <th className="order-table__heading">Customer</th>
-            <th className="order-table__heading">Payment</th>
-            <th className="order-table__heading">Total</th>
-            <th className="order-table__heading">Delivery</th>
-            <th className="order-table__heading">Items</th>
-            <th className="order-table__heading">Fulfilment</th>
+            <th className="order-table__heading">{t('table.order')}</th>
+            <th className="order-table__heading">{t('table.date')}</th>
+            <th className="order-table__heading">{t('table.customer')}</th>
+            <th className="order-table__heading">{t('table.payment')}</th>
+            <th className="order-table__heading">{t('table.total')}</th>
+            <th className="order-table__heading">{t('table.delivery')}</th>
+            <th className="order-table__heading">{t('table.items')}</th>
+            <th className="order-table__heading">{t('table.fulfilment')}</th>
           </tr>
         </thead>
 
@@ -55,7 +58,7 @@ export const OrderTable: React.FC<Props> = ({ orders }) => {
               <td className="order-table__cell">
                 <span className="order-table__badge">
                   <Badge status={OrderPaymentBadgeMap[order.paymentMethod]}>
-                    {order.paymentMethod}
+                    {t(`paymentMethod.${order.paymentMethod}`)}
                   </Badge>
                 </span>
               </td>
@@ -64,12 +67,14 @@ export const OrderTable: React.FC<Props> = ({ orders }) => {
               <td className="order-table__cell">
                 {order.deliveryDate ? formatDate(order.deliveryDate) : 'N/A'}
               </td>
-              <td className="order-table__cell">{order.items.length} items</td>
+              <td className="order-table__cell">
+                {t(`items`, { count: order.items.length })}
+              </td>
 
               <td className="order-table__cell">
                 <span className="order-table__status">
                   <Badge status={OrderStatusBadgeMap[order.status]}>
-                    {order.status}
+                    {t(`orderStatus.${order.status}`)}
                   </Badge>
                 </span>
               </td>

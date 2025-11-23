@@ -9,7 +9,7 @@ export enum Language {
 
 export const LanguageLabels: Record<Language, string> = {
   [Language.EN]: 'English',
-  [Language.UA]: 'Ukrainian',
+  [Language.UA]: 'Українська',
 };
 
 export const LanguageFlags: Record<Language, React.ReactNode> = {

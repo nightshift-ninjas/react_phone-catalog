@@ -1,11 +1,7 @@
 import React from 'react';
 import './CatalogFilter.scss';
 import { Dropdown } from '../../../../shared/ui/Dropdown';
-import {
-  ProductItemsPerPage,
-  ProductSortLabels,
-  ProductSortTypes,
-} from './type';
+import { ProductItemsPerPage, ProductSortTypes } from './type';
 import { useSearchParams } from 'react-router-dom';
 
 type DropdownItem = number | string;
@@ -13,8 +9,9 @@ type DropdownItem = number | string;
 export const CatalogFilter: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const defaultProductLabel = Object.values(ProductSortLabels)[0];
-  const defaultItemsPerPage = ProductItemsPerPage.TEN;
+  const defaultProductLabel =
+    searchParams.get('sort') ?? Object.values(ProductSortTypes)[0];
+  const defaultItemsPerPage = ProductItemsPerPage.THIRTY;
 
   const onItemsPerPageSelect = (item: DropdownItem) => {
     if (Number(item) === defaultItemsPerPage) {
@@ -26,17 +23,11 @@ export const CatalogFilter: React.FC = () => {
     setSearchParams(searchParams);
   };
 
-  const onSortTypeSelect = (label: DropdownItem) => {
-    const value = (
-      Object.keys(ProductSortLabels) as Array<ProductSortTypes>
-    ).find((key) => ProductSortLabels[key] === label);
-
-    if (!value) return;
-
-    if (label === defaultProductLabel) {
+  const onSortTypeSelect = (value: DropdownItem) => {
+    if (value === defaultProductLabel) {
       searchParams.delete('sort');
     } else {
-      searchParams.set('sort', value);
+      searchParams.set('sort', String(value));
     }
 
     setSearchParams(searchParams);
@@ -46,7 +37,7 @@ export const CatalogFilter: React.FC = () => {
     <div className="catalog-filter">
       <Dropdown
         labelValue="Sort by"
-        dropdownItems={Object.values(ProductSortLabels)}
+        dropdownItems={Object.values(ProductSortTypes)}
         onSelect={onSortTypeSelect}
         defaultValue={defaultProductLabel}
       />

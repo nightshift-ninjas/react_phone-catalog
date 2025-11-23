@@ -1,26 +1,29 @@
 import React from 'react';
 import type { Product } from '../../../../services/product';
 import './ProductDescription.scss';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: Product;
 };
 
 const ProductDescription: React.FC<Props> = ({ product }) => {
+  const { t } = useTranslation('productDetail');
+
   const specs = [
-    { label: 'Screen', value: product.screen },
-    { label: 'Resolution', value: product.resolution },
-    { label: 'Processor', value: product.processor },
-    { label: 'RAM', value: product.ram },
-    { label: 'Camera', value: product.camera },
-    { label: 'Zoom', value: product.zoom },
-    { label: 'Cell', value: product.cell?.join(', ') },
+    { label: t('productInfo.screen'), value: product.screen },
+    { label: t('productInfo.resolution'), value: product.resolution },
+    { label: t('productInfo.processor'), value: product.processor },
+    { label: t('productInfo.ram'), value: product.ram },
+    { label: t('productInfo.camera'), value: product.camera },
+    { label: t('productInfo.zoom'), value: product.zoom },
+    { label: t('productInfo.cell'), value: product.cell?.join(', ') },
   ];
 
   return (
     <div className="product-description">
       <div className="about-section">
-        <h2 className="about-section__title">About</h2>
+        <h2 className="about-section__title">{t('about')}</h2>
         {product.description?.map((section) => (
           <div key={section.title} className="about-section__content">
             <h2 className="about-section__section-title">{section.title}</h2>
@@ -36,7 +39,7 @@ const ProductDescription: React.FC<Props> = ({ product }) => {
       </div>
 
       <div className="tech-specs-section">
-        <h2 className="tech-specs-section__title">Tech specs</h2>
+        <h2 className="tech-specs-section__title">{t('techSpecs')}</h2>
         <ul className="tech-specs-section__list">
           {specs.map(
             (spec, idx) =>
