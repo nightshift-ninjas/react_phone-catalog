@@ -7,6 +7,7 @@ export function useSubmitOrder() {
     cart: Cart,
     cartItems: CartItem[],
     formData: FormData,
+    finalTotalAmount: number,
   ) => {
     const data = Object.fromEntries(formData.entries()) as Record<
       string,
@@ -17,10 +18,7 @@ export function useSubmitOrder() {
       userId: cart.userId,
       items: cartItems,
       products: cartItems.map((i) => i.product!).filter(Boolean),
-      totalAmount: cartItems.reduce((a, i) => {
-        const price = i.product?.priceDiscount ?? i.product?.priceRegular ?? 0;
-        return a + price * i.quantity;
-      }, 0),
+      totalAmount: finalTotalAmount,
       firstName: data['first-name'],
       lastName: data['last-name'],
       email: data['email'],

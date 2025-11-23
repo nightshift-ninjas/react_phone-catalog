@@ -11,11 +11,13 @@ import { useSubmitOrder } from './hooks/useSubmitOrder';
 import { ROUTES } from '../../shared/config/routes';
 import './CheckoutPage.scss';
 import { useLanguage } from '../../shared/context/language';
+import { promoService } from '../../services/promo';
 
 export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
   const [showAnimation, setShowAnimation] = useState(false);
+  const [promoDiscount, setPromoDiscount] = useState(0);
   const { language: lng } = useLanguage();
 
   const { user, loading: authLoading } = useAuth();
@@ -40,20 +42,6 @@ export const CheckoutPage: React.FC = () => {
     );
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!cart) return;
-
-    try {
-      await submitOrder(cart, cartItems, new FormData(event.currentTarget));
-      setCartItems([]);
-      setShowAnimation(true);
-      event.currentTarget.reset();
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
   const totalAmount = cartItems.reduce(
     (sum, item) =>
       sum +
@@ -61,6 +49,47 @@ export const CheckoutPage: React.FC = () => {
         item.quantity,
     0,
   );
+
+  const discountAmount = totalAmount * (promoDiscount / 100);
+  const finalTotalAmount = totalAmount - discountAmount;
+
+  const handlePromoApply = async (promoCode: string): Promise<void> => {
+    if (!user) return;
+
+    try {
+      const percentage = await promoService.activatePromo(promoCode, user.uid);
+
+      if (!percentage) {
+        alert('Invalid or expired promocode');
+        return;
+      }
+
+      setPromoDiscount(percentage);
+      alert(`Promocode applied! Discount ${percentage}%`);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (!cart) return;
+
+    try {
+      await submitOrder(
+        cart,
+        cartItems,
+        new FormData(event.currentTarget),
+        finalTotalAmount,
+      );
+
+      setCartItems([]);
+      setShowAnimation(true);
+      event.currentTarget.reset();
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   // Redirect if user is not logged in
   useEffect(() => {
@@ -102,7 +131,10 @@ export const CheckoutPage: React.FC = () => {
 
       <div className="checkout__section">
         <CheckoutInfo
+          onPromoApply={handlePromoApply}
           totalAmount={totalAmount}
+          discountAmount={discountAmount}
+          finalTotalAmount={finalTotalAmount}
           paymentMethod={paymentMethod}
           formRef={formRef}
         />
