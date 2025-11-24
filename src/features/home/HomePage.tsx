@@ -12,7 +12,7 @@ import ImageSlider from './components/ImageSlider/ImageSlider';
 import { useAllProducts } from '../../shared/hooks';
 
 const HomePage: React.FC = () => {
-  const { products, isLoading } = useAllProducts();
+  const { products } = useAllProducts();
 
   const hot = getHotProducts(products);
   const premium = getPremiumProducts(products);
