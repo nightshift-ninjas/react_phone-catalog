@@ -2,19 +2,22 @@ import React, { useEffect } from 'react';
 import { startCatAnimation } from './catAnimation';
 import ArrowIcon from '../../../../shared/assets/icons/auth-arrow.svg?react';
 import './SuccessAnimation.scss';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   onBackToCatalog: () => void;
 };
 
 export const SuccessAnimation: React.FC<Props> = ({ onBackToCatalog }) => {
+  const { t } = useTranslation('successAnimation');
+
   useEffect(() => {
     startCatAnimation();
   }, []);
 
   return (
     <div className="cat-container">
-      <h1 className='cat-container__title'>Thanks for you purchase</h1>
+      <h1 className='cat-container__title'>{t('gratitude')}</h1>
 
       <div className="container_svg">
         <svg
@@ -355,7 +358,7 @@ export const SuccessAnimation: React.FC<Props> = ({ onBackToCatalog }) => {
       </div>
 
       <button className="cat-container__btn" onClick={onBackToCatalog}>
-        Track Order
+        {t('trackOrder')}
         <ArrowIcon className="cat-container__arrow" />
       </button>
     </div>
