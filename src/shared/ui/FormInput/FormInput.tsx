@@ -2,6 +2,7 @@ import React from 'react';
 import * as Form from '@radix-ui/react-form';
 import cn from 'classnames';
 import './FormInput.scss';
+import { useTranslation } from 'react-i18next';
 
 interface FormInputProps {
   name: string;
@@ -30,6 +31,7 @@ export const FormInput: React.FC<FormInputProps> = ({
   disabled = false,
   onChange,
 }) => {
+  const { t } = useTranslation('contactsPage');
   return (
     <Form.Field
       className={cn(
@@ -65,12 +67,12 @@ export const FormInput: React.FC<FormInputProps> = ({
       </Form.Control>
 
       <Form.Message match="valueMissing" className="form-input__message">
-        {placeholder} is required
+        {placeholder} {t('isRequired')}
       </Form.Message>
 
       {type === 'email' && (
         <Form.Message match="typeMismatch" className="form-input__message">
-          Please enter a valid email
+          {t('validEmail')}
         </Form.Message>
       )}
     </Form.Field>
