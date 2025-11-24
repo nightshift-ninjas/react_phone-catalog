@@ -8,7 +8,7 @@ import { ProductCard } from '../ProductCard';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './ProductSlider.scss';
-import ArrowButton from '../../shared/ui/ArrowButton/ArrowButton';
+import { ArrowButton } from '../../shared/ui/ArrowButton';
 
 type Props = {
   layoutText: string;

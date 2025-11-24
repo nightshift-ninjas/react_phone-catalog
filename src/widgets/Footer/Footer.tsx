@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import './Footer.scss';
 import { Link } from 'react-router-dom';
 import Logo from '../../shared/assets/Logo.svg?react';
-import ArrowButton from '../../shared/ui/ArrowButton/ArrowButton';
 import { ROUTES } from '../../shared/config/routes';
 import { LanguageContext } from '../../shared/context/language';
+import { ArrowButton } from '../../shared/ui/ArrowButton';
 
 export const Footer: React.FC = () => {
   const { language: lng } = useContext(LanguageContext)!;

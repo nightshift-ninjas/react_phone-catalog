@@ -10,7 +10,7 @@ import './ImageSlider.scss';
 import video1 from '../../../../shared/assets/video/video-slider.webm';
 import img2 from '../../../../shared/assets/img/home-slider-2.webp';
 import img3 from '../../../../shared/assets/img/home-slider-3.webp';
-import ArrowButton from '../../../../shared/ui/ArrowButton/ArrowButton';
+import { ArrowButton } from '../../../../shared/ui/ArrowButton';
 
 const ImageSlider = () => {
   const [isBeginning, setIsBeginning] = useState(true);

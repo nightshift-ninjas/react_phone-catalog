@@ -9,7 +9,7 @@ type ArrowButtonProps = {
   isDisabled?: boolean;
 };
 
-const ArrowButton: React.FC<ArrowButtonProps> = ({
+export const ArrowButton: React.FC<ArrowButtonProps> = ({
   onClick,
   direction,
   isDisabled = false,
@@ -44,5 +44,3 @@ const ArrowButton: React.FC<ArrowButtonProps> = ({
     </button>
   );
 };
-
-export default ArrowButton;

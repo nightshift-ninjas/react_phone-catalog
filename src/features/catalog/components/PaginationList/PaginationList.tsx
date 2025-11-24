@@ -1,8 +1,8 @@
 import React from 'react';
 
-import ArrowButton from '../../../../shared/ui/ArrowButton/ArrowButton';
 import PaginationButton from '../PaginationButton/PaginationButton';
 import './PaginationList.scss';
+import { ArrowButton } from '../../../../shared/ui/ArrowButton';
 
 type Props = {
   onPageSelect: (pageNumber: number) => void;
