@@ -61,8 +61,8 @@ const FavoritePage: React.FC = () => {
 
       <h1>{t('favoritesTitle')}</h1>
 
-      {isLoading && <p>Loading favorites...</p>}
-      {error && <p className="favorite__error">{error}</p>}
+      {isLoading && <p>{t('loadingFavorites')}</p>}
+      {error && <p className="favorite__error">{t('error', { error })}</p>}
 
       {!isLoading && favorites.length === 0 && <p>{t('noFavorites')}</p>}
 
