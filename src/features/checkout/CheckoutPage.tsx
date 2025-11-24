@@ -95,8 +95,13 @@ export const CheckoutPage: React.FC = () => {
   };
 
   const handleRemoveItem = (id: string) => {
-    setCartItems(prev => prev.filter(item => item.id !== id));
+    setCartItems(prev => {
+      const updated = prev.filter(item => item.id !== id);
+      setCartCount(updated.length);   // ← ось цього не вистачало
+      return updated;
+    });
   };
+
 
 
   // Redirect if user is not logged in
