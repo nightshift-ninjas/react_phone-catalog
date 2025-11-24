@@ -7,12 +7,14 @@ import './AuthSlider.scss';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   slides: string[];
 };
 
 export const AuthSlider: React.FC<Props> = ({ slides }) => {
+  const { t } = useTranslation('auth')
   return (
     <div className="auth-slider">
       <Swiper
@@ -26,7 +28,7 @@ export const AuthSlider: React.FC<Props> = ({ slides }) => {
           <SwiperSlide key={index} className="auth-slider__slide">
             <img
               src={slide}
-              alt={`Slide ${index}`}
+              alt={`${t('slideIndex')} ${index}`}
               className="auth-slider__image"
             />
           </SwiperSlide>
@@ -34,7 +36,7 @@ export const AuthSlider: React.FC<Props> = ({ slides }) => {
       </Swiper>
 
       <Link className="auth-slider__button" to="/">
-        Back to website
+        {t("backToWebsite")}
         <AuthArrowIcon />
       </Link>
     </div>

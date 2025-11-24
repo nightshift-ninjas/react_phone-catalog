@@ -1,0 +1,8 @@
+{
+  "cartEmptyMessage": "Your cart is empty..",
+  "totalItemsLabel_one": "Total for {{count}} item",
+  "totalItemsLabel_other": "Total for {{count}} items",
+  "checkoutAction": "Checkout",
+  "productImageAlt": "Product image",
+  "cartTitle": "Your Cart"
+}
