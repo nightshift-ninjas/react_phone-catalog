@@ -9,13 +9,19 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import './ProductSlider.scss';
 import { ArrowButton } from '../../shared/ui/ArrowButton';
+import { ProductCardSkeleton } from '../ProductCardSkeleton';
 
 type Props = {
   layoutText: string;
   products: Product[];
+  isLoading?: boolean;
 };
 
-export const ProductSlider: React.FC<Props> = ({ layoutText, products }) => {
+export const ProductSlider: React.FC<Props> = ({
+  layoutText,
+  products,
+  isLoading = false,
+}) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
 
@@ -60,6 +66,13 @@ export const ProductSlider: React.FC<Props> = ({ layoutText, products }) => {
           },
         }}
       >
+        {isLoading &&
+          Array.from({ length: 10 }).map((_, index) => (
+            <SwiperSlide key={index}>
+              <ProductCardSkeleton />
+            </SwiperSlide>
+          ))}
+
         {products.map((product) => {
           return (
             <SwiperSlide key={product.id}>

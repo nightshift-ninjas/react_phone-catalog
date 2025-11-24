@@ -104,14 +104,13 @@ const ProductDetailPage: React.FC = () => {
         <ProductDescriptionSkeleton />
       )}
 
-      {relatedProducts.length > 0 && (
-        <div className="product-detail__related">
-          <ProductSlider
-            layoutText="You may also like"
-            products={relatedProducts}
-          />
-        </div>
-      )}
+      <div className="product-detail__related">
+        <ProductSlider
+          layoutText="You may also like"
+          products={relatedProducts}
+          isLoading={isLoading}
+        />
+      </div>
     </div>
   );
 };

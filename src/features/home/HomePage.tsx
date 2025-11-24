@@ -12,7 +12,7 @@ import ImageSlider from './components/ImageSlider/ImageSlider';
 import { useAllProducts } from '../../shared/hooks';
 
 const HomePage: React.FC = () => {
-  const { products } = useAllProducts();
+  const { products, isLoading } = useAllProducts();
 
   const hot = getHotProducts(products);
   const premium = getPremiumProducts(products);
@@ -25,21 +25,29 @@ const HomePage: React.FC = () => {
 
       <ImageSlider />
 
-      {products && (
-        <ProductSlider layoutText="Brand new models" products={random} />
-      )}
+      <ProductSlider
+        layoutText="Brand new models"
+        products={random}
+        isLoading={isLoading}
+      />
 
       <CategoryList />
 
-      {products && <ProductSlider layoutText="Hot prices" products={hot} />}
-
-      {products && (
-        <ProductSlider layoutText="Premium devices" products={premium} />
-      )}
-
-      {products && (
-        <ProductSlider layoutText="Popular devices" products={popular} />
-      )}
+      <ProductSlider
+        layoutText="Hot prices"
+        products={hot}
+        isLoading={isLoading}
+      />
+      <ProductSlider
+        layoutText="Premium devices"
+        products={premium}
+        isLoading={isLoading}
+      />
+      <ProductSlider
+        layoutText="Popular devices"
+        products={popular}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
