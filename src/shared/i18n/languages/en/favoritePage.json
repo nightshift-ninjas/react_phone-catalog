@@ -1,0 +1,6 @@
+{
+  "favoritesTitle": "Favorites",
+  "noFavorites": "You have no favorite items yet.",
+  "itemCount_one": "{{count}} item",
+  "itemCount_other": "{{count}} items"
+}

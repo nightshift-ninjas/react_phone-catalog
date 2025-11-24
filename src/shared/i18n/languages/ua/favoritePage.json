@@ -1,0 +1,7 @@
+{
+  "favoritesTitle": "Вибрані товари",
+  "noFavorites": "У вас ще немає улюблених товарів.",
+  "itemCount_one": "{{count}} товар",
+  "itemCount_few": "{{count}} товари",
+  "itemCount_many": "{{count}} товарів"
+}

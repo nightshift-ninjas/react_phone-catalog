@@ -8,11 +8,13 @@ import './FavoritePage.scss';
 import { ProductCard } from '../../widgets/ProductCard';
 import { LanguageContext } from '../../shared/context/language';
 import { ROUTES } from '../../shared/config/routes';
+import { useTranslation } from 'react-i18next';
 
 const FavoritePage: React.FC = () => {
   const navigate = useNavigate();
   const { language: lng } = useContext(LanguageContext)!;
   const { user, loading: authLoading } = useAuth();
+  const { t } = useTranslation('favoritePage');
 
   const [favorites, setFavorites] = useState<FavoriteItem[]>([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -51,22 +53,24 @@ const FavoritePage: React.FC = () => {
     <div className="favorite">
       <div className="favorite__breadcrumbs">
         <Breadcrumb
-          items={[{ text: 'favorites', link: `/${lng}/${ROUTES.favorite}` }]}
+          items={[
+            { text: t('favoritesTitle'), link: `/${lng}/${ROUTES.favorite}` },
+          ]}
         />
       </div>
 
-      <h1>Favorites</h1>
+      <h1>{t('favoritesTitle')}</h1>
 
       {isLoading && <p>Loading favorites...</p>}
       {error && <p className="favorite__error">{error}</p>}
 
-      {!isLoading && favorites.length === 0 && (
-        <p>You have no favorite items yet.</p>
-      )}
+      {!isLoading && favorites.length === 0 && <p>{t('noFavorites')}</p>}
 
       {!isLoading && favorites.length > 0 && (
         <>
-          <p className="favorite__count">{favorites.length} items</p>
+          <p className="favorite__count">
+            {t('itemCount', { count: favorites.length })}
+          </p>
           <ul className="favorite__list">
             {favorites.map((fav) => (
               <li key={fav.id} className="favorite__item">
