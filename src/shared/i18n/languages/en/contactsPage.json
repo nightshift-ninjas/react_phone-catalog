@@ -1,0 +1,21 @@
+{
+  "getInTouch": "Get in Touch",
+  "reachUs": "You can reach us anytime",
+
+  "placeholder": {
+    "firstName": "First name",
+    "lastName": "Last name",
+    "email": "Your email",
+    "subject": "Subject",
+    "message": "Tell us what we can help you with..."
+  },
+
+  "submit": "Submit",
+  "agreeWarning": "By contacting us, you agree to our",
+  "termsOfService": "Terms of service",
+  "and": "and",
+  "privacyPolicy": "Privacy Policy",
+
+  "isRequired": "is required",
+  "validEmail": "Please enter a valid email"
+}

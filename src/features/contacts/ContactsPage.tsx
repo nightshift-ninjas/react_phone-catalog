@@ -4,8 +4,11 @@ import * as Form from '@radix-ui/react-form';
 import { Button } from '../../shared/ui/Button';
 import { FormInput } from '../../shared/ui/FormInput';
 import emailjs from 'emailjs-com';
+import { useTranslation } from 'react-i18next';
 
 export const ContactsPage: React.FC = () => {
+  const { t } = useTranslation('contactsPage');
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -51,21 +54,21 @@ export const ContactsPage: React.FC = () => {
   return (
     <div className="contacts">
       <div className="contacts__card">
-        <h1>Get in Touch</h1>
-        <p>You can reach us anytime</p>
+        <h1>{t('getInTouch')}</h1>
+        <p>{t('reachUs')}</p>
 
         <Form.Root className="contacts__form" onSubmit={handleSubmit}>
           <div className="contacts__row">
             <FormInput
               name="firstName"
-              placeholder="First name"
+              placeholder={t('placeholder.firstName')}
               value={formData.firstName}
               onChange={handleChange}
               required
             />
             <FormInput
               name="lastName"
-              placeholder="Last name"
+              placeholder={t('placeholder.lastName')}
               value={formData.lastName}
               onChange={handleChange}
               required
@@ -75,7 +78,7 @@ export const ContactsPage: React.FC = () => {
           <FormInput
             name="email"
             type="email"
-            placeholder="Your email"
+            placeholder={t('placeholder.email')}
             value={formData.email}
             onChange={handleChange}
             required
@@ -83,31 +86,31 @@ export const ContactsPage: React.FC = () => {
 
           <FormInput
             name="subject"
-            placeholder="Subject"
+            placeholder={t('placeholder.subject')}
             value={formData.subject}
             onChange={handleChange}
           />
 
           <FormInput
             name="message"
-            placeholder="Tell us what we can help you with..."
+            placeholder={t('placeholder.message')}
             textarea
             value={formData.message}
             onChange={handleChange}
           />
 
           <Form.Submit asChild>
-            <Button onClick={() => {}}>Submit</Button>
+            <Button onClick={() => { }}>{t('submit')}</Button>
           </Form.Submit>
 
           <p className="terms">
-            By contacting us, you agree to our
+            {t('agreeWarning')}
             <a href="#" className="contacts__link">
-              Terms of service
+              {t('termsOfService')}
             </a>
-            and
+            {t('and')}
             <a href="#" className="contacts__link">
-              Privacy Policy
+              {t('privacyPolicy')}
             </a>
             .
           </p>

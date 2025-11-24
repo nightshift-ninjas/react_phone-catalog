@@ -1,0 +1,17 @@
+{
+  "order": {
+    "summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "discount": "Discount",
+    "total": "Total"
+  },
+
+  "promo": {
+    "promocode": "Promocode",
+    "usePromo": "Use Promocode",
+    "apply": "Apply Promocode"
+  },
+
+  "confirmOrder": "Confirm Order"
+}
