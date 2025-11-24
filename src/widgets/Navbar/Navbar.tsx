@@ -9,12 +9,15 @@ import ShoppingBagIcon from '../../shared/assets/icons/shopping-bag.svg?react';
 import ProfileIcon from '../../shared/assets/icons/profile.svg?react';
 import ArrowIcon from '../../shared/assets/icons/arrow-icon-dark.svg?react';
 import cn from 'classnames';
-import './Navbar.scss';
 import { LanguageButton } from '../LanguageButton';
 import { ROUTES } from '../../shared/config/routes';
 import { LanguageContext } from '../../shared/context/language';
 import { CurrencyButton } from '../CurrencyButton';
 import { useTranslation } from 'react-i18next';
+import { SearchButton } from '../SearchButton';
+import './Navbar.scss';
+
+type Props = { onSearchClick: () => void };
 
 const getClasses = ({ isActive }: { isActive: boolean }) =>
   cn('nav__link', { 'nav__link--active': isActive });
@@ -22,7 +25,7 @@ const getClasses = ({ isActive }: { isActive: boolean }) =>
 const getClassesCatalog = ({ isActive }: { isActive: boolean }) =>
   cn('nav__catalog-link', { 'nav__catalog-link--active': isActive });
 
-export const Navbar: React.FC = () => {
+export const Navbar: React.FC<Props> = ({ onSearchClick }) => {
   const { language: lng } = useContext(LanguageContext)!;
   const [isCollapsed, setIsCollapsed] = useState(false);
   const { t } = useTranslation('navbar');
@@ -84,6 +87,8 @@ export const Navbar: React.FC = () => {
         </div>
 
         <div className="nav__block">
+          <SearchButton onSearchClick={onSearchClick} />
+
           {navButtons.map((btn, i) => {
             if (btn.component) {
               const Comp = btn.component;

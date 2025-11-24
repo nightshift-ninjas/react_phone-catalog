@@ -6,7 +6,7 @@ interface SpinnerProps {
   thickness?: number;
 }
 
-const Spinner: React.FC<SpinnerProps> = ({
+export const Spinner: React.FC<SpinnerProps> = ({
   size = 40,
   thickness = 4,
 }) => {
@@ -18,5 +18,3 @@ const Spinner: React.FC<SpinnerProps> = ({
 
   return <div className="spinner" style={style} />;
 };
-
-export default Spinner;

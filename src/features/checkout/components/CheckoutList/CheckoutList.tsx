@@ -2,7 +2,7 @@ import React from 'react';
 import type { CartItem as CartItemType } from '../../../../services/cart';
 import { CartItem } from '../../../cart/components/CartItem';
 import './CheckoutList.scss';
-import Spinner from '../../../../shared/ui/Spinner/Spinner';
+import { Spinner } from '../../../../shared/ui/Spinner';
 import { CurrencyRatesChart } from '../CurrencyRatesChart';
 
 type Props = {

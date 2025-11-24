@@ -1,0 +1,32 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+
+.search-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: map.get($spacing, 'lg');
+  padding: map.get($spacing, 'sm') map.get($spacing, 'md');
+  background-color: var(--bg-color);
+  color: var(--text-color);
+
+  &__block {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: map.get($spacing, 'lg');
+  }
+
+  &__thumbnail {
+    max-height: 60px;
+  }
+
+  &__name {
+    font-size: 14px;
+  }
+
+  &__price {
+    font-weight: 900;
+  }
+}
+

@@ -1,0 +1,8 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+
+.search-list {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'sm');
+}

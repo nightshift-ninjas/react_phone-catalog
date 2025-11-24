@@ -4,7 +4,7 @@ import './ProfileInfo.scss';
 import { Button } from '../../../../shared/ui/Button';
 import { authClient } from '../../../../services/auth';
 import { useNavigate } from 'react-router-dom';
-import Spinner from '../../../../shared/ui/Spinner/Spinner';
+import { Spinner } from '../../../../shared/ui/Spinner';
 import { LanguageContext } from '../../../../shared/context/language';
 import { ROUTES } from '../../../../shared/config/routes';
 import { useTranslation } from 'react-i18next';

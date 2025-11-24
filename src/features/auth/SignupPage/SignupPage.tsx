@@ -4,9 +4,9 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form } from 'radix-ui';
 import { PasswordField } from '../../../shared/ui/PasswordField';
 import GoogleIcon from '../../../shared/assets/icons/google.svg?react';
-import '../form.scss';
 import { LanguageContext } from '../../../shared/context/language';
 import { ROUTES } from '../../../shared/config/routes';
+import '../form.scss';
 
 export function SignupPage() {
   const { language: lng } = useContext(LanguageContext)!;

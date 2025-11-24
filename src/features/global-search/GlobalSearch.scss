@@ -1,0 +1,79 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+
+.global-search {
+  width: 660px;
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  border-radius: 12px;
+  padding: map.get($spacing, 'xl');
+
+  &__results {
+    color: map.get($colors, 'white');
+    text-align: center;
+    font-weight: 700;
+
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'md');
+    margin-top: map.get($spacing, 'md');
+  }
+
+  &__item {
+    background: rgba(255, 255, 255, 0.3);
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+  }
+
+  &__search {
+    display: flex;
+    align-items: center;
+    padding-right: map.get($spacing, 'md');
+    border: 1px solid map.get($colors, 'platinum');
+    background-color: var(--bg-color);
+    border-radius: 4px;
+    overflow: hidden;
+    width: 100%;
+
+    &:focus-within {
+      outline: 2px solid var(--text-color);
+    }
+
+    .form-input {
+      outline: none;
+      border-radius: 0;
+      margin-bottom: 0;
+
+      &__input {
+        border-radius: 0;
+        box-shadow: none;
+
+        &:focus {
+          outline: none;
+        }
+      }
+    }
+
+    svg {
+      width: 20px;
+
+      path {
+        fill: var(--text-color);
+      }
+    }
+  }
+
+  &__spinner {
+    display: flex;
+    justify-content: center;
+    padding: map.get($spacing, 'md');
+  }
+}
+
+[data-theme='dark'] {
+  .global-search {
+    &__search {
+      background: var(--bg-color-lighter);
+    }
+  }
+}

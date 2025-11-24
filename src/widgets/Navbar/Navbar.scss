@@ -24,7 +24,7 @@
   justify-content: space-between;
   align-items: center;
 
-  @include on-tablet {
+  @include on-desktop {
     justify-content: flex-start;
   }
 
@@ -54,7 +54,7 @@
       transition: transform $base-transition ease;
     }
 
-    @include on-tablet {
+    @include on-desktop {
       display: none;
     }
   }
@@ -65,7 +65,7 @@
     justify-content: space-between;
     width: 100%;
 
-    @include on-tablet {
+    @include on-desktop {
       display: flex;
     }
   }
