@@ -2,9 +2,11 @@ import React from 'react';
 import ReactApexChart from 'react-apexcharts';
 import { useCurrency } from '../../../../shared/context/currency';
 import './CurrencyRatesChart.scss';
+import { useTranslation } from 'react-i18next';
 
 export const CurrencyRatesChart: React.FC = () => {
   const { rates, loading, error } = useCurrency();
+  const { t } = useTranslation('currencyRatesChart');
 
   if (loading) return <div>Loading currency rates...</div>;
   if (error) return <div>Error: {error}</div>;
@@ -42,7 +44,7 @@ export const CurrencyRatesChart: React.FC = () => {
 
   return (
     <div className="currency-chart">
-      <h3>Currency Exchange Rates</h3>
+      <h3>{t('currencyRates')}</h3>
 
       <ReactApexChart
         type="area"

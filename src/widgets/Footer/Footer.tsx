@@ -5,9 +5,11 @@ import Logo from '../../shared/assets/Logo.svg?react';
 import { ROUTES } from '../../shared/config/routes';
 import { LanguageContext } from '../../shared/context/language';
 import { ArrowButton } from '../../shared/ui/ArrowButton';
+import { useTranslation } from 'react-i18next';
 
 export const Footer: React.FC = () => {
   const { language: lng } = useContext(LanguageContext)!;
+  const { t } = useTranslation('footer');
 
   return (
     <footer className="footer">
@@ -28,15 +30,15 @@ export const Footer: React.FC = () => {
             GITHUB
           </a>
           <Link to={`/${lng}/${ROUTES.contacts}`} className="footer__nav-item">
-            CONTACTS
+            {t('footerLinks.contacts')}
           </Link>
           <Link to={`/${lng}/${ROUTES.rights}`} className="footer__nav-item">
-            RIGHTS
+            {t('footerLinks.rights')}
           </Link>
         </nav>
 
         <div className="footer__top">
-          Back to top
+          {t('topButton')}
           <ArrowButton
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             direction="up"

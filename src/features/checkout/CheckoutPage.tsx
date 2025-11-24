@@ -94,6 +94,16 @@ export const CheckoutPage: React.FC = () => {
     }
   };
 
+  const handleRemoveItem = (id: string) => {
+    setCartItems(prev => {
+      const updated = prev.filter(item => item.id !== id);
+      setCartCount(updated.length);   // ← ось цього не вистачало
+      return updated;
+    });
+  };
+
+
+
   // Redirect if user is not logged in
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -128,6 +138,7 @@ export const CheckoutPage: React.FC = () => {
           cartItems={cartItems}
           noProducts={!cartItems.length || !!error}
           isLoading={cartLoading}
+          onRemoveItem={handleRemoveItem}
           onQuantityChange={handleQuantityChange}
         />
       </div>
