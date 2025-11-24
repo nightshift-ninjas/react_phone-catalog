@@ -12,6 +12,8 @@ import { LanguageContext } from '../../shared/context/language';
 import { useCurrency } from '../../shared/context/currency';
 import { convertPrice } from '../../shared/utils';
 import type { Currency } from '../CurrencyButton';
+import { useFavoriteCount } from '../../shared/context/favorite';
+import { useCartCount } from '../../shared/context/cart';
 
 type Props = {
   product: Product;
@@ -22,24 +24,16 @@ export const BASE_URL = 'src/shared/assets/';
 
 export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
   const { user } = useAuth();
+  const { increase: increaseCart, decrease: decreaseCart } = useCartCount();
+  const { increase: increaseFav, decrease: decreaseFav } = useFavoriteCount();
+
   const navigate = useNavigate();
   const { language: lng } = useContext(LanguageContext)!;
 
   const [isSelectedCart, setIsSelectedCart] = useState(false);
   const [isSelectedFav, setIsSelectedFav] = useState(false);
-
-  useEffect(() => {
-    if (!user) return;
-
-    (async () => {
-      const cart = await cartService.getOrCreateCart(user.uid);
-      const items = await cartService.fetchCartItems(cart.id);
-      setIsSelectedCart(items.some((item) => item.productId === product.id));
-
-      const favs = await favoriteService.fetchFavoritesByUser(user.uid);
-      setIsSelectedFav(favs.some((fav) => fav.productId === product.id));
-    })();
-  }, [user, product.id]);
+  const [isCartProcessing, setIsCartProcessing] = useState(false);
+  const [isFavProcessing, setIsFavProcessing] = useState(false);
 
   function requireLogin() {
     if (!user) {
@@ -50,29 +44,49 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
   }
 
   async function onClickCart() {
-    if (!requireLogin()) return;
+    if (!requireLogin() || isCartProcessing) return;
 
-    const cart = await cartService.getOrCreateCart(user!.uid);
+    setIsCartProcessing(true);
 
-    if (!isSelectedCart) {
-      await cartService.addItemToCart(cart.id, product.id, 1);
-      setIsSelectedCart(true);
-    } else {
-      await cartService.removeCartItemByProduct(cart.id, product.id);
-      setIsSelectedCart(false);
+    try {
+      const cart = await cartService.getOrCreateCart(user!.uid);
+
+      if (!isSelectedCart) {
+        await cartService.addItemToCart(cart.id, product.id, 1);
+        setIsSelectedCart(true);
+        increaseCart();
+      } else {
+        await cartService.removeCartItemByProduct(cart.id, product.id);
+        setIsSelectedCart(false);
+        decreaseCart();
+      }
+    } catch (error) {
+      console.error('Cart operation failed:', error);
+    } finally {
+      setIsCartProcessing(false);
     }
   }
 
   async function onClickFav() {
-    if (!requireLogin()) return;
+    if (!requireLogin() || isFavProcessing) return;
 
-    if (!isSelectedFav) {
-      await favoriteService.addFavorite(user!.uid, product.id);
-      setIsSelectedFav(true);
-    } else {
-      await favoriteService.removeFavoriteByProduct(user!.uid, product.id);
-      setIsSelectedFav(false);
-      onRemove?.();
+    setIsFavProcessing(true);
+
+    try {
+      if (!isSelectedFav) {
+        await favoriteService.addFavorite(user!.uid, product.id);
+        setIsSelectedFav(true);
+        increaseFav();
+      } else {
+        await favoriteService.removeFavoriteByProduct(user!.uid, product.id);
+        setIsSelectedFav(false);
+        onRemove?.();
+        decreaseFav();
+      }
+    } catch (error) {
+      console.error('Favorite operation failed:', error);
+    } finally {
+      setIsFavProcessing(false);
     }
   }
 
@@ -91,6 +105,19 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
     rates,
     currentCurrency as Currency,
   );
+
+  useEffect(() => {
+    if (!user) return;
+
+    (async () => {
+      const cart = await cartService.getOrCreateCart(user.uid);
+      const items = await cartService.fetchCartItems(cart.id);
+      setIsSelectedCart(items.some((item) => item.productId === product.id));
+
+      const favs = await favoriteService.fetchFavoritesByUser(user.uid);
+      setIsSelectedFav(favs.some((fav) => fav.productId === product.id));
+    })();
+  }, [user, product.id]);
 
   return (
     <article className="product-card">

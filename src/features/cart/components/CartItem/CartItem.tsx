@@ -10,6 +10,7 @@ import { ROUTES } from '../../../../shared/config/routes';
 import { useCurrency } from '../../../../shared/context/currency';
 import { convertPrice } from '../../../../shared/utils';
 import type { Currency } from '../../../../widgets/CurrencyButton';
+import { useCartCount } from '../../../../shared/context/cart';
 
 export type Props = {
   item: CartItemType;
@@ -25,6 +26,7 @@ export const CartItem: React.FC<Props> = ({
   const [quantity, setQuantity] = useState(item.quantity);
   const { language: lng } = useContext(LanguageContext)!;
   const { rates, currentCurrency } = useCurrency();
+  const { decrease: decreaseCart } = useCartCount();
 
   const totalPrice = convertPrice(
     (item.product?.priceDiscount ?? item.product?.priceRegular ?? 0) * quantity,
@@ -32,16 +34,27 @@ export const CartItem: React.FC<Props> = ({
     currentCurrency as Currency,
   );
 
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const handleRemove = async () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+
     try {
       await cartService.removeCartItemById(item.id);
       onRemove?.();
+      decreaseCart();
     } catch (error) {
       console.error('Failed to remove cart item:', error);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
   const handleIncrease = async () => {
+    if (isProcessing) return;
+    setIsProcessing(true);
+
     try {
       const newQty = quantity + 1;
       const updated = { ...item, quantity: newQty };
@@ -51,11 +64,14 @@ export const CartItem: React.FC<Props> = ({
       onQuantityChange?.(item.id, newQty);
     } catch (error) {
       console.error('Failed to increase quantity:', error);
+    } finally {
+      setIsProcessing(false);
     }
   };
 
   const handleDecrease = async () => {
-    if (quantity === 1) return;
+    if (quantity === 1 || isProcessing) return;
+    setIsProcessing(true);
 
     try {
       const newQty = quantity - 1;
@@ -66,6 +82,8 @@ export const CartItem: React.FC<Props> = ({
       onQuantityChange?.(item.id, newQty);
     } catch (error) {
       console.error('Failed to decrease quantity:', error);
+    } finally {
+      setIsProcessing(false);
     }
   };
 

@@ -12,6 +12,7 @@ import { ROUTES } from '../../shared/config/routes';
 import './CheckoutPage.scss';
 import { useLanguage } from '../../shared/context/language';
 import { promoService } from '../../services/promo';
+import { useCartCount } from '../../shared/context/cart';
 
 export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export const CheckoutPage: React.FC = () => {
   const { language: lng } = useLanguage();
 
   const { user, loading: authLoading } = useAuth();
+  const { set: setCartCount } = useCartCount();
 
   const {
     cart,
@@ -85,6 +87,7 @@ export const CheckoutPage: React.FC = () => {
 
       setCartItems([]);
       setShowAnimation(true);
+      setCartCount(0);
       event.currentTarget.reset();
     } catch (err) {
       console.error(err);
