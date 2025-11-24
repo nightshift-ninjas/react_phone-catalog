@@ -10,6 +10,7 @@ import CategoryList from './components/CategoryList/CategoryList';
 import './HomePage.scss';
 import ImageSlider from './components/ImageSlider/ImageSlider';
 import { useAllProducts } from '../../shared/hooks';
+import { useTranslation } from 'react-i18next';
 
 const HomePage: React.FC = () => {
   const { products, isLoading } = useAllProducts();
@@ -18,33 +19,34 @@ const HomePage: React.FC = () => {
   const premium = getPremiumProducts(products);
   const popular = getPopularProducts(products);
   const random = getRandomProducts(products);
+  const { t } = useTranslation('homePage');
 
   return (
     <div className="home">
-      <h1>Welcome to Nice Gadgets store!</h1>
+      <h1>{t('welcomeMessage')}</h1>
 
       <ImageSlider />
 
       <ProductSlider
-        layoutText="Brand new models"
+        layoutText={t('brandNewModels')}
         products={random}
         isLoading={isLoading}
       />
 
-      <CategoryList />
+      <CategoryList sectionTitle={t('shopByCategory')} />
 
       <ProductSlider
-        layoutText="Hot prices"
+        layoutText={t('hotPrices')}
         products={hot}
         isLoading={isLoading}
       />
       <ProductSlider
-        layoutText="Premium devices"
+        layoutText={t('premiumDevices')}
         products={premium}
         isLoading={isLoading}
       />
       <ProductSlider
-        layoutText="Popular devices"
+        layoutText={t('popularDevices')}
         products={popular}
         isLoading={isLoading}
       />

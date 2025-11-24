@@ -11,7 +11,11 @@ import type { Category } from '../../../../services/product';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../../../shared/context/language';
 
-const CategoryList: React.FC = () => {
+interface CategoryListProps {
+  sectionTitle: string;
+}
+
+const CategoryList: React.FC<CategoryListProps> = ({ sectionTitle }) => {
   const [categories, setCategories] = useState<
     { category: string; numberOfModels: number }[]
   >([]);
@@ -46,7 +50,7 @@ const CategoryList: React.FC = () => {
 
   return (
     <div className="category-list">
-      <h2 className="category-list__title">Shop by category</h2>
+      <h2 className="category-list__title">{sectionTitle}</h2>
       <ul className="category-list__list">
         {categories.map((category) => (
           <li className="category-list__item" key={category.category}>
