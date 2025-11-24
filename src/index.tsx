@@ -4,15 +4,23 @@ import { createRoot } from 'react-dom/client';
 import { HashRouter } from 'react-router-dom';
 import { AppRoutes } from './app/routes/AppRoutes.tsx';
 import './shared/styles/main.scss';
-import { LanguageProvider } from './app/providers/LanguageProvider.tsx';
-import { CurrencyProvider } from './app/providers/CurrencyProvider.tsx';
+import {
+  LanguageProvider,
+  CurrencyProvider,
+  CartCountProvider,
+  FavoriteCountProvider,
+} from './app/providers';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
       <LanguageProvider>
         <CurrencyProvider>
-          <AppRoutes />
+          <CartCountProvider>
+            <FavoriteCountProvider>
+              <AppRoutes />
+            </FavoriteCountProvider>
+          </CartCountProvider>
         </CurrencyProvider>
       </LanguageProvider>
     </HashRouter>

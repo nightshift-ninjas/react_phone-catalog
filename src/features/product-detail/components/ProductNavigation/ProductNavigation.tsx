@@ -17,6 +17,8 @@ import { useCurrency } from '../../../../shared/context/currency';
 import { convertPrice } from '../../../../shared/utils';
 import type { Currency } from '../../../../widgets/CurrencyButton';
 import { useTranslation } from 'react-i18next';
+import { useCartCount } from '../../../../shared/context/cart';
+import { useFavoriteCount } from '../../../../shared/context/favorite';
 
 type Props = {
   product: Product;
@@ -29,6 +31,11 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
   const { rates, currentCurrency } = useCurrency();
   const { language: lng } = useContext(LanguageContext)!;
   const { t } = useTranslation(['productDetail', 'common']);
+
+  const { increase: increaseCart, decrease: decreaseCart } = useCartCount();
+  const { increase: increaseFav, decrease: decreaseFav } = useFavoriteCount();
+  const [isCartProcessing, setIsCartProcessing] = useState(false);
+  const [isFavProcessing, setIsFavProcessing] = useState(false);
 
   const convertedPriceDiscount = product.priceDiscount
     ? convertPrice(product.priceDiscount, rates, currentCurrency as Currency)
@@ -54,27 +61,46 @@ export const ProductNavigation: React.FC<Props> = ({ product }) => {
   }
 
   async function onClickCart() {
-    if (!requireLogin()) return;
+    if (!requireLogin() || isCartProcessing) return;
+    setIsCartProcessing(true);
 
-    const cart = await cartService.getOrCreateCart(user!.uid);
-    if (!isSelectedCart) {
-      await cartService.addItemToCart(cart.id, product.id, 1);
-      setIsSelectedCart(true);
-    } else {
-      await cartService.removeCartItemByProduct(cart.id, product.id);
-      setIsSelectedCart(false);
+    try {
+      const cart = await cartService.getOrCreateCart(user!.uid);
+
+      if (!isSelectedCart) {
+        await cartService.addItemToCart(cart.id, product.id, 1);
+        setIsSelectedCart(true);
+        increaseCart();
+      } else {
+        await cartService.removeCartItemByProduct(cart.id, product.id);
+        setIsSelectedCart(false);
+        decreaseCart();
+      }
+    } catch (error) {
+      console.error('Cart operation failed:', error);
+    } finally {
+      setIsCartProcessing(false);
     }
   }
 
   async function onClickFav() {
-    if (!requireLogin()) return;
+    if (!requireLogin() || isFavProcessing) return;
+    setIsFavProcessing(true);
 
-    if (!isSelectedFav) {
-      await favoriteService.addFavorite(user!.uid, product.id);
-      setIsSelectedFav(true);
-    } else {
-      await favoriteService.removeFavoriteByProduct(user!.uid, product.id);
-      setIsSelectedFav(false);
+    try {
+      if (!isSelectedFav) {
+        await favoriteService.addFavorite(user!.uid, product.id);
+        setIsSelectedFav(true);
+        increaseFav();
+      } else {
+        await favoriteService.removeFavoriteByProduct(user!.uid, product.id);
+        setIsSelectedFav(false);
+        decreaseFav();
+      }
+    } catch (error) {
+      console.error('Favorite operation failed:', error);
+    } finally {
+      setIsFavProcessing(false);
     }
   }
 

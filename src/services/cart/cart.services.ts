@@ -78,4 +78,14 @@ export const cartService = {
 
     await Promise.all(deletePromises);
   },
+
+  async getCartItemCountByUserId(userId: User['id']): Promise<number> {
+    const carts = await cartRepository.getCartByUserId(userId);
+    if (carts.length === 0) return 0;
+
+    const cartId = carts[0].id;
+    const items = await cartRepository.getItemsByCartId(cartId);
+
+    return items.reduce((total, item) => total + item.quantity, 0);
+  },
 };

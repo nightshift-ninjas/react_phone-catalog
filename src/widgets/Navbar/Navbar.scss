@@ -159,6 +159,25 @@
     }
   }
 
+  &__link-pillow {
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(-60%, 100%);
+    width: 17px;
+    height: 17px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background-color: map.get($colors, 'red');
+    border: 2px solid var(--bg-color);
+    color: map.get($colors, 'white');
+    font-size: 8px;
+    border-radius: 50%;
+  }
+
   &__catalog-link {
     position: relative;
 

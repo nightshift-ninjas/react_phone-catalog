@@ -43,4 +43,9 @@ export const favoriteService = {
 
     return favoriteRepository.delete(existing.id);
   },
+
+  async getFavoriteCountByUserId(userId: string): Promise<number> {
+    const favorites = await favoriteRepository.getByUserId(userId);
+    return favorites.length;
+  },
 };
