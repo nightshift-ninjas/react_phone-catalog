@@ -12,11 +12,13 @@ import { CartInfo } from './components/CartInfo';
 import { LanguageContext } from '../../shared/context/language';
 import { ROUTES } from '../../shared/config/routes';
 import './CartPage.scss';
+import { useTranslation } from 'react-i18next';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
   const { language: lng } = useContext(LanguageContext)!;
   const { user, loading: authLoading } = useAuth();
+  const { t } = useTranslation('cartPage');
 
   const [, setCart] = useState<Cart | null>(null);
   const [cartItems, setCartItems] = useState<CartItemType[]>([]);
@@ -74,12 +76,12 @@ const CartPage: React.FC = () => {
         />
       </div>
 
-      <h1 className="cart__title">Your Cart</h1>
+      <h1 className="cart__title">{t('cartTitle')}</h1>
 
       <div className="cart__grid">
         <div className="cart__block">
           {cartItems.length === 0 ? (
-            <p>Your cart is empty.</p>
+            <p>{t('cartEmptyMessage')}</p>
           ) : (
             <ul className="cart__items-wrapper">
               {cartItems.map((item) => (

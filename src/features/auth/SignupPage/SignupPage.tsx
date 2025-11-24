@@ -7,9 +7,11 @@ import GoogleIcon from '../../../shared/assets/icons/google.svg?react';
 import { LanguageContext } from '../../../shared/context/language';
 import { ROUTES } from '../../../shared/config/routes';
 import '../form.scss';
+import { useTranslation } from 'react-i18next';
 
 export function SignupPage() {
   const { language: lng } = useContext(LanguageContext)!;
+  const { t } = useTranslation('auth');
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -51,12 +53,12 @@ export function SignupPage() {
 
   return (
     <Form.Root className="form" onSubmit={handleSubmit}>
-      <h2 className="form__title">Create an account</h2>
+      <h2 className="form__title">{t('createAccountTitle')}</h2>
 
       <p className="form__text">
-        Already have an account?{' '}
+        {t('alreadyHaveAccountPrompt')}{' '}
         <Link to={`/${lng}/${ROUTES.login}`} className="form__link">
-          Log in
+          {t('loginButton')}
         </Link>
       </p>
 
@@ -66,7 +68,7 @@ export function SignupPage() {
             <input
               className="form__input"
               type="text"
-              placeholder="First name..."
+              placeholder={t('firstNamePlaceholder')}
               value={firstName}
               onChange={(e) => setFirstName(e.target.value)}
               required
@@ -74,7 +76,7 @@ export function SignupPage() {
           </Form.Control>
           <div>
             <Form.Message className="form__message" match="valueMissing">
-              Please provide your first name
+              {t('firstNameValidationFailed')}
             </Form.Message>
           </div>
         </Form.Field>
@@ -84,7 +86,7 @@ export function SignupPage() {
             <input
               className="form__input"
               type="text"
-              placeholder="Last name..."
+              placeholder={t('lastNamePlaceholder')}
               value={lastName}
               onChange={(e) => setLastName(e.target.value)}
               required
@@ -92,7 +94,7 @@ export function SignupPage() {
           </Form.Control>
           <div>
             <Form.Message className="form__message" match="valueMissing">
-              Please provide your last name
+              {t('lastNameValidationFailed')}
             </Form.Message>
           </div>
         </Form.Field>
@@ -103,7 +105,7 @@ export function SignupPage() {
           <input
             className="form__input"
             type="email"
-            placeholder="Email..."
+            placeholder={t('emailPlaceholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -111,7 +113,7 @@ export function SignupPage() {
         </Form.Control>
         <div>
           <Form.Message className="form__message" match="typeMismatch">
-            Please provide a valid email
+            {t('emailValidationFailed')}
           </Form.Message>
         </div>
       </Form.Field>
@@ -121,14 +123,14 @@ export function SignupPage() {
           <PasswordField
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password..."
+            placeholder={t('passwordPlaceholder')}
             name="password"
             required
           />
         </Form.Control>
         <div>
           <Form.Message className="form__message" match="typeMismatch">
-            Please provide a valid password
+            {t('passwordValidationFailed')}
           </Form.Message>
         </div>
       </Form.Field>
@@ -142,16 +144,16 @@ export function SignupPage() {
           onChange={(e) => setAgreement(e.target.checked)}
         />
         <label htmlFor="agreement">
-          I agree{' '}
+          {t('iAgreeCheckbox')}{' '}
           <a href="#" target="_blank" className="form__link">
-            Terms & Conditions
+            {t('termsAndConditions')}
           </a>
         </label>
       </div>
 
       <Form.Submit asChild>
         <button className="form__submit" disabled={loading || !agreement}>
-          Create account
+          {t('createAccountAction')}
         </button>
       </Form.Submit>
 
@@ -159,7 +161,7 @@ export function SignupPage() {
 
       <p className="form__divider">
         <span className="form__line"></span>
-        <span>Or register with</span>
+        <span>{t('orRegisterWith')}</span>
         <span className="form__line"></span>
       </p>
 
@@ -170,7 +172,7 @@ export function SignupPage() {
         disabled={loading}
       >
         <GoogleIcon />
-        {loading ? 'Logging in...' : 'Google'}
+        {loading ? t('loggingInStatus') : t('googleLoginOption')}
       </button>
     </Form.Root>
   );
