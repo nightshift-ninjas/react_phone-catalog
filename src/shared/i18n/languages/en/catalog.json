@@ -1,0 +1,25 @@
+{
+  "categories": {
+    "phones": "Mobile phones",
+    "tablets": "Tablets",
+    "accessories": "Accessories"
+  },
+
+  "models": "models",
+  "loading": "Loading products...",
+  "error": "Something went wrong",
+
+  "filters": {
+    "sortBy": "Sort by",
+    "itemsPerPage": "Items on page"
+  },
+
+  "sort": {
+    "name_asc": "Name (A - Z)",
+    "name_desc": "Name (Z - A)",
+    "price_asc": "Price (Low - High)",
+    "price_desc": "Price (High - Low)",
+    "discount_asc": "Discount (Low - High)",
+    "discount_desc": "Discount (High - Low)"
+  }
+}
