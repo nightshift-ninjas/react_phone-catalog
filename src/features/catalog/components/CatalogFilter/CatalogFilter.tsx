@@ -41,7 +41,8 @@ export const CatalogFilter: React.FC = () => {
     <div className="catalog-filter">
       <Dropdown
         labelValue={t('filters.sortBy')}
-        dropdownItems={Object.values(ProductSortTypes).map((sort) => t(`sort.${sort}`))}
+        dropdownItems={Object.values(ProductSortTypes)}
+        dropdownItemsLabels={Object.values(ProductSortTypes).map((sort) => t(`sort.${sort}`))}
         onSelect={onSortTypeSelect}
         defaultValue={defaultSortLabel}
         key={i18n.language}

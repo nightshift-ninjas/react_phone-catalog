@@ -10,6 +10,7 @@ type Item = string | number;
 type Props = {
   labelValue: string;
   dropdownItems: Item[];
+  dropdownItemsLabels?: string[];
   defaultValue?: Item;
   onSelect: (item: Item) => void;
 };
@@ -17,6 +18,7 @@ type Props = {
 export const Dropdown: React.FC<Props> = ({
   labelValue,
   dropdownItems,
+  dropdownItemsLabels = dropdownItems,
   defaultValue = dropdownItems[0],
   onSelect,
 }) => {
@@ -24,7 +26,11 @@ export const Dropdown: React.FC<Props> = ({
   const [selectedItem, setSelectedItem] = useState(defaultValue);
 
   const handleSelection = (item: Item) => {
-    setSelectedItem(item);
+    const index = dropdownItems.findIndex(
+      (currentItem) => currentItem === item,
+    );
+    const label = dropdownItemsLabels[index] ?? String(item);
+    setSelectedItem(label);
     onSelect(item);
   };
 
@@ -41,14 +47,14 @@ export const Dropdown: React.FC<Props> = ({
 
         <DropdownMenu.Portal>
           <DropdownMenu.Content className="dropdown__content" sideOffset={4}>
-            {dropdownItems.map((item) => {
+            {dropdownItems.map((item, index) => {
               return (
                 <DropdownMenu.Item
                   key={item}
                   className="dropdown__item"
                   onSelect={() => handleSelection(item)}
                 >
-                  {item}
+                  {dropdownItemsLabels.at(index)}
                 </DropdownMenu.Item>
               );
             })}

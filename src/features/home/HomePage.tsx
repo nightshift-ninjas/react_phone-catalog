@@ -11,6 +11,7 @@ import './HomePage.scss';
 import ImageSlider from './components/ImageSlider/ImageSlider';
 import { useAllProducts } from '../../shared/hooks';
 import { useTranslation } from 'react-i18next';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 const HomePage: React.FC = () => {
   const { products, isLoading } = useAllProducts();
@@ -25,31 +26,45 @@ const HomePage: React.FC = () => {
     <div className="home">
       <h1>{t('welcomeMessage')}</h1>
 
-      <ImageSlider />
+      <SlideIn>
+        <ImageSlider />
+      </SlideIn>
 
-      <ProductSlider
-        layoutText={t('brandNewModels')}
-        products={random}
-        isLoading={isLoading}
-      />
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('brandNewModels')}
+          products={random}
+          isLoading={isLoading}
+        />
+      </SlideIn>
 
-      <CategoryList sectionTitle={t('shopByCategory')} />
+      <SlideIn>
+        <CategoryList sectionTitle={t('shopByCategory')} />
+      </SlideIn>
 
-      <ProductSlider
-        layoutText={t('hotPrices')}
-        products={hot}
-        isLoading={isLoading}
-      />
-      <ProductSlider
-        layoutText={t('premiumDevices')}
-        products={premium}
-        isLoading={isLoading}
-      />
-      <ProductSlider
-        layoutText={t('popularDevices')}
-        products={popular}
-        isLoading={isLoading}
-      />
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('hotPrices')}
+          products={hot}
+          isLoading={isLoading}
+        />
+      </SlideIn>
+
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('premiumDevices')}
+          products={premium}
+          isLoading={isLoading}
+        />
+      </SlideIn>
+
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('popularDevices')}
+          products={popular}
+          isLoading={isLoading}
+        />
+      </SlideIn>
     </div>
   );
 };

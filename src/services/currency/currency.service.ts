@@ -1,7 +1,7 @@
 import { Currency } from '../../widgets/CurrencyButton';
 import type { Rate } from './currency.types';
 
-const API_KEY = 'fca_live_ehEwkhH6bDrcA31n5iwVMQDqTwFjMZ6NpGHxVtwL';
+const API_KEY = 'fca_live_wJ0Ifv6oTAfdDMi1xbwTF6iVBtXUxvtRK21B2XAg';
 const BASE_URL = `https://api.freecurrencyapi.com/v1/latest?apikey=${API_KEY}`;
 
 async function getCashRates(

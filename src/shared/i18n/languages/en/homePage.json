@@ -4,5 +4,8 @@
   "shopByCategory": "Shop by category",
   "hotPrices": "Hot prices",
   "premiumDevices": "Premium devices",
-  "popularDevices": "Popular devices"
+  "popularDevices": "Popular devices",
+  "categories": {
+    "phones": "asdfsdf"
+  }
 }
