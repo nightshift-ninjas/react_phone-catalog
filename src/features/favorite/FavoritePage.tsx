@@ -10,7 +10,6 @@ import { LanguageContext } from '../../shared/context/language';
 import { ROUTES } from '../../shared/config/routes';
 import { useTranslation } from 'react-i18next';
 import { SlideIn } from '../../shared/animation/SlideIn';
-import { motion } from 'framer-motion';
 
 const FavoritePage: React.FC = () => {
   const navigate = useNavigate();
