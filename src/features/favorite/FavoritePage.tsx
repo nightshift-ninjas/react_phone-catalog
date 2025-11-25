@@ -9,6 +9,8 @@ import { ProductCard } from '../../widgets/ProductCard';
 import { LanguageContext } from '../../shared/context/language';
 import { ROUTES } from '../../shared/config/routes';
 import { useTranslation } from 'react-i18next';
+import { SlideIn } from '../../shared/animation/SlideIn';
+import { motion } from 'framer-motion';
 
 const FavoritePage: React.FC = () => {
   const navigate = useNavigate();
@@ -72,16 +74,26 @@ const FavoritePage: React.FC = () => {
             {t('itemCount', { count: favorites.length })}
           </p>
           <ul className="favorite__list">
-            {favorites.map((fav) => (
-              <li key={fav.id} className="favorite__item">
-                {fav.product && (
-                  <ProductCard
-                    product={fav.product}
-                    onRemove={() => handleRemoveFavorite(fav.id)}
-                  />
-                )}
-              </li>
-            ))}
+            {favorites.map((fav, index) => {
+              const delay = ((index % 4) + 1) * 0.1;
+              return (
+                <SlideIn
+                  key={fav.id}
+                  beforeAnimationState={{
+                    delay,
+                  }}
+                >
+                  <li className="favorite__item">
+                    {fav.product && (
+                      <ProductCard
+                        product={fav.product}
+                        onRemove={() => handleRemoveFavorite(fav.id)}
+                      />
+                    )}
+                  </li>
+                </SlideIn>
+              );
+            })}
           </ul>
         </>
       )}
