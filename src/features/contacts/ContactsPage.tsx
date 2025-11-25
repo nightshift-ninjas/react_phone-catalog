@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './ContactsPage.scss';
 import * as Form from '@radix-ui/react-form';
 import { Button } from '../../shared/ui/Button';
 import { FormInput } from '../../shared/ui/FormInput';
 import emailjs from 'emailjs-com';
 import { useTranslation } from 'react-i18next';
+import { SlideIn } from '../../shared/animation/SlideIn';
+import { motion } from 'framer-motion';
 
 export const ContactsPage: React.FC = () => {
   const { t } = useTranslation('contactsPage');
@@ -51,13 +53,39 @@ export const ContactsPage: React.FC = () => {
       });
   };
 
+    useEffect(() => {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto",
+      });
+    }, []);
+
   return (
     <div className="contacts">
       <div className="contacts__card">
-        <h1>{t('getInTouch')}</h1>
-        <p>{t('reachUs')}</p>
+        <motion.h1
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+        >
+          {t("getInTouch")}
+        </motion.h1>
+        
+        <motion.p
+          initial={{ opacity: 0, y: -5 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+        >
+          {t("reachUs")}
+        </motion.p>
 
-        <Form.Root className="contacts__form" onSubmit={handleSubmit}>
+
+        <SlideIn
+          beforeAnimationState={{ y: 20, opacity: 0, delay: 0.2 }}
+          trigger="load"
+        >
+          <Form.Root className="contacts__form" onSubmit={handleSubmit}>
           <div className="contacts__row">
             <FormInput
               name="firstName"
@@ -114,7 +142,8 @@ export const ContactsPage: React.FC = () => {
             </a>
             .
           </p>
-        </Form.Root>
+          </Form.Root>
+        </SlideIn>
       </div>
     </div>
   );

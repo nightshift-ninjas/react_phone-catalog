@@ -20,19 +20,5 @@ export const creators: CreatorInfo[] = [
         icon: SocialNetworkEnum.TELEGRAM,
       },
     ],
-  },
-  {
-    key: 'nhr2',
-    images: [nhr_2, nhr_1],
-    socialNetworks: [
-      {
-        link: '',
-        icon: SocialNetworkEnum.LINKEDIN,
-      },
-      {
-        link: '',
-        icon: SocialNetworkEnum.GITHUB,
-      },
-    ],
-  },
+  }
 ];

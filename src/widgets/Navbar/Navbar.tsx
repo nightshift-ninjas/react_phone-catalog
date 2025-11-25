@@ -18,6 +18,7 @@ import { useFavoriteCount } from '../../shared/context/favorite';
 import cn from 'classnames';
 import './Navbar.scss';
 import { useCartCount } from '../../shared/context/cart';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 type Props = { onSearchClick: () => void };
 
@@ -48,72 +49,92 @@ export const Navbar: React.FC<Props> = ({ onSearchClick }) => {
 
   return (
     <nav className={cn('nav', { 'nav--collapsed': isCollapsed })}>
-      <Link to={`/${lng}`} className="nav__brand">
-        <Logo />
-      </Link>
+      <SlideIn beforeAnimationState={{ y: -20, opacity: 0 }}>
+        <Link to={`/${lng}`} className="nav__brand">
+          <Logo />
+        </Link>
+      </SlideIn>
 
       <div className="nav__content">
-        <div className="nav__block">
-          <NavLink to={`/${lng}`} end className={getClasses}>
-            {t('navLinks.home')}
-          </NavLink>
+        <SlideIn beforeAnimationState={{ y: -20, opacity: 0 }}>
+          <div className="nav__block">
+            <NavLink to={`/${lng}`} end className={getClasses}>
+              {t('navLinks.home')}
+            </NavLink>
 
-          <NavigationMenu.Root className="nav__dropdown">
-            <NavigationMenu.List className="nav__dropdown-list">
-              <NavigationMenu.Item>
-                <NavigationMenu.Trigger className="nav__dropdown-btn">
-                  {t('navLinks.catalog')}
-                  <ArrowIcon />
-                </NavigationMenu.Trigger>
+            <NavigationMenu.Root className="nav__dropdown">
+              <NavigationMenu.List className="nav__dropdown-list">
+                <NavigationMenu.Item>
+                  <NavigationMenu.Trigger className="nav__dropdown-btn">
+                    {t('navLinks.catalog')}
+                    <ArrowIcon />
+                  </NavigationMenu.Trigger>
 
-                <NavigationMenu.Content className="nav__dropdown-content">
-                  <ul className="nav__dropdown-content-list">
-                    {catalogLinks.map((item, index) => (
-                      <li key={index} className="nav__dropdown-content-item">
-                        <NavLink to={item.path} className={getClassesCatalog}>
-                          {item.label}
-                        </NavLink>
-                      </li>
-                    ))}
-                  </ul>
-                </NavigationMenu.Content>
-              </NavigationMenu.Item>
-            </NavigationMenu.List>
-          </NavigationMenu.Root>
-        </div>
+                  <NavigationMenu.Content className="nav__dropdown-content">
+                    <ul className="nav__dropdown-content-list">
+                      {catalogLinks.map((item, index) => (
+                        <SlideIn
+                          key={index}
+                          beforeAnimationState={{
+                            delay: 0.2 + 0.1 * index,
+                            opacity: 0,
+                            y: -20
+                          }}
+                        >
+                          <li className="nav__dropdown-content-item">
+                            <NavLink
+                              to={item.path}
+                              className={getClassesCatalog}
+                            >
+                              {item.label}
+                            </NavLink>
+                          </li>
+                        </SlideIn>
+                      ))}
+                    </ul>
+                  </NavigationMenu.Content>
+                </NavigationMenu.Item>
+              </NavigationMenu.List>
+            </NavigationMenu.Root>
+          </div>
+        </SlideIn>
 
-        <div className="nav__block">
-          <SearchButton onSearchClick={onSearchClick} />
+        <SlideIn beforeAnimationState={{ y: -20, opacity: 0 }}>
+          <div className="nav__block">
+            <SearchButton onSearchClick={onSearchClick} />
 
-          <LanguageButton />
-          <CurrencyButton />
-          <ThemeButton />
+            <LanguageButton />
+            <CurrencyButton />
+            <ThemeButton />
 
-          <NavLink to={`/${lng}/${ROUTES.favorite}`} className={getClasses}>
-            <FavoriteIcon />
-            {!!favoriteCount && (
-              <span className="nav__link-pillow">{favoriteCount}</span>
-            )}
-          </NavLink>
+            <NavLink to={`/${lng}/${ROUTES.favorite}`} className={getClasses}>
+              <FavoriteIcon />
+              {!!favoriteCount && (
+                <span className="nav__link-pillow">{favoriteCount}</span>
+              )}
+            </NavLink>
 
-          <NavLink to={`/${lng}/${ROUTES.cart}`} className={getClasses}>
-            <ShoppingBagIcon />
-            {!!cartCount && (
-              <span className="nav__link-pillow">{cartCount}</span>
-            )}
-          </NavLink>
+            <NavLink to={`/${lng}/${ROUTES.cart}`} className={getClasses}>
+              <ShoppingBagIcon />
+              {!!cartCount && (
+                <span className="nav__link-pillow">{cartCount}</span>
+              )}
+            </NavLink>
 
-          <NavLink to={`/${lng}/${ROUTES.profile}`} className={getClasses}>
-            <ProfileIcon />
-          </NavLink>
-        </div>
+            <NavLink to={`/${lng}/${ROUTES.profile}`} className={getClasses}>
+              <ProfileIcon />
+            </NavLink>
+          </div>
+        </SlideIn>
       </div>
 
-      <button className="nav__mobile-btn" onClick={toggleMobileMenu}>
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <SlideIn beforeAnimationState={{ y: -20, opacity: 0 }}>
+        <button className="nav__mobile-btn" onClick={toggleMobileMenu}>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </SlideIn>
     </nav>
   );
 };

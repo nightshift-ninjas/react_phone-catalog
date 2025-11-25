@@ -14,6 +14,7 @@ import { ProductDescriptionSkeleton } from './components/ProductDescriptionSkele
 import { BlurReveal } from './components/BlurReveal';
 import { useLanguage } from '../../shared/context/language';
 import { Language } from '../../widgets/LanguageButton';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -68,13 +69,15 @@ const ProductDetailPage: React.FC = () => {
         />
       </div>
 
-      {!isLoading && product ? (
-        <h1 className="product-detail__title">{product.name}</h1>
-      ) : (
-        <TextSkeleton height={'40px'} widths={['40%', '15%', '5%', '20%']} />
-      )}
+      <SlideIn>
+        {!isLoading && product ? (
+          <h1 className="product-detail__title">{product.name}</h1>
+        ) : (
+          <TextSkeleton height={'40px'} widths={['40%', '15%', '5%', '20%']} />
+        )}
+      </SlideIn>
 
-      <>
+      <SlideIn beforeAnimationState={{ delay: 0.2 }}>
         <div className="product-detail__section">
           {!isLoading && product ? (
             <>
@@ -88,29 +91,33 @@ const ProductDetailPage: React.FC = () => {
             </>
           )}
         </div>
-      </>
+      </SlideIn>
 
-      {!isLoading && product ? (
-        <>
-          {lng !== Language.EN ? (
-            <BlurReveal>
+      <SlideIn beforeAnimationState={{ delay: 0.4 }}>
+        {!isLoading && product ? (
+          <>
+            {lng !== Language.EN ? (
+              <BlurReveal>
+                <ProductDescription product={product} />
+              </BlurReveal>
+            ) : (
               <ProductDescription product={product} />
-            </BlurReveal>
-          ) : (
-            <ProductDescription product={product} />
-          )}
-        </>
-      ) : (
-        <ProductDescriptionSkeleton />
-      )}
+            )}
+          </>
+        ) : (
+          <ProductDescriptionSkeleton />
+        )}
+      </SlideIn>
 
-      <div className="product-detail__related">
-        <ProductSlider
-          layoutText="You may also like"
-          products={relatedProducts}
-          isLoading={isLoading}
-        />
-      </div>
+      <SlideIn>
+        <div className="product-detail__related">
+          <ProductSlider
+            layoutText="You may also like"
+            products={relatedProducts}
+            isLoading={isLoading}
+          />
+        </div>
+      </SlideIn>
     </div>
   );
 };
