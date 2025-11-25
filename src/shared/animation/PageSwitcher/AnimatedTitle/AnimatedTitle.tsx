@@ -1,12 +1,12 @@
-import { motion } from "framer-motion";
-import React from "react";
+import { motion } from 'framer-motion';
+import React from 'react';
 
 type Props = {
   text: string;
 };
 
 export const AnimatedTitle: React.FC<Props> = ({ text }) => {
-  const letters = text.split("");
+  const letters = text.split('');
 
   const container = {
     hidden: { opacity: 0 },
@@ -26,13 +26,20 @@ export const AnimatedTitle: React.FC<Props> = ({ text }) => {
       variants={container}
       initial="hidden"
       animate="visible"
-      style={{ display: "flex", gap: "2px" }}
+      style={{ display: 'flex', gap: '2px' }}
     >
-      {letters.map((letter, index) => (
-        <motion.span key={index} variants={child}>
-          {letter}
-        </motion.span>
-      ))}
+      {letters.map((letter, index) =>
+        letter === ' ' ? (
+          <motion.span
+            key={index}
+            style={{ display: 'inline-block', width: '8px' }}
+          ></motion.span>
+        ) : (
+          <motion.span key={index} variants={child}>
+            {letter}
+          </motion.span>
+        ),
+      )}
     </motion.h1>
   );
 };
