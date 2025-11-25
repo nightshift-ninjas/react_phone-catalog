@@ -6,6 +6,8 @@
   "premiumDevices": "Premium devices",
   "popularDevices": "Popular devices",
   "categories": {
-    "phones": "asdfsdf"
+    "phones": "Mobile phones",
+    "tablets": "Tablets",
+    "accessories": "Accessories"
   }
 }
