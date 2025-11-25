@@ -10,11 +10,13 @@ type Props = {
     delay?: number;
     duration?: number;
   };
+  once?: boolean;
 };
 
 export const SlideIn: React.FC<Props> = ({
   children,
   beforeAnimationState,
+  once = true,
 }) => {
   const {
     x = 0,
@@ -27,8 +29,13 @@ export const SlideIn: React.FC<Props> = ({
   return (
     <motion.div
       initial={{ x, y, opacity }}
-      whileInView={{ x: 0, y: 0, opacity: 1 }}
-      transition={{ delay, duration }}
+      whileInView={{ x: 0, y: 0, opacity: 1,
+        transition: {
+          delay,
+          duration,
+        },
+        }}
+        viewport={{ once }}
     >
       {children}
     </motion.div>
