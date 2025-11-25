@@ -12,6 +12,7 @@ import ImageSlider from './components/ImageSlider/ImageSlider';
 import { useAllProducts } from '../../shared/hooks';
 import { useTranslation } from 'react-i18next';
 import { SlideIn } from '../../shared/animation/SlideIn';
+import { AnimatedTitle } from '../../shared/animation/PageSwitcher/AnimatedTitle/AnimatedTitle'
 
 const HomePage: React.FC = () => {
   const { products, isLoading } = useAllProducts();
@@ -24,13 +25,13 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="home">
-      <h1>{t('welcomeMessage')}</h1>
+     <AnimatedTitle text={t('welcomeMessage')} />
 
-      <SlideIn>
+      <SlideIn once={false}>
         <ImageSlider />
       </SlideIn>
 
-      <SlideIn>
+      <SlideIn once={false}>
         <ProductSlider
           layoutText={t('brandNewModels')}
           products={random}
@@ -38,11 +39,11 @@ const HomePage: React.FC = () => {
         />
       </SlideIn>
 
-      <SlideIn>
+      <SlideIn once={false}>
         <CategoryList sectionTitle={t('shopByCategory')} />
       </SlideIn>
 
-      <SlideIn>
+      <SlideIn once={false}>
         <ProductSlider
           layoutText={t('hotPrices')}
           products={hot}
@@ -50,7 +51,7 @@ const HomePage: React.FC = () => {
         />
       </SlideIn>
 
-      <SlideIn>
+      <SlideIn once={false}>
         <ProductSlider
           layoutText={t('premiumDevices')}
           products={premium}
@@ -58,7 +59,7 @@ const HomePage: React.FC = () => {
         />
       </SlideIn>
 
-      <SlideIn>
+      <SlideIn once={false}>
         <ProductSlider
           layoutText={t('popularDevices')}
           products={popular}
