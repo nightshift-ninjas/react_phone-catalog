@@ -13,6 +13,7 @@ import { LanguageContext } from '../../shared/context/language';
 import { ROUTES } from '../../shared/config/routes';
 import './CartPage.scss';
 import { useTranslation } from 'react-i18next';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 const CartPage: React.FC = () => {
   const navigate = useNavigate();
@@ -76,7 +77,15 @@ const CartPage: React.FC = () => {
         />
       </div>
 
-      <h1 className="cart__title">{t('cartTitle')}</h1>
+      <SlideIn
+        beforeAnimationState={{
+          x: -100,
+          y: 0,
+          opacity: 0,
+        }}
+      >
+        <h1 className="cart__title">{t('cartTitle')}</h1>
+      </SlideIn>
 
       <div className="cart__grid">
         <div className="cart__block">
@@ -86,11 +95,19 @@ const CartPage: React.FC = () => {
             <ul className="cart__items-wrapper">
               {cartItems.map((item) => (
                 <li key={item.id}>
-                  <CartItem
-                    item={item}
-                    onRemove={() => handleRemoveFromCart(item.id)}
-                    onQuantityChange={handleQuantityChange}
-                  />
+                  <SlideIn
+                    beforeAnimationState={{
+                      x: -100,
+                      y: 0,
+                      opacity: 0,
+                    }}
+                  >
+                    <CartItem
+                      item={item}
+                      onRemove={() => handleRemoveFromCart(item.id)}
+                      onQuantityChange={handleQuantityChange}
+                    />
+                  </SlideIn>
                 </li>
               ))}
             </ul>
@@ -98,7 +115,9 @@ const CartPage: React.FC = () => {
         </div>
 
         <div className="cart__block">
-          <CartInfo total={totalAmount} itemsCount={cartItems.length} />
+          <SlideIn>
+            <CartInfo total={totalAmount} itemsCount={cartItems.length} />
+          </SlideIn>
         </div>
       </div>
     </div>
