@@ -30,22 +30,18 @@ export const SlideIn: React.FC<Props> = ({
     duration = 0.3,
   } = beforeAnimationState || {};
 
+  const transition = { delay, duration };
+
   const animationProps =
     trigger === 'view'
-      ? { whileInView: { x: 0, y: 0, opacity: 1, scale: 1 } }
-      : { animate: { x: 0, y: 0, opacity: 1, scale: 1 } };
+      ? { whileInView: { x: 0, y: 0, opacity: 1, scale: 1, transition } }
+      : { animate: { x: 0, y: 0, opacity: 1, scale: 1, transition } };
 
   return (
     <motion.div
       initial={{ x, y, opacity, scale }}
       {...animationProps}
-      whileInView={{ x: 0, y: 0, opacity: 1,
-        transition: {
-          delay,
-          duration,
-        },
-        }}
-        viewport={{ once }}
+      viewport={{ once }}
     >
       {children}
     </motion.div>

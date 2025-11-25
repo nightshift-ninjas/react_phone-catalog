@@ -5,7 +5,7 @@ import {
   Category,
 } from '../../../services/product';
 import { useSearchParams } from 'react-router-dom';
-import { ProductSortTypes } from '../components/CatalogFilter/type';
+import { ProductItemsPerPage, ProductSortTypes } from '../components/CatalogFilter/type';
 
 const cache: Record<string, Product[]> = {};
 
@@ -16,7 +16,7 @@ export const useCatalogProducts = (category: Category | undefined) => {
   const [error, setError] = useState('');
 
   const sortType = searchParams.get('sort') as ProductSortTypes | null;
-  const perPage = Number(searchParams.get('perPage')) || 10;
+  const perPage = Number(searchParams.get('perPage')) || ProductItemsPerPage.THIRTY;
 
   const load = async () => {
     if (!category) return;
