@@ -27,11 +27,11 @@ const HomePage: React.FC = () => {
     <div className="home">
      <AnimatedTitle text={t('welcomeMessage')} />
 
-      <SlideIn once={false}>
+      <SlideIn>
         <ImageSlider />
       </SlideIn>
 
-      <SlideIn once={false}>
+      <SlideIn>
         <ProductSlider
           layoutText={t('brandNewModels')}
           products={random}
@@ -39,11 +39,11 @@ const HomePage: React.FC = () => {
         />
       </SlideIn>
 
-      <SlideIn once={false}>
+      <SlideIn>
         <CategoryList sectionTitle={t('shopByCategory')} />
       </SlideIn>
 
-      <SlideIn once={false}>
+      <SlideIn>
         <ProductSlider
           layoutText={t('hotPrices')}
           products={hot}
@@ -51,7 +51,7 @@ const HomePage: React.FC = () => {
         />
       </SlideIn>
 
-      <SlideIn once={false}>
+      <SlideIn>
         <ProductSlider
           layoutText={t('premiumDevices')}
           products={premium}
@@ -59,7 +59,7 @@ const HomePage: React.FC = () => {
         />
       </SlideIn>
 
-      <SlideIn once={false}>
+      <SlideIn>
         <ProductSlider
           layoutText={t('popularDevices')}
           products={popular}
