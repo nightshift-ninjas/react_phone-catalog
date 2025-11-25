@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import App from '../App';
 
 import AuthPage, { LoginPage, SignupPage } from '../../features/auth';
@@ -14,40 +14,131 @@ import { CheckoutPage } from '../../features/checkout';
 import { ProfilePage } from '../../features/profile';
 import { CreatorsPage } from '../../features/creators';
 import { ROUTES } from '../../shared/config/routes';
+import { AnimatePresence } from 'framer-motion';
+import { PageSwitcher } from '../../shared/animation/PageSwitcher';
 
-export const AppRoutes = () => (
-  <Routes>
-    <Route path="/" element={<Navigate to="/en" replace />} />
+export const AppRoutes = () => {
+  const location = useLocation();
 
-    <Route path=":lng" element={<App />}>
-      <Route index element={<HomePage />} />
-      <Route path={ROUTES.home} element={<Navigate to=".." replace />} />
+  return (
+    <AnimatePresence>
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={
+          <PageSwitcher>
+            <Navigate to="/en" replace />
+          </PageSwitcher>
+        } />
 
-      <Route path={ROUTES.catalog} element={<CatalogPage />} />
-      <Route path={ROUTES.catalogCategory} element={<CatalogPage />} />
-      <Route path={ROUTES.productDetail} element={<ProductDetailPage />} />
+        <Route
+          path=":lng"
+          element={
+            <PageSwitcher>
+              <App />
+            </PageSwitcher>
+          }
+        >
+          <Route index element={
+            <PageSwitcher>
+              <HomePage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.home} element={
+            <PageSwitcher>
+              <Navigate to=".." replace />
+            </PageSwitcher>
+          } />
 
-      <Route path={ROUTES.cart} element={<CartPage />} />
-      <Route path={ROUTES.favorite} element={<FavoritePage />} />
+          <Route path={ROUTES.catalog} element={
+            <PageSwitcher>
+              <CatalogPage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.catalogCategory} element={
+            <PageSwitcher>
+              <CatalogPage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.productDetail} element={
+            <PageSwitcher>
+              <ProductDetailPage />
+            </PageSwitcher>
+          } />
 
-      <Route path={ROUTES.contacts} element={<ContactsPage />} />
-      <Route path={ROUTES.creators} element={<CreatorsPage />} />
-      <Route path={ROUTES.rights} element={<RightsPage />} />
-      <Route path={ROUTES.checkout} element={<CheckoutPage />} />
-      <Route path={ROUTES.profile} element={<ProfilePage />} />
-    </Route>
+          <Route path={ROUTES.cart} element={
+            <PageSwitcher>
+              <CartPage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.favorite} element={
+            <PageSwitcher>
+              <FavoritePage />
+            </PageSwitcher>
+          } />
 
-    <Route path="*" element={<NotFound />} />
+          <Route path={ROUTES.contacts} element={
+            <PageSwitcher>
+              <ContactsPage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.creators} element={
+            <PageSwitcher>
+              <CreatorsPage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.rights} element={
+            <PageSwitcher>
+              <RightsPage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.checkout} element={
+            <PageSwitcher>
+              <CheckoutPage />
+            </PageSwitcher>
+          } />
+          <Route path={ROUTES.profile} element={
+            <PageSwitcher>
+              <ProfilePage />
+            </PageSwitcher>
+          } />
+        </Route>
 
-    <Route path=":lng/auth" element={<AuthPage />}>
-      <Route
-        index
-        element={<Navigate to={ROUTES.login.replace('auth/', '')} replace />}
-      />
-      <Route path="login" element={<LoginPage />} />
-      <Route path="signup" element={<SignupPage />} />
-    </Route>
+        <Route path="*" element={
+          <PageSwitcher>
+            <NotFound />
+          </PageSwitcher>
+        } />
 
-    <Route path="*" element={<Navigate to="/en" replace />} />
-  </Routes>
-);
+        <Route path=":lng/auth" element={
+          <PageSwitcher>
+            <AuthPage />
+          </PageSwitcher>
+        }>
+          <Route
+            index
+            element={
+              <PageSwitcher>
+                <Navigate to={ROUTES.login.replace('auth/', '')} replace />
+              </PageSwitcher>
+            }
+          />
+          <Route path="login" element={
+            <PageSwitcher>
+              <LoginPage />
+            </PageSwitcher>
+          } />
+          <Route path="signup" element={
+            <PageSwitcher>
+              <SignupPage />
+            </PageSwitcher>
+          } />
+        </Route>
+
+        <Route path="*" element={
+          <PageSwitcher>
+            <Navigate to="/en" replace />
+          </PageSwitcher>
+        } />
+      </Routes>
+    </AnimatePresence>
+  );
+};
