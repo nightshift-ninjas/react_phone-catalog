@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')!).render(
         <CurrencyProvider>
           <CartCountProvider>
             <FavoriteCountProvider>
-              <AppRoutes />
+               <AppRoutes />
             </FavoriteCountProvider>
           </CartCountProvider>
         </CurrencyProvider>
