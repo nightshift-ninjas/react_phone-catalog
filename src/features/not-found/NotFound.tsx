@@ -2,9 +2,9 @@ import React from 'react';
 import { Button } from '../../shared/ui/Button';
 import { useNavigate } from 'react-router-dom';
 import GIF from '../../shared/assets/img/404.gif';
-import './NotFound.scss';
 import { useTranslation } from 'react-i18next';
 import { SlideIn } from '../../shared/animation/SlideIn';
+import './NotFound.scss';
 
 const NotFound: React.FC = () => {
   const navigate = useNavigate();
@@ -53,7 +53,7 @@ const NotFound: React.FC = () => {
       </SlideIn>
 
       <SlideIn>
-          <Button onClick={() => navigate('/')}>{t('404_goHomeAction')}</Button>
+        <Button onClick={() => navigate('/')}>{t('404_goHomeAction')}</Button>
       </SlideIn>
     </section>
   );

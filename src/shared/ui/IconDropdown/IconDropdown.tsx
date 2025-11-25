@@ -3,6 +3,7 @@ import * as RadixDropdown from '@radix-ui/react-dropdown-menu';
 import { CheckIcon } from '@radix-ui/react-icons';
 import cn from 'classnames';
 import './IconDropdown.scss';
+import { SlideIn } from '../../animation/SlideIn';
 
 interface Option {
   label: string;
@@ -51,28 +52,34 @@ export const IconDropdown: React.FC<Props> = ({
           align="end"
           sideOffset={5}
         >
-          {options.map((option) => (
-            <RadixDropdown.Item
+          {options.map((option, index) => (
+            <SlideIn
               key={option.value}
-              className={`icon-dropdown__item ${option.disabled ? 'icon-dropdown__item--disabled' : ''}`}
-              onClick={() => !option.disabled && handleSelect(option.value)}
-              disabled={option.disabled}
+              beforeAnimationState={{ delay: 0.2 + 0.1 * index, opacity: 0, y: -20 }}
             >
-              {option.icon && (
-                <span
-                  className={cn('icon-dropdown__item-icon', {
-                    'icon-dropdown__item-icon--theme': themeIcon,
-                  })}
-                  style={{ width: option.optionIconWidth ?? 40 }}
-                >
-                  {option.icon}
+              <RadixDropdown.Item
+                className={`icon-dropdown__item ${option.disabled ? 'icon-dropdown__item--disabled' : ''}`}
+                onClick={() => !option.disabled && handleSelect(option.value)}
+                disabled={option.disabled}
+              >
+                {option.icon && (
+                  <span
+                    className={cn('icon-dropdown__item-icon', {
+                      'icon-dropdown__item-icon--theme': themeIcon,
+                    })}
+                    style={{ width: option.optionIconWidth ?? 40 }}
+                  >
+                    {option.icon}
+                  </span>
+                )}
+                <span className="icon-dropdown__item-label">
+                  {option.label}
                 </span>
-              )}
-              <span className="icon-dropdown__item-label">{option.label}</span>
-              {selectedValue === option.value && (
-                <CheckIcon className="icon-dropdown__item-check" />
-              )}
-            </RadixDropdown.Item>
+                {selectedValue === option.value && (
+                  <CheckIcon className="icon-dropdown__item-check" />
+                )}
+              </RadixDropdown.Item>
+            </SlideIn>
           ))}
           <RadixDropdown.Separator className="icon-dropdown__separator" />
         </RadixDropdown.Content>

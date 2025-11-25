@@ -9,6 +9,7 @@ type Props = {
     x?: number;
     delay?: number;
     duration?: number;
+    scale?: number;
   };
 };
 
@@ -19,6 +20,7 @@ export const SlideIn: React.FC<Props> = ({
   const {
     x = 0,
     y = 30,
+    scale = 1,
     opacity = 0.7,
     delay = 0,
     duration = 0.3,
@@ -26,8 +28,8 @@ export const SlideIn: React.FC<Props> = ({
 
   return (
     <motion.div
-      initial={{ x, y, opacity }}
-      whileInView={{ x: 0, y: 0, opacity: 1 }}
+      initial={{ x, y, opacity, scale }}
+      whileInView={{ x: 0, y: 0, opacity: 1, scale: 1 }}
       transition={{ delay, duration }}
     >
       {children}

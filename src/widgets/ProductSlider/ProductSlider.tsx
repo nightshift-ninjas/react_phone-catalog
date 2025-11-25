@@ -8,6 +8,7 @@ import { ProductCard } from '../ProductCard';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import './ProductSlider.scss';
+
 import { ArrowButton } from '../../shared/ui/ArrowButton';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
 import { SlideIn } from '../../shared/animation/SlideIn';
@@ -25,8 +26,12 @@ export const ProductSlider: React.FC<Props> = ({
 }) => {
   const [isBeginning, setIsBeginning] = useState(true);
   const [isEnd, setIsEnd] = useState(false);
+  const [currentSlidesPerView, setCurrentSlidesPerView] = useState(1.5);
 
   const swiperRef = useRef<SwiperType | null>(null);
+
+  const animatedSlidesCount =
+    currentSlidesPerView >= 4 ? 4 : currentSlidesPerView >= 2.5 ? 2 : 2;
 
   return (
     <div className="slider">
@@ -48,6 +53,10 @@ export const ProductSlider: React.FC<Props> = ({
       <Swiper
         onSwiper={(swiper) => {
           swiperRef.current = swiper;
+          setCurrentSlidesPerView(swiper.params.slidesPerView as number);
+        }}
+        onBreakpoint={(swiper) => {
+          setCurrentSlidesPerView(swiper.params.slidesPerView as number);
         }}
         onSlideChange={(swiper) => {
           setIsBeginning(swiper.isBeginning);
@@ -57,14 +66,8 @@ export const ProductSlider: React.FC<Props> = ({
         slidesPerView={1.5}
         spaceBetween={16}
         breakpoints={{
-          640: {
-            slidesPerView: 2.5,
-            spaceBetween: 20,
-          },
-          1200: {
-            slidesPerView: 4,
-            spaceBetween: 30,
-          },
+          640: { slidesPerView: 2.5, spaceBetween: 20 },
+          1200: { slidesPerView: 4, spaceBetween: 30 },
         }}
       >
         {isLoading &&
@@ -75,11 +78,18 @@ export const ProductSlider: React.FC<Props> = ({
           ))}
 
         {products.map((product, index) => {
+          const shouldAnimate = index < animatedSlidesCount;
+          const delay = index * 0.15;
+
           return (
             <SwiperSlide key={product.id}>
-              <SlideIn beforeAnimationState={{ delay: 0.2 * index, y: 60, opacity: 0 }}>
+              {shouldAnimate ? (
+                <SlideIn beforeAnimationState={{ delay, y: 60, opacity: 0 }}>
+                  <ProductCard product={product} />
+                </SlideIn>
+              ) : (
                 <ProductCard product={product} />
-              </SlideIn>
+              )}
             </SwiperSlide>
           );
         })}

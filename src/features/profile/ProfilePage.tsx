@@ -13,6 +13,7 @@ import { LanguageContext } from '../../shared/context/language';
 import { ROUTES } from '../../shared/config/routes';
 import './ProfilePage.scss';
 import { OrderCharts } from './components/OrderCharts';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 export const ProfilePage: React.FC = () => {
   const navigate = useNavigate();
@@ -42,9 +43,11 @@ export const ProfilePage: React.FC = () => {
 
   return (
     <div className="profile">
-      <section className="profile__section">
-        <ProfileInfo user={user} />
-      </section>
+      <SlideIn beforeAnimationState={{ y: 0, scale: 0.5 }}>
+        <section className="profile__section">
+          <ProfileInfo user={user} />
+        </section>
+      </SlideIn>
 
       <section className="profile__section">
         <OrderCharts orders={orders} />

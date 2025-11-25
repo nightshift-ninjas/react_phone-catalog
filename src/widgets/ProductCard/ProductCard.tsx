@@ -21,7 +21,7 @@ type Props = {
   onRemove?: () => void;
 };
 
-export const BASE_URL = 'src/shared/assets/';
+export const BASE_URL = '';
 
 export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
   const { user } = useAuth();

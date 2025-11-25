@@ -1,7 +1,7 @@
 import React from 'react';
 import type { Product } from '../../../../services/product';
-import './GlobalSearchList.scss';
 import { GlobalSearchItem } from '../GlobalSearchItem';
+import './GlobalSearchList.scss';
 
 type Props = {
   products: Product[];
