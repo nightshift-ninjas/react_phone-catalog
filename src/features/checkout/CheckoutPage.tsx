@@ -13,6 +13,8 @@ import './CheckoutPage.scss';
 import { useLanguage } from '../../shared/context/language';
 import { promoService } from '../../services/promo';
 import { useCartCount } from '../../shared/context/cart';
+import { SlideIn } from '../../shared/animation/SlideIn';
+
 
 export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
@@ -102,8 +104,6 @@ export const CheckoutPage: React.FC = () => {
     });
   };
 
-
-
   // Redirect if user is not logged in
   useEffect(() => {
     if (!authLoading && !user) navigate('/auth');
@@ -125,33 +125,37 @@ export const CheckoutPage: React.FC = () => {
       )}
 
       <div className="checkout__section">
+        <SlideIn trigger="load" beforeAnimationState={{ x: 0, y: 0, opacity: 0, duration: 0.4}}>
         <CheckoutForm
-          ref={formRef}
-          user={user}
-          onSubmit={handleSubmit}
-          onPaymentMethodChange={setPaymentMethod}
-        />
+            ref={formRef}
+            user={user}
+            onSubmit={handleSubmit}
+            onPaymentMethodChange={setPaymentMethod}
+          />
+        </SlideIn>
       </div>
 
       <div className="checkout__section">
-        <CheckoutList
-          cartItems={cartItems}
-          noProducts={!cartItems.length || !!error}
-          isLoading={cartLoading}
-          onRemoveItem={handleRemoveItem}
-          onQuantityChange={handleQuantityChange}
-        />
+          <CheckoutList
+            cartItems={cartItems}
+            noProducts={!cartItems.length || !!error}
+            isLoading={cartLoading}
+            onRemoveItem={handleRemoveItem}
+            onQuantityChange={handleQuantityChange}
+          />
       </div>
 
       <div className="checkout__section">
-        <CheckoutInfo
-          onPromoApply={handlePromoApply}
-          totalAmount={totalAmount}
-          discountAmount={discountAmount}
-          finalTotalAmount={finalTotalAmount}
-          paymentMethod={paymentMethod}
-          formRef={formRef}
-        />
+        <SlideIn trigger="load" beforeAnimationState={{ x: 0, y: 0, opacity: 0, duration: 0.4}}>
+          <CheckoutInfo
+            onPromoApply={handlePromoApply}
+            totalAmount={totalAmount}
+            discountAmount={discountAmount}
+            finalTotalAmount={finalTotalAmount}
+            paymentMethod={paymentMethod}
+            formRef={formRef}
+          />
+          </SlideIn>
       </div>
     </section>
   );

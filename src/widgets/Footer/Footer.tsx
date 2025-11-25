@@ -6,6 +6,7 @@ import { ROUTES } from '../../shared/config/routes';
 import { LanguageContext } from '../../shared/context/language';
 import { ArrowButton } from '../../shared/ui/ArrowButton';
 import { useTranslation } from 'react-i18next';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 export const Footer: React.FC = () => {
   const { language: lng } = useContext(LanguageContext)!;
@@ -16,34 +17,46 @@ export const Footer: React.FC = () => {
       <div className="footer__container">
         <div className="footer__logo">
           <Link to={`/${lng}`}>
-            <Logo />
+            <SlideIn beforeAnimationState={{ x: - 100, y: 0, opacity: 0, delay: 1 }}>
+              <Logo />
+            </SlideIn>
           </Link>
         </div>
 
         <nav className="footer__nav">
-          <a
-            href="https://github.com/nightshift-ninjas/react_phone-catalog"
-            target="_blank"
-            className="footer__nav-item"
-            rel="noreferrer"
-          >
-            GITHUB
-          </a>
-          <Link to={`/${lng}/${ROUTES.contacts}`} className="footer__nav-item">
-            {t('footerLinks.contacts')}
-          </Link>
-          <Link to={`/${lng}/${ROUTES.rights}`} className="footer__nav-item">
-            {t('footerLinks.rights')}
-          </Link>
+          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0 }}>
+            <a
+              href="https://github.com/nightshift-ninjas/react_phone-catalog"
+              target="_blank"
+              className="footer__nav-item"
+              rel="noreferrer"
+            >
+              GITHUB
+            </a>
+          </SlideIn>
+
+          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.3 }}>
+            <Link to={`/${lng}/${ROUTES.contacts}`} className="footer__nav-item">
+              {t('footerLinks.contacts')}
+            </Link>
+          </SlideIn>
+
+          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.6 }}>
+            <Link to={`/${lng}/${ROUTES.rights}`} className="footer__nav-item">
+              {t('footerLinks.rights')}
+            </Link>
+          </SlideIn>
         </nav>
 
-        <div className="footer__top">
-          {t('topButton')}
-          <ArrowButton
-            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            direction="up"
-          />
-        </div>
+        <SlideIn beforeAnimationState={{ x: 100, y: 0, opacity: 0, delay: 1 }}>
+          <div className="footer__top">
+            {t('topButton')}
+            <ArrowButton
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              direction="up"
+            />
+          </div>
+        </SlideIn>
       </div>
     </footer>
   );

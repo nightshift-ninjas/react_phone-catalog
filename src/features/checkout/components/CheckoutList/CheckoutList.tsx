@@ -1,4 +1,6 @@
 import React from 'react';
+import { motion } from "framer-motion";
+import { microFade, microFadeDelay } from "../../../../shared/animation/micro";
 import type { CartItem as CartItemType } from '../../../../services/cart';
 import { CartItem } from '../../../cart/components/CartItem';
 import './CheckoutList.scss';
@@ -22,33 +24,42 @@ export const CheckoutList: React.FC<Props> = ({
   onRemoveItem,
 }) => {
   const { t } = useTranslation('checkoutList');
+
   return (
-    <div className="checkout-list">
+    <motion.div className="checkout-list" {...microFade}>
+      
       {isLoading && <Spinner />}
 
       {!isLoading && !noProducts && (
         <ul className="checkout-list__list">
-          {cartItems.map((item) => (
-            <li key={item.id} className="checkout-list__item">
+          {cartItems.map((item, index) => (
+            <motion.li
+              key={item.id}
+              className="checkout-list__item"
+              {...microFadeDelay(index * 0.05)}
+            >
               <CartItem 
-                item={item} 
-                onQuantityChange={onQuantityChange} 
-                onRemove={() => onRemoveItem?.(item.id)} 
+                item={item}
+                onQuantityChange={onQuantityChange}
+                onRemove={() => onRemoveItem?.(item.id)}
               />
-            </li>
+            </motion.li>
           ))}
         </ul>
       )}
 
       {!isLoading && noProducts && (
-        <h4 className="checkout-list__text">
+        <motion.h4 className="checkout-list__text" {...microFade}>
           {t('noProducts')}
-        </h4>
+        </motion.h4>
       )}
 
-      <div className="checkout-list__currency-chart">
+      <motion.div
+        className="checkout-list__currency-chart"
+        {...microFadeDelay(0.2)}
+      >
         <CurrencyRatesChart />
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };

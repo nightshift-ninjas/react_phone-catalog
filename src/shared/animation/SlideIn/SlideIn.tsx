@@ -10,11 +10,13 @@ type Props = {
     delay?: number;
     duration?: number;
   };
+  trigger?: 'view' | 'load'; // NEW PROP
 };
 
 export const SlideIn: React.FC<Props> = ({
   children,
   beforeAnimationState,
+  trigger = 'view', // default = whileInView
 }) => {
   const {
     x = 0,
@@ -24,10 +26,15 @@ export const SlideIn: React.FC<Props> = ({
     duration = 0.3,
   } = beforeAnimationState || {};
 
+  const animationProps =
+    trigger === 'view'
+      ? { whileInView: { x: 0, y: 0, opacity: 1 } }
+      : { animate: { x: 0, y: 0, opacity: 1 } };
+
   return (
     <motion.div
       initial={{ x, y, opacity }}
-      whileInView={{ x: 0, y: 0, opacity: 1 }}
+      {...animationProps}
       transition={{ delay, duration }}
     >
       {children}
