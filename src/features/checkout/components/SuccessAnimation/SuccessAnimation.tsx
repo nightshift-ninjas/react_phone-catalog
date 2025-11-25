@@ -3,6 +3,7 @@ import { startCatAnimation } from './catAnimation';
 import ArrowIcon from '../../../../shared/assets/icons/auth-arrow.svg?react';
 import './SuccessAnimation.scss';
 import { useTranslation } from 'react-i18next';
+import { motion } from 'framer-motion';
 
 type Props = {
   onBackToCatalog: () => void;
@@ -17,7 +18,14 @@ export const SuccessAnimation: React.FC<Props> = ({ onBackToCatalog }) => {
 
   return (
     <div className="cat-container">
-      <h1 className='cat-container__title'>{t('gratitude')}</h1>
+      <motion.h1
+        className="cat-container__title"
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+      >
+        {t('gratitude')}
+      </motion.h1>
 
       <div className="container_svg">
         <svg
@@ -357,10 +365,16 @@ export const SuccessAnimation: React.FC<Props> = ({ onBackToCatalog }) => {
         </svg>
       </div>
 
-      <button className="cat-container__btn" onClick={onBackToCatalog}>
+      <motion.button
+        className="cat-container__btn"
+        onClick={onBackToCatalog}
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.3, duration: 0.5 }}
+      >
         {t('trackOrder')}
         <ArrowIcon className="cat-container__arrow" />
-      </button>
+      </motion.button>
     </div>
   );
 };
