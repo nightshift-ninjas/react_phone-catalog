@@ -31,5 +31,6 @@
   button {
     max-width: 200px;
     background-color: map.get($colors, 'dark');
+    padding-inline: 25px;
   }
 }

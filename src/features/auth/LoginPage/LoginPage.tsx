@@ -8,6 +8,7 @@ import { LanguageContext } from '../../../shared/context/language';
 import { ROUTES } from '../../../shared/config/routes';
 import '../form.scss';
 import { useTranslation } from 'react-i18next';
+import { SlideIn } from '../../../shared/animation/SlideIn';
 
 export function LoginPage() {
   const { language: lng } = useContext(LanguageContext)!;
@@ -51,90 +52,92 @@ export function LoginPage() {
   };
 
   return (
-    <Form.Root className="form" onSubmit={handleSubmit}>
-      <h2 className="form__title">{t("loginTitle")}</h2>
+    <SlideIn>
+      <Form.Root className="form" onSubmit={handleSubmit}>
+        <h2 className="form__title">{t("loginTitle")}</h2>
 
-      <p className="form__text">
-        {t("noAccountPrompt")}{' '}
-        <Link to={`/${lng}/${ROUTES.signup}`} className="form__link">
-          {t('createAccountAction')}
-        </Link>
-      </p>
+        <p className="form__text">
+          {t("noAccountPrompt")}{' '}
+          <Link to={`/${lng}/${ROUTES.signup}`} className="form__link">
+            {t('createAccountAction')}
+          </Link>
+        </p>
 
-      <Form.Field className="form__field" name="email">
-        <Form.Control asChild>
+        <Form.Field className="form__field" name="email">
+          <Form.Control asChild>
+            <input
+              className="form__input"
+              type="email"
+              placeholder={t('emailPlaceholder')}
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+          </Form.Control>
+          <div>
+            <Form.Message className="form__message" match="typeMismatch">
+              {t('emailValidationFailed')}
+            </Form.Message>
+          </div>
+        </Form.Field>
+
+        <Form.Field className="form__field" name="password">
+          <Form.Control asChild>
+            <PasswordField
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder={t('passwordPlaceholder')}
+              name="password"
+              required
+            />
+          </Form.Control>
+          <div>
+            <Form.Message className="form__message" match="typeMismatch">
+              {t('passwordValidationFailed')}
+            </Form.Message>
+          </div>
+        </Form.Field>
+
+        <div className="form__checkbox-wrapper">
           <input
-            className="form__input"
-            type="email"
-            placeholder={t('emailPlaceholder')}
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
+            id="agreement"
+            className="form__checkbox"
+            type="checkbox"
+            checked={agreement}
+            onChange={(e) => setAgreement(e.target.checked)}
           />
-        </Form.Control>
-        <div>
-          <Form.Message className="form__message" match="typeMismatch">
-            {t('emailValidationFailed')}
-          </Form.Message>
+          <label htmlFor="agreement">
+            {t('iAgreeCheckbox')}{' '}
+            <a href="#" target="_blank" className="form__link">
+              {t('termsAndConditions')}
+            </a>
+          </label>
         </div>
-      </Form.Field>
 
-      <Form.Field className="form__field" name="password">
-        <Form.Control asChild>
-          <PasswordField
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder={t('passwordPlaceholder')}
-            name="password"
-            required
-          />
-        </Form.Control>
-        <div>
-          <Form.Message className="form__message" match="typeMismatch">
-            {t('passwordValidationFailed')}
-          </Form.Message>
-        </div>
-      </Form.Field>
+        <Form.Submit asChild>
+          <button className="form__submit" disabled={loading || !agreement}>
+            {t('loginButton')}
+          </button>
+        </Form.Submit>
 
-      <div className="form__checkbox-wrapper">
-        <input
-          id="agreement"
-          className="form__checkbox"
-          type="checkbox"
-          checked={agreement}
-          onChange={(e) => setAgreement(e.target.checked)}
-        />
-        <label htmlFor="agreement">
-          {t('iAgreeCheckbox')}{' '}
-          <a href="#" target="_blank" className="form__link">
-            {t('termsAndConditions')}
-          </a>
-        </label>
-      </div>
+        {error && <span className="form__message">{error}</span>}
 
-      <Form.Submit asChild>
-        <button className="form__submit" disabled={loading || !agreement}>
-          {t('loginButton')}
+        <p className="form__divider">
+          <span className="form__line"></span>
+          <span>{t('orLoginWith')}</span>
+          <span className="form__line"></span>
+        </p>
+
+        <button
+          className="form__button-google"
+          type="button"
+          onClick={handleGoogleLogin}
+          disabled={loading}
+        >
+          <GoogleIcon />
+          {loading ? t('loggingInStatus') : t('googleLoginOption')}
         </button>
-      </Form.Submit>
-
-      {error && <span className="form__message">{error}</span>}
-
-      <p className="form__divider">
-        <span className="form__line"></span>
-        <span>{t('orLoginWith')}</span>
-        <span className="form__line"></span>
-      </p>
-
-      <button
-        className="form__button-google"
-        type="button"
-        onClick={handleGoogleLogin}
-        disabled={loading}
-      >
-        <GoogleIcon />
-        {loading ? t('loggingInStatus') : t('googleLoginOption')}
-      </button>
-    </Form.Root>
+      </Form.Root>
+    </SlideIn>
   );
 }
