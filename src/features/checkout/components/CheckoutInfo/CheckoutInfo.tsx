@@ -9,6 +9,7 @@ import { useCurrency } from '../../../../shared/context/currency';
 import ToggleSwitch from '../../../../shared/ui/ToggleSwitch/ToggleSwitch';
 import * as Form from '@radix-ui/react-form';
 import { FormInput } from '../../../../shared/ui/FormInput';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   totalAmount: number;
@@ -29,6 +30,7 @@ export const CheckoutInfo: React.FC<Props> = ({
 }) => {
   const [usePromo, setUsePromo] = useState(false);
   const { rates, currentCurrency } = useCurrency();
+  const { t } = useTranslation('checkoutInfo');
 
   const formattedTotal = convertPrice(
     totalAmount,
@@ -68,22 +70,22 @@ export const CheckoutInfo: React.FC<Props> = ({
 
   return (
     <section className="checkout-info" aria-labelledby="checkout-summary-title">
-      <h2 className="checkout-info__title">Order Summary</h2>
+      <h2 className="checkout-info__title">{t('order.summary')}</h2>
 
       <dl className="checkout-info__list">
         <div className="checkout-info__row">
-          <dt>Subtotal</dt>
+          <dt>{t('order.subtotal')}</dt>
           <dd>{formattedTotal}</dd>
         </div>
 
         <div className="checkout-info__row">
-          <dt>Shipping</dt>
+          <dt>{t('order.shipping')}</dt>
           <dd>--</dd>
         </div>
 
         {formattedDiscount && (
           <div className="checkout-info__row">
-            <dt>Discount</dt>
+            <dt>{t('order.discount')}</dt>
             <dd>{formattedDiscount}</dd>
           </div>
         )}
@@ -91,14 +93,14 @@ export const CheckoutInfo: React.FC<Props> = ({
         <hr className="checkout-info__divider" />
 
         <div className="checkout-info__row checkout-info__row--total">
-          <dt>Total (USD)</dt>
+          <dt>{t('order.total')} (USD)</dt>
           <dd>{formattedFinalTotal}</dd>
         </div>
       </dl>
 
       <div className="checkout-form__switcher">
         <ToggleSwitch
-          label="Use Promocode"
+          label={t('promo.usePromo')}
           checked={usePromo}
           onChange={setUsePromo}
         />
@@ -110,12 +112,12 @@ export const CheckoutInfo: React.FC<Props> = ({
             <FormInput
               name="promo"
               type="text"
-              label="Promocode"
+              label={t('promo.promocode')}
               disabled={!usePromo}
             />
 
             <Button onClick={() => {}} type={ButtonTypes.SUBMIT}>
-              Apply Promocode
+              {t('promo.apply')}
             </Button>
           </Form.Root>
           <hr />
@@ -125,7 +127,7 @@ export const CheckoutInfo: React.FC<Props> = ({
       {paymentMethod === PaymentMethod.ONLINE_PAYMENT ? (
         <PayPalCheckout totalAmount={totalAmount} onSuccess={submitOrder} />
       ) : (
-        <Button onClick={submitOrder}>Confirm Order</Button>
+        <Button onClick={submitOrder}>{t('confirmOrder')}</Button>
       )}
     </section>
   );

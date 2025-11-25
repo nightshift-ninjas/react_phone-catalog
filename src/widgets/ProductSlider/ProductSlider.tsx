@@ -10,6 +10,7 @@ import 'swiper/css/navigation';
 import './ProductSlider.scss';
 import { ArrowButton } from '../../shared/ui/ArrowButton';
 import { ProductCardSkeleton } from '../ProductCardSkeleton';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 type Props = {
   layoutText: string;
@@ -73,10 +74,12 @@ export const ProductSlider: React.FC<Props> = ({
             </SwiperSlide>
           ))}
 
-        {products.map((product) => {
+        {products.map((product, index) => {
           return (
             <SwiperSlide key={product.id}>
-              <ProductCard product={product} />
+              <SlideIn beforeAnimationState={{ delay: 0.2 * index, y: 60, opacity: 0 }}>
+                <ProductCard product={product} />
+              </SlideIn>
             </SwiperSlide>
           );
         })}

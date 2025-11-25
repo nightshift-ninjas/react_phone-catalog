@@ -37,8 +37,6 @@ export const Navbar: React.FC<Props> = ({ onSearchClick }) => {
 
   const toggleMobileMenu = () => setIsCollapsed((prev) => !prev);
 
-  console.log(true);
-
   const catalogLinks: NavbarLink[] = [
     { label: t('navLinks.phones'), path: `/${lng}/${ROUTES.catalog}/phones` },
     { label: t('navLinks.tablets'), path: `/${lng}/${ROUTES.catalog}/tablets` },

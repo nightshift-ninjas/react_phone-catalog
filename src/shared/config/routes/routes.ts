@@ -9,6 +9,7 @@ export const ROUTES = {
   cart: 'cart',
   favorite: 'favorite',
   contacts: 'contacts',
+  creators: 'creators',
   rights: 'rights',
   checkout: 'checkout',
   profile: 'profile',

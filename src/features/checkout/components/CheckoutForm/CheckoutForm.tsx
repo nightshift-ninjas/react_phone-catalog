@@ -6,12 +6,8 @@ import './CheckoutForm.scss';
 import { PaymentMethod } from '../../../../services/order';
 import RadioGroupComponent from '../../../../shared/ui/RadioGroup/RadioGroup';
 import type { User } from 'firebase/auth';
+import { useTranslation } from 'react-i18next';
 
-const paymentMethodOptions = [
-  { label: 'Online Payment', value: PaymentMethod.ONLINE_PAYMENT },
-  { label: 'Cash on Delivery', value: PaymentMethod.CASH_ON_DELIVERY },
-  { label: 'POS on Delivery', value: PaymentMethod.POS_ON_DELIVERY },
-];
 
 type Props = {
   user: User | null;
@@ -35,6 +31,13 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
     const [email, setEmail] = useState(user?.email || '');
     const [mobile, setMobile] = useState(user?.phoneNumber || '');
     const [isScheduled, setIsScheduled] = useState(true);
+    const { t } = useTranslation('checkoutForm');
+
+    const paymentMethodOptions = [
+      { label: t('payment.online') , value: PaymentMethod.ONLINE_PAYMENT },
+      { label: t('payment.cash'), value: PaymentMethod.CASH_ON_DELIVERY },
+      { label: t('payment.pos'), value: PaymentMethod.POS_ON_DELIVERY },
+    ];
 
     return (
       <Form.Root ref={ref} className="checkout-form" onSubmit={onSubmit}>
@@ -42,16 +45,16 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
           <div className="checkout-form__row">
             <FormInput
               name="first-name"
-              placeholder="First Name"
-              label="First Name"
+              placeholder={t('checkoutForm.firstName')}
+              label={t('checkoutForm.firstName')}
               required
               value={firstName}
               onChange={(event: InFd) => setFirstName(event.target.value)}
             />
             <FormInput
               name="last-name"
-              placeholder="Last Name"
-              label="Last Name"
+              placeholder={t('checkoutForm.lastName')}
+              label={t('checkoutForm.lastName')}
               value={lastName}
               onChange={(event: InFd) => setLastName(event.target.value)}
             />
@@ -60,17 +63,17 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
           <div className="checkout-form__row">
             <FormInput
               name="email"
-              placeholder="Email"
+              placeholder={t('checkoutForm.email')}
               type="email"
-              label="Email"
+              label={t('checkoutForm.email')}
               required
               value={email}
               onChange={(event: InFd) => setEmail(event.target.value)}
             />
             <FormInput
               name="phone"
-              placeholder="Mobile Number"
-              label="Mobile Number"
+              placeholder={t('checkoutForm.mobile')}
+              label={t('checkoutForm.mobile')}
               type="tel"
               required
               value={mobile}
@@ -81,29 +84,43 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
           <div className="checkout-form__row">
             <FormInput
               name="country"
-              placeholder="Country"
-              label="Country"
+              placeholder={t('checkoutForm.country')}
+              label={t('checkoutForm.country')}
               required
             />
-            <FormInput name="city" placeholder="City" label="City" required />
+            <FormInput
+              name="city"
+              placeholder={t('checkoutForm.city')} 
+              label={t('checkoutForm.city')} 
+              required 
+            />
           </div>
 
           <div className="checkout-form__row">
             <FormInput
               name="address"
-              placeholder="Address"
-              label="Address"
+              placeholder={t('checkoutForm.address')}
+              label={t('checkoutForm.address')}
               className="checkout-form__long"
               required
             />
-            <FormInput name="zip" placeholder="ZIP" label="ZIP" required />
-            <FormInput name="state" placeholder="State" label="State" />
+            <FormInput 
+              name="zip" 
+              placeholder={t('checkoutForm.zip')}
+              label={t('checkoutForm.zip')}
+              required 
+            />
+            <FormInput 
+              name="state" 
+              placeholder={t('checkoutForm.state')}
+              label={t('checkoutForm.state')} 
+            />
           </div>
         </div>
 
         <div className="checkout-form__switcher">
           <ToggleSwitch
-            label="Schedule Delivery"
+            label={t('schedule.delivery')}
             checked={isScheduled}
             onChange={setIsScheduled}
           />
@@ -114,13 +131,13 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
             <FormInput
               name="delivery-date"
               type="date"
-              label="Delivery Date"
+              label={t('schedule.date')}
               disabled={!isScheduled}
             />
             <FormInput
               name="delivery-time"
               type="time"
-              label="Delivery Time"
+              label={t('schedule.time')}
               disabled={!isScheduled}
             />
           </div>
@@ -128,8 +145,8 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
           <div className="checkout-form__row">
             <FormInput
               name="delivery-notes"
-              placeholder="Notes for the courier"
-              label="Delivery Notes"
+              placeholder={t('schedule.notesForCourier')}
+              label={t('schedule.notes')}
               className="checkout-form__long"
               textarea
               disabled={!isScheduled}
@@ -137,7 +154,7 @@ export const CheckoutForm = forwardRef<HTMLFormElement, Props>(
           </div>
         </div>
 
-        <h6 className="checkout-form__label">Payment Method</h6>
+        <h6 className="checkout-form__label">{t('payment.method')}</h6>
 
         <div className="checkout-form__block">
           <RadioGroupComponent

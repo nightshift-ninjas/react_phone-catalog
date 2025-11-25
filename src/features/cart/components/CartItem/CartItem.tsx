@@ -11,6 +11,7 @@ import { useCurrency } from '../../../../shared/context/currency';
 import { convertPrice } from '../../../../shared/utils';
 import type { Currency } from '../../../../widgets/CurrencyButton';
 import { useCartCount } from '../../../../shared/context/cart';
+import { useTranslation } from 'react-i18next';
 
 export type Props = {
   item: CartItemType;
@@ -27,6 +28,7 @@ export const CartItem: React.FC<Props> = ({
   const { language: lng } = useContext(LanguageContext)!;
   const { rates, currentCurrency } = useCurrency();
   const { decrease: decreaseCart } = useCartCount();
+  const { t } = useTranslation('cartPage');
 
   const totalPrice = convertPrice(
     (item.product?.priceDiscount ?? item.product?.priceRegular ?? 0) * quantity,
@@ -101,7 +103,7 @@ export const CartItem: React.FC<Props> = ({
             <div className="cart-item__image_wrapper">
               <img
                 src={`${BASE_URL}${item.product?.images?.[0] ?? 'placeholder.png'}`}
-                alt={item.product?.name || 'Product image'}
+                alt={item.product?.name || t('productImageAlt')}
                 className="cart-item__image"
               />
             </div>

@@ -14,6 +14,7 @@ import { convertPrice } from '../../shared/utils';
 import type { Currency } from '../CurrencyButton';
 import { useFavoriteCount } from '../../shared/context/favorite';
 import { useCartCount } from '../../shared/context/cart';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   product: Product;
@@ -24,6 +25,7 @@ export const BASE_URL = 'src/shared/assets/';
 
 export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
   const { user } = useAuth();
+  const { t } = useTranslation('productCard');
   const { increase: increaseCart, decrease: decreaseCart } = useCartCount();
   const { increase: increaseFav, decrease: decreaseFav } = useFavoriteCount();
 
@@ -126,7 +128,7 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
           <div className="product-card__image-wrapper">
             <img
               src={`${BASE_URL}${product.images?.[0] ?? 'placeholder.png'}`}
-              alt={product.name || 'Product image'}
+              alt={product.name || t('productImage')}
               className="product-card__image"
             />
           </div>
@@ -146,15 +148,15 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
 
           <ul className="product-card__specs">
             <li>
-              <span className="spec-name">Screen</span>
+              <span className="spec-name">{t('specificationScreen')}</span>
               <span>{product.screen}</span>
             </li>
             <li>
-              <span className="spec-name">Capacity</span>
+              <span className="spec-name">{t('specificationCapacity')}</span>
               <span>{product.capacity}</span>
             </li>
             <li>
-              <span className="spec-name">RAM</span>
+              <span className="spec-name">{t('specificationRAM')}</span>
               <span>{product.ram}</span>
             </li>
           </ul>
@@ -163,7 +165,7 @@ export const ProductCard: React.FC<Props> = ({ product, onRemove }) => {
 
       <div className="product-card__actions">
         <Button isSelected={isSelectedCart} onClick={onClickCart}>
-          {isSelectedCart ? 'Added' : 'Add to cart'}
+          {isSelectedCart ? t('addedConfirmation') : t('addToCartAction')}
         </Button>
 
         <FavoriteButton isSelected={isSelectedFav} onClick={onClickFav} />

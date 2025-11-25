@@ -12,7 +12,7 @@ import { ContactsPage } from '../../features/contacts';
 import { RightsPage } from '../../features/rights';
 import { CheckoutPage } from '../../features/checkout';
 import { ProfilePage } from '../../features/profile';
-
+import { CreatorsPage } from '../../features/creators';
 import { ROUTES } from '../../shared/config/routes';
 
 export const AppRoutes = () => (
@@ -31,11 +31,12 @@ export const AppRoutes = () => (
       <Route path={ROUTES.favorite} element={<FavoritePage />} />
 
       <Route path={ROUTES.contacts} element={<ContactsPage />} />
+      <Route path={ROUTES.creators} element={<CreatorsPage />} />
       <Route path={ROUTES.rights} element={<RightsPage />} />
       <Route path={ROUTES.checkout} element={<CheckoutPage />} />
       <Route path={ROUTES.profile} element={<ProfilePage />} />
     </Route>
-    
+
     <Route path="*" element={<NotFound />} />
 
     <Route path=":lng/auth" element={<AuthPage />}>

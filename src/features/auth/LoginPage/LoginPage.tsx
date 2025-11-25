@@ -7,9 +7,11 @@ import GoogleIcon from '../../../shared/assets/icons/google.svg?react';
 import { LanguageContext } from '../../../shared/context/language';
 import { ROUTES } from '../../../shared/config/routes';
 import '../form.scss';
+import { useTranslation } from 'react-i18next';
 
 export function LoginPage() {
   const { language: lng } = useContext(LanguageContext)!;
+  const { t } = useTranslation('auth');
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -50,12 +52,12 @@ export function LoginPage() {
 
   return (
     <Form.Root className="form" onSubmit={handleSubmit}>
-      <h2 className="form__title">Log in your account</h2>
+      <h2 className="form__title">{t("loginTitle")}</h2>
 
       <p className="form__text">
-        Don&apos;t have an account?{' '}
+        {t("noAccountPrompt")}{' '}
         <Link to={`/${lng}/${ROUTES.signup}`} className="form__link">
-          Create account
+          {t('createAccountAction')}
         </Link>
       </p>
 
@@ -64,7 +66,7 @@ export function LoginPage() {
           <input
             className="form__input"
             type="email"
-            placeholder="Email..."
+            placeholder={t('emailPlaceholder')}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
@@ -72,7 +74,7 @@ export function LoginPage() {
         </Form.Control>
         <div>
           <Form.Message className="form__message" match="typeMismatch">
-            Please provide a valid email
+            {t('emailValidationFailed')}
           </Form.Message>
         </div>
       </Form.Field>
@@ -82,14 +84,14 @@ export function LoginPage() {
           <PasswordField
             value={password}
             onChange={(e) => setPassword(e.target.value)}
-            placeholder="Password..."
+            placeholder={t('passwordPlaceholder')}
             name="password"
             required
           />
         </Form.Control>
         <div>
           <Form.Message className="form__message" match="typeMismatch">
-            Please provide a valid password
+            {t('passwordValidationFailed')}
           </Form.Message>
         </div>
       </Form.Field>
@@ -103,16 +105,16 @@ export function LoginPage() {
           onChange={(e) => setAgreement(e.target.checked)}
         />
         <label htmlFor="agreement">
-          I agree{' '}
+          {t('iAgreeCheckbox')}{' '}
           <a href="#" target="_blank" className="form__link">
-            Terms & Conditions
+            {t('termsAndConditions')}
           </a>
         </label>
       </div>
 
       <Form.Submit asChild>
         <button className="form__submit" disabled={loading || !agreement}>
-          Log in
+          {t('loginButton')}
         </button>
       </Form.Submit>
 
@@ -120,7 +122,7 @@ export function LoginPage() {
 
       <p className="form__divider">
         <span className="form__line"></span>
-        <span>Or login with</span>
+        <span>{t('orLoginWith')}</span>
         <span className="form__line"></span>
       </p>
 
@@ -131,7 +133,7 @@ export function LoginPage() {
         disabled={loading}
       >
         <GoogleIcon />
-        {loading ? 'Logging in...' : 'Google'}
+        {loading ? t('loggingInStatus') : t('googleLoginOption')}
       </button>
     </Form.Root>
   );

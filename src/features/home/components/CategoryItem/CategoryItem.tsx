@@ -1,5 +1,6 @@
 import React from 'react';
 import './CategoryItem.scss';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   categoryImg: string;
@@ -12,6 +13,8 @@ const CategoryItem: React.FC<Props> = ({
   categoryQuantity,
   categoryName,
 }) => {
+  const { t } = useTranslation('homePage');
+
   return (
     <article className="category-item">
       <div className="category-item__img-wrapper">
@@ -22,7 +25,7 @@ const CategoryItem: React.FC<Props> = ({
         />
       </div>
 
-      <h3 className="category-item__title">{categoryName}</h3>
+      <h3 className="category-item__title">{t(categoryName)}</h3>
 
       <p className="category-item__count">{categoryQuantity} models</p>
     </article>

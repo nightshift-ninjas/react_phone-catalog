@@ -10,6 +10,8 @@ import CategoryList from './components/CategoryList/CategoryList';
 import './HomePage.scss';
 import ImageSlider from './components/ImageSlider/ImageSlider';
 import { useAllProducts } from '../../shared/hooks';
+import { useTranslation } from 'react-i18next';
+import { SlideIn } from '../../shared/animation/SlideIn';
 
 const HomePage: React.FC = () => {
   const { products, isLoading } = useAllProducts();
@@ -18,36 +20,51 @@ const HomePage: React.FC = () => {
   const premium = getPremiumProducts(products);
   const popular = getPopularProducts(products);
   const random = getRandomProducts(products);
+  const { t } = useTranslation('homePage');
 
   return (
     <div className="home">
-      <h1>Welcome to Nice Gadgets store!</h1>
+      <h1>{t('welcomeMessage')}</h1>
 
-      <ImageSlider />
+      <SlideIn>
+        <ImageSlider />
+      </SlideIn>
 
-      <ProductSlider
-        layoutText="Brand new models"
-        products={random}
-        isLoading={isLoading}
-      />
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('brandNewModels')}
+          products={random}
+          isLoading={isLoading}
+        />
+      </SlideIn>
 
-      <CategoryList />
+      <SlideIn>
+        <CategoryList sectionTitle={t('shopByCategory')} />
+      </SlideIn>
 
-      <ProductSlider
-        layoutText="Hot prices"
-        products={hot}
-        isLoading={isLoading}
-      />
-      <ProductSlider
-        layoutText="Premium devices"
-        products={premium}
-        isLoading={isLoading}
-      />
-      <ProductSlider
-        layoutText="Popular devices"
-        products={popular}
-        isLoading={isLoading}
-      />
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('hotPrices')}
+          products={hot}
+          isLoading={isLoading}
+        />
+      </SlideIn>
+
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('premiumDevices')}
+          products={premium}
+          isLoading={isLoading}
+        />
+      </SlideIn>
+
+      <SlideIn>
+        <ProductSlider
+          layoutText={t('popularDevices')}
+          products={popular}
+          isLoading={isLoading}
+        />
+      </SlideIn>
     </div>
   );
 };

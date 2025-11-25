@@ -9,6 +9,7 @@ import './CartInfo.scss';
 import { useCurrency } from '../../../../shared/context/currency';
 import { convertPrice } from '../../../../shared/utils';
 import type { Currency } from '../../../../widgets/CurrencyButton';
+import { useTranslation } from 'react-i18next';
 
 type Props = {
   total: number;
@@ -19,6 +20,8 @@ export const CartInfo: React.FC<Props> = ({ total, itemsCount }) => {
   const navigate = useNavigate();
   const { language: lng } = useContext(LanguageContext)!;
   const { rates, currentCurrency } = useCurrency();
+  const { t } = useTranslation('cartPage');
+
   const totalFormatted = convertPrice(
     total,
     rates,
@@ -32,13 +35,15 @@ export const CartInfo: React.FC<Props> = ({ total, itemsCount }) => {
       <div className="cart-info__wrapper">
         <div className="cart-info__total-price">{totalFormatted}</div>
         <div className="cart-info__total-items">
-          Total for {itemsCount} items
+          {t('totalItemsLabel', {
+            count: itemsCount,
+          })}
         </div>
       </div>
 
       <div className="cart-info__divider" />
 
-      <Button onClick={handleClick}>Checkout</Button>
+      <Button onClick={handleClick}>{t('checkoutAction')}</Button>
     </div>
   );
 };

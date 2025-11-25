@@ -1,0 +1,16 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.creators {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'xl');
+  padding-block: map.get($spacing, 'xl');
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, '4xl');
+  }
+}
