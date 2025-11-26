@@ -125,7 +125,7 @@ export const CheckoutInfo: React.FC<Props> = ({
       )}
 
       {paymentMethod === PaymentMethod.ONLINE_PAYMENT ? (
-        <PayPalCheckout totalAmount={totalAmount} onSuccess={submitOrder} />
+        <PayPalCheckout totalAmount={finalTotalAmount} onSuccess={submitOrder} />
       ) : (
         <Button onClick={submitOrder}>{t('confirmOrder')}</Button>
       )}

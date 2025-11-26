@@ -37,6 +37,10 @@
     margin-top: map.get($spacing, 'lg');
   }
 
+  &__form-input {
+    width: 100%;
+  }
+
   .radio-group__root {
     flex-direction: row;
     justify-content: space-between;

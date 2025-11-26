@@ -17,7 +17,8 @@ export type Colors =
   | 'spaceblack'
   | 'skyblue'
   | 'coral'
-  | 'starlightblack';
+  | 'starlightblack'
+  | 'red';
 
 export const COLORS: Record<Colors, string> = {
   black: "#000000",
@@ -38,5 +39,6 @@ export const COLORS: Record<Colors, string> = {
   spaceblack:	"#1C1C1E",
   skyblue:	"#87CEEB",
   coral:	"#e02f2fff",
+  red:	"#e02f2fff",
   starlightblack:	"#1B1C1D",
 };
