@@ -1,0 +1,68 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+
+.autocomplete {
+  position: relative;
+  width: 100%;
+
+  &__label {
+    display: block;
+    margin-bottom: map.get($spacing, 'sm');
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  &__input {
+    width: 100%;
+    padding: 14px 18px;
+    border-radius: 6px;
+    font-size: 14px;
+
+    box-shadow: inset 0 0 0 1px map.get($colors, 'platinum');
+    color: var(--text-color);
+    border-radius: 4px;
+    border: 1px solid transparent;
+    margin-bottom: map.get($spacing, 'md');
+  }
+
+  &__list {
+    position: absolute;
+    top: calc(100% + map.get($spacing, 'sm'));
+    padding: map.get($spacing, 'md');
+    left: 0;
+    right: 0;
+    white-space: nowrap;
+
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border-radius: 6px;
+    border: $border;
+    font-size: 14px;
+
+    margin-bottom: map.get($spacing, 'sm');
+    max-height: 220px;
+    overflow-y: auto;
+    z-index: 10;
+
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'sm');
+
+    &__item {
+      padding: 10px 12px;
+      cursor: pointer;
+      transition: background 0.1s;
+
+      &:hover {
+        background: #f3f3f3;
+      }
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .autocomplete__input,
+  .autocomplete__list {
+    background: var(--bg-color-lighter);
+  }
+}
