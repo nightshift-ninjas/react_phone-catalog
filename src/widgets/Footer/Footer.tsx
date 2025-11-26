@@ -25,20 +25,23 @@ export const Footer: React.FC = () => {
 
         <nav className="footer__nav">
           <SlideIn beforeAnimationState={{ opacity: 0, delay: 0 }}>
-            <Link to={`/${lng}/${ROUTES.creators}`} className="footer__nav-item">
-              {t('footerLinks.creators')}
-            </Link>
-            {/* <a
+            <a
               href="https://github.com/nightshift-ninjas/react_phone-catalog"
               target="_blank"
               className="footer__nav-item"
               rel="noreferrer"
             >
               GITHUB
-            </a> */}
+            </a>
+              </SlideIn>
+
+          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.2 }}>
+            <Link to={`/${lng}/${ROUTES.creators}`} className="footer__nav-item">
+              {t('footerLinks.creators')}
+            </Link>
           </SlideIn>
 
-          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.3 }}>
+          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.4 }}>
             <Link to={`/${lng}/${ROUTES.contacts}`} className="footer__nav-item">
               {t('footerLinks.contacts')}
             </Link>
