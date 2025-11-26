@@ -52,6 +52,14 @@ const ProductDetailPage: React.FC = () => {
     loadProduct();
   }, [id]);
 
+  useEffect(() => {
+    window.scrollTo({
+    top: 0,
+    left: 0,
+    behavior: "auto",
+    });
+  }, []);
+
   return (
     <div className="product-detail">
       <div className="product-detail__breadcrumbs">

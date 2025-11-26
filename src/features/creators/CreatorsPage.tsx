@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './CreatorsPage.scss';
 import { creators } from './data';
 import { CreatorCard } from './components/CreatorCard';
@@ -17,6 +17,13 @@ const shuffleArray = (array: CreatorInfo[]) => {
 export const CreatorsPage: React.FC = () => {
   const shuffledCreators = shuffleArray(creators);
 
+  useEffect(() => {
+      window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+      });
+  }, []);
   return (
     <div className="creators">
       <ul className="creators__list">
