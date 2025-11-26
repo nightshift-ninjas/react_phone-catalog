@@ -15,6 +15,7 @@ import { BlurReveal } from './components/BlurReveal';
 import { useLanguage } from '../../shared/context/language';
 import { Language } from '../../widgets/LanguageButton';
 import { SlideIn } from '../../shared/animation/SlideIn';
+import { useTranslation } from 'react-i18next';
 
 const ProductDetailPage: React.FC = () => {
   const { id } = useParams();
@@ -23,6 +24,7 @@ const ProductDetailPage: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
   const { language: lng } = useLanguage();
+  const { t } = useTranslation('productDetail');
 
   useEffect(() => {
     if (!id) return;
@@ -112,7 +114,7 @@ const ProductDetailPage: React.FC = () => {
       <SlideIn>
         <div className="product-detail__related">
           <ProductSlider
-            layoutText="You may also like"
+            layoutText={t("youMayAlsoLike")}
             products={relatedProducts}
             isLoading={isLoading}
           />

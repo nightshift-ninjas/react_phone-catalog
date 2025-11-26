@@ -33,9 +33,15 @@ export const Footer: React.FC = () => {
             >
               GITHUB
             </a>
+              </SlideIn>
+
+          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.2 }}>
+            <Link to={`/${lng}/${ROUTES.creators}`} className="footer__nav-item">
+              {t('footerLinks.creators')}
+            </Link>
           </SlideIn>
 
-          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.3 }}>
+          <SlideIn beforeAnimationState={{ opacity: 0, delay: 0.4 }}>
             <Link to={`/${lng}/${ROUTES.contacts}`} className="footer__nav-item">
               {t('footerLinks.contacts')}
             </Link>
