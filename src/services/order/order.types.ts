@@ -25,11 +25,8 @@ export type Order = {
   email: string;
   mobile: string;
 
-  country: string;
   city: string;
-  state?: string;
-  zip: string;
-  address: string;
+  warehouse?: string;
 
   isScheduled: boolean;
   deliveryDate?: string;

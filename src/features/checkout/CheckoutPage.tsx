@@ -15,7 +15,6 @@ import { promoService } from '../../services/promo';
 import { useCartCount } from '../../shared/context/cart';
 import { SlideIn } from '../../shared/animation/SlideIn';
 
-
 export const CheckoutPage: React.FC = () => {
   const navigate = useNavigate();
   const formRef = useRef<HTMLFormElement>(null);
@@ -55,7 +54,8 @@ export const CheckoutPage: React.FC = () => {
   );
 
   const discountAmount = totalAmount * (promoDiscount / 100);
-  const finalTotalAmount = totalAmount - discountAmount;
+  const finalTotalAmount =
+    Math.round((totalAmount - discountAmount) * 100) / 100;
 
   const handlePromoApply = async (promoCode: string): Promise<void> => {
     if (!user) return;
@@ -97,9 +97,9 @@ export const CheckoutPage: React.FC = () => {
   };
 
   const handleRemoveItem = (id: string) => {
-    setCartItems(prev => {
-      const updated = prev.filter(item => item.id !== id);
-      setCartCount(updated.length);   // ← ось цього не вистачало
+    setCartItems((prev) => {
+      const updated = prev.filter((item) => item.id !== id);
+      setCartCount(updated.length); // ← ось цього не вистачало
       return updated;
     });
   };
@@ -125,8 +125,11 @@ export const CheckoutPage: React.FC = () => {
       )}
 
       <div className="checkout__section">
-        <SlideIn trigger="load" beforeAnimationState={{ x: 0, y: 0, opacity: 0, duration: 0.4}}>
-        <CheckoutForm
+        <SlideIn
+          trigger="load"
+          beforeAnimationState={{ x: 0, y: 0, opacity: 0, duration: 0.4 }}
+        >
+          <CheckoutForm
             ref={formRef}
             user={user}
             onSubmit={handleSubmit}
@@ -136,17 +139,20 @@ export const CheckoutPage: React.FC = () => {
       </div>
 
       <div className="checkout__section">
-          <CheckoutList
-            cartItems={cartItems}
-            noProducts={!cartItems.length || !!error}
-            isLoading={cartLoading}
-            onRemoveItem={handleRemoveItem}
-            onQuantityChange={handleQuantityChange}
-          />
+        <CheckoutList
+          cartItems={cartItems}
+          noProducts={!cartItems.length || !!error}
+          isLoading={cartLoading}
+          onRemoveItem={handleRemoveItem}
+          onQuantityChange={handleQuantityChange}
+        />
       </div>
 
       <div className="checkout__section">
-        <SlideIn trigger="load" beforeAnimationState={{ x: 0, y: 0, opacity: 0, duration: 0.4}}>
+        <SlideIn
+          trigger="load"
+          beforeAnimationState={{ x: 0, y: 0, opacity: 0, duration: 0.4 }}
+        >
           <CheckoutInfo
             onPromoApply={handlePromoApply}
             totalAmount={totalAmount}
@@ -155,7 +161,7 @@ export const CheckoutPage: React.FC = () => {
             paymentMethod={paymentMethod}
             formRef={formRef}
           />
-          </SlideIn>
+        </SlideIn>
       </div>
     </section>
   );

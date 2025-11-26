@@ -12,7 +12,9 @@
     "email": "Email",
     "mobile": "Mobile Number",
     "country": "Country",
+    "region": "Region",
     "city": "City",
+    "warehouse": "Warehouse",
     "address": "Address",
     "zip": "ZIP",
     "state": "State"
