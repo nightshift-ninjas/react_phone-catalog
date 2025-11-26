@@ -37,7 +37,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
               { name: 'Canceled', data: ordersPerDayByStatus.canceled },
             ]}
             options={{
-              chart: { height: 350 },
+              chart: { height: 350, background: 'transparent' },
               xaxis: { categories: daysLabels },
               stroke: { curve: 'smooth' },
               markers: { size: 5 },
@@ -60,7 +60,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
               },
             ]}
             options={{
-              chart: { height: 350 },
+              chart: { height: 350, background: 'transparent' },
               xaxis: { categories: daysLabels },
             }}
           />
@@ -74,6 +74,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
             type="pie"
             series={categoryStats.series}
             options={{
+              chart: { background: 'transparent' },
               labels: categoryStats.labels,
             }}
           />
@@ -87,6 +88,7 @@ export const OrderCharts: React.FC<Props> = ({ orders }) => {
             type="donut"
             series={statusStats.series}
             options={{
+              chart: { background: 'transparent' },
               labels: statusStats.labels,
             }}
           />

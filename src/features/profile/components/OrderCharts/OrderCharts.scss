@@ -11,8 +11,8 @@
   }
 
   .chart {
-    background-color: #fff;
-    color: map.get($colors, "dark");
+    background-color: var(--bg-color);
+    color: var(--text-color);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
