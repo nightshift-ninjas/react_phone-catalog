@@ -4,7 +4,10 @@
     "role": "Project-Manager",
     "description": "I'm a web developer who enjoys experimenting with new ideas, learning as I go, and building projects that feel fun and satisfying to use. I like keeping things simple, clean, and easy to understand."
   },
-
+  "vpm": {
+    "name": "Viktoriia Pitsan",
+    "role": "Developer",
+    "description": "I'm a web developer specializing in creating responsive, user-friendly web interfaces. I am passionate about enhancing user experience by building well-crafted, accessible, and intuitive web solutions."
   "mkm": {
     "name": "Kramarchuk Marina",
     "role": "Tech Lead",
