@@ -1,6 +1,7 @@
 import { SocialNetworkEnum, type CreatorInfo } from './types';
 import nhr_1 from '../../shared/assets/img/nhr_1.webp';
 import nhr_2 from '../../shared/assets/img/nhr_2.webp';
+import vpm from '../../shared/assets/img/vpm.jpg'
 
 export const creators: CreatorInfo[] = [
   {
@@ -17,6 +18,25 @@ export const creators: CreatorInfo[] = [
       },
       {
         link: 'https://t.me/nazariyholovach',
+        icon: SocialNetworkEnum.TELEGRAM,
+      },
+    ],
+  },
+
+  {
+    key: 'vpm',
+    images: [vpm],
+    socialNetworks: [
+      {
+        link: 'https://www.linkedin.com/in/viktoriia-pitsan-4426a238b/',
+        icon: SocialNetworkEnum.LINKEDIN,
+      },
+      {
+        link: 'https://github.com/ViktoriiaPitsan',
+        icon: SocialNetworkEnum.GITHUB,
+      },
+      {
+        link: 'https://t.me/Pitsan_Viktoriia',
         icon: SocialNetworkEnum.TELEGRAM,
       },
     ],
