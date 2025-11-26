@@ -7,6 +7,10 @@ import { CategoryLabels } from '../../../catalog/types';
 import categoryPhones from '../../../../shared/assets/img/category-phones.webp';
 import categoryTablets from '../../../../shared/assets/img/category-tablets.webp';
 import categoryAccessories from '../../../../shared/assets/img/category-accessories.webp';
+import categoryPhonesVideo from '../../../../shared/assets/video/video-1.webm';
+import categoryTabletsVideo from '../../../../shared/assets/video/video-2.webm';
+import categoryAccessoriesVideo from '../../../../shared/assets/video/video-3.webm';
+
 import type { Category } from '../../../../services/product';
 import { Link } from 'react-router-dom';
 import { useLanguage } from '../../../../shared/context/language';
@@ -35,16 +39,25 @@ const CategoryList: React.FC<CategoryListProps> = ({ sectionTitle }) => {
     fetchCategoryStats();
   }, []);
 
-  const getCategoryImage = (category: string) => {
+  const getCategoryMedia = (category: string) => {
     switch (category.toLowerCase()) {
       case 'phones':
-        return categoryPhones;
+        return {
+          img: categoryPhones,
+          video: categoryPhonesVideo,
+        };
       case 'tablets':
-        return categoryTablets;
+        return {
+          img: categoryTablets,
+          video: categoryTabletsVideo,
+        };
       case 'accessories':
-        return categoryAccessories;
+        return {
+          img: categoryAccessories,
+          video: categoryAccessoriesVideo,
+        };
       default:
-        return '';
+        return { img: '', video: '' };
     }
   };
 
@@ -52,17 +65,22 @@ const CategoryList: React.FC<CategoryListProps> = ({ sectionTitle }) => {
     <div className="category-list">
       <h2 className="category-list__title">{sectionTitle}</h2>
       <ul className="category-list__list">
-        {categories.map((category) => (
-          <li className="category-list__item" key={category.category}>
-            <Link to={`/${lng}/catalog/${category.category}`}>
-              <CategoryItem
-                categoryName={CategoryLabels[category.category as Category]}
-                categoryQuantity={category.numberOfModels}
-                categoryImg={getCategoryImage(category.category)}
-              />
-            </Link>
-          </li>
-        ))}
+        {categories.map((category) => {
+          const media = getCategoryMedia(category.category);
+
+          return (
+            <li className="category-list__item" key={category.category}>
+              <Link to={`/${lng}/catalog/${category.category}`} title="">
+                <CategoryItem
+                  categoryName={CategoryLabels[category.category as Category]}
+                  categoryQuantity={category.numberOfModels}
+                  categoryImg={media.img}
+                  categoryVideo={media.video}
+                />
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );
