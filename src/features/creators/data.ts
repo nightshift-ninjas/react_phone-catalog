@@ -38,6 +38,12 @@ export const creators: CreatorInfo[] = [
       },
       {
         link: 'https://t.me/Pitsan_Viktoriia',
+        icon: SocialNetworkEnum.TELEGRAM,
+      },
+    ],
+  },
+
+  {
     key: 'mkm',
     images: [mkm_1],
     socialNetworks: [

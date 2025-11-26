@@ -20,7 +20,11 @@
     padding: map.get($spacing, "md");
     background-color: var(--auth-modal-bg);
 
-    --auth-block-width: 450px;
+    --auth-block-width: 300px;
+
+    @include on-tablet {
+      --auth-block-width: 450px;
+    }
 
     @include on-desktop {
       flex-direction: row;

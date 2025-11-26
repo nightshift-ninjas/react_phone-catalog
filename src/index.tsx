@@ -10,6 +10,7 @@ import {
   CartCountProvider,
   FavoriteCountProvider,
 } from './app/providers';
+import { ScrollToTop } from './app/routes/ScrollToTop.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -18,7 +19,8 @@ createRoot(document.getElementById('root')!).render(
         <CurrencyProvider>
           <CartCountProvider>
             <FavoriteCountProvider>
-               <AppRoutes />
+              <ScrollToTop />
+                <AppRoutes />
             </FavoriteCountProvider>
           </CartCountProvider>
         </CurrencyProvider>

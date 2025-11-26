@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './ContactsPage.scss';
 import * as Form from '@radix-ui/react-form';
 import { Button } from '../../shared/ui/Button';
@@ -52,14 +52,6 @@ export const ContactsPage: React.FC = () => {
         event.currentTarget.reset();
       });
   };
-
-    useEffect(() => {
-      window.scrollTo({
-        top: 0,
-        left: 0,
-        behavior: "auto",
-      });
-    }, []);
 
   return (
     <div className="contacts">
