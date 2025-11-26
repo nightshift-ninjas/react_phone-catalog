@@ -1,7 +1,7 @@
 import { SocialNetworkEnum, type CreatorInfo } from './types';
 import nhr_1 from '../../shared/assets/img/nhr_1.webp';
 import nhr_2 from '../../shared/assets/img/nhr_2.webp';
-import vpm from '../../shared/assets/img/vpm.jpg'
+import vpm from '../../shared/assets/img/vpm.jpg';
 import mkm_1 from '../../shared/assets/img/mkm_1.webp';
 
 export const creators: CreatorInfo[] = [
@@ -60,5 +60,5 @@ export const creators: CreatorInfo[] = [
         icon: SocialNetworkEnum.TELEGRAM,
       },
     ],
-  }
+  },
 ];
