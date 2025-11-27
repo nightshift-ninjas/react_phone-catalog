@@ -14,14 +14,10 @@ export const FullScreenModal: React.FC<Props> = ({
 }) => {
   if (!isOpen) return null;
 
-  const handleContentClick = (event: React.MouseEvent) => {
-    event.stopPropagation();
-  };
-
   return (
-    <div className="full-screen-modal" onClick={onClose}>
-      <div className="full-screen-modal__backdrop"></div>
-      <div className="full-screen-modal__content" onClick={handleContentClick}>
+    <div className="full-screen-modal">
+      <div className="full-screen-modal__backdrop" onClick={onClose} />
+      <div className="full-screen-modal__content" onClick={onClose}>
         {children}
       </div>
     </div>

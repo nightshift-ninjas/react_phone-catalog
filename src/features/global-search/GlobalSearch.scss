@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     gap: map.get($spacing, 'md');
-    margin-top: map.get($spacing, 'md');
+    margin-top: map.get($spacing, 'sm');
   }
 
   &__item {

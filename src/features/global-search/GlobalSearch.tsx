@@ -60,7 +60,7 @@ export const GlobalSearch: React.FC<Props> = ({ isOpen, onClose }) => {
   return (
     <FullScreenModal isOpen={isOpen} onClose={onClose}>
       <SlideIn beforeAnimationState={{ y: -100 }}>
-        <div className="global-search">
+        <div className="global-search" onClick={(e) => e.stopPropagation()}>
           <Form.Root>
             <div className="global-search__search">
               <FormInput

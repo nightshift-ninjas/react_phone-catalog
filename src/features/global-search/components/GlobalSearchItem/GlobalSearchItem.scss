@@ -9,6 +9,7 @@
   padding: map.get($spacing, 'sm') map.get($spacing, 'md');
   background-color: var(--bg-color);
   color: var(--text-color);
+  border: $border;
 
   &__block {
     display: flex;

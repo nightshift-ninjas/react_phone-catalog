@@ -4,5 +4,6 @@
 .search-list {
   display: flex;
   flex-direction: column;
-  gap: map.get($spacing, 'sm');
+  border-radius: 6px;
+  overflow: hidden;
 }

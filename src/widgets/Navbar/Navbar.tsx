@@ -16,9 +16,9 @@ import { useTranslation } from 'react-i18next';
 import { SearchButton } from '../SearchButton';
 import { useFavoriteCount } from '../../shared/context/favorite';
 import cn from 'classnames';
-import './Navbar.scss';
 import { useCartCount } from '../../shared/context/cart';
 import { SlideIn } from '../../shared/animation/SlideIn';
+import './Navbar.scss';
 
 type Props = { onSearchClick: () => void };
 
