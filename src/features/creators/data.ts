@@ -3,6 +3,8 @@ import nhr_1 from '../../shared/assets/img/nhr_1.webp';
 import nhr_2 from '../../shared/assets/img/nhr_2.webp';
 import vpm from '../../shared/assets/img/vpm.jpg';
 import mkm_1 from '../../shared/assets/img/mkm_1.webp';
+import laa_1 from '../../shared/assets/img/laa_1.webp';
+import laa_2 from '../../shared/assets/img/laa_2.webp';
 
 export const creators: CreatorInfo[] = [
   {
@@ -57,6 +59,25 @@ export const creators: CreatorInfo[] = [
       },
       {
         link: 'https://t.me/mar_kram',
+        icon: SocialNetworkEnum.TELEGRAM,
+      },
+    ],
+  },
+
+  {
+    key: 'laa',
+    images: [laa_1, laa_2],
+    socialNetworks: [
+      {
+        link: 'https://www.linkedin.com/in/andrii-linkevych-928823394/',
+        icon: SocialNetworkEnum.LINKEDIN,
+      },
+      {
+        link: 'https://github.com/andriiLink',
+        icon: SocialNetworkEnum.GITHUB,
+      },
+      {
+        link: 'https://t.me/andrL1nk',
         icon: SocialNetworkEnum.TELEGRAM,
       },
     ],
