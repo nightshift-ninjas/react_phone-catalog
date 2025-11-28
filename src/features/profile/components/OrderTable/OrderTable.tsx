@@ -74,7 +74,10 @@ export const OrderTable: React.FC<Props> = ({ orders }) => {
                   </span>
                 </td>
 
-                <td className="order-table__cell">${order.totalAmount}</td>
+                <td className="order-table__cell">
+                  ${order.totalAmount.toFixed(2)}
+                </td>
+                
                 <td className="order-table__cell">
                   {order.deliveryDate ? formatDate(order.deliveryDate) : 'N/A'}
                 </td>
