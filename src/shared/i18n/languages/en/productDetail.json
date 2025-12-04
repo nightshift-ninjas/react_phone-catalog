@@ -1,0 +1,20 @@
+{
+  "availableColors": "Available colors",
+  "selectCapacity": "Select capacity",
+  "about": "About",
+  "techSpecs": "Tech specs",
+  "translationWarning": "This content can't be completely translated into the selected language",
+  "showOriginal": "Show in original",
+  "productInfo": {
+    "screen": "Screen",
+    "resolution": "Resolution",
+    "processor": "Processor",
+    "ram": "RAM",
+    "availableColors": "Available colors",
+    "selectCapacity": "Select capacity",
+    "camera": "Camera",
+    "zoom": "Zoom",
+    "cell": "Cell"
+  },
+  "youMayAlsoLike": "You may also like"
+}

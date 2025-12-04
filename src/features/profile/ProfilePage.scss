@@ -1,0 +1,28 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'md');
+
+  &__section {
+    border-radius: 6px;
+    background-color: var(--bg-color-lighter);
+    padding: map.get($spacing, 'md');
+
+    &:nth-child(1) {
+      width: 100%;
+      margin-left: auto;
+    }
+  }
+
+  &__filter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: map.get($spacing, "md");
+  }
+}

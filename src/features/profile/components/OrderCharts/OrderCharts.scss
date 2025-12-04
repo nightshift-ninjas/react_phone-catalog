@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.order-charts {
+  gap: map.get($spacing, 'md');
+  @include grid(1);
+
+  @include on-desktop {
+    @include grid(2);
+  }
+
+  .chart {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h3 {
+      margin-bottom: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  }
+}

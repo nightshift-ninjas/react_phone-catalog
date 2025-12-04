@@ -1,0 +1,32 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.order-table {
+  color: var(--text-color);
+  border-radius: 6px;
+
+  &__table {
+    width: 100%;
+    min-width: 900px;
+  }
+
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+
+  &__row {
+    background: var(--bg-color);
+  }
+
+  &__heading {
+    text-align: start;
+    padding: map.get($spacing, 'md');
+    font-weight: 600;
+  }
+
+  &__cell {
+    padding: map.get($spacing, 'md');
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+  }
+}

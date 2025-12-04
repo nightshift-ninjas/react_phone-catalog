@@ -1,0 +1,13 @@
+{
+  "welcomeMessage": "Welcome to Nice Gadgets store!",
+  "brandNewModels": "Brand new models",
+  "shopByCategory": "Shop by category",
+  "hotPrices": "Hot prices",
+  "premiumDevices": "Premium devices",
+  "popularDevices": "Popular devices",
+  "categories": {
+    "phones": "Mobile phones",
+    "tablets": "Tablets",
+    "accessories": "Accessories"
+  }
+}

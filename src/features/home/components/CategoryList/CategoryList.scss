@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.category-list {
+  width: 100%;
+
+  &__title {
+    font-weight: 800;
+    margin-bottom: map.get($spacing, 'lg');
+  }
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: map.get($spacing, 'md');
+
+    @include grid(1);
+
+    @include on-tablet {
+      @include grid(3);
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "currencies": {
+    "USD": "American Dollar",
+    "PLN": "Polish złoty",
+    "EUR": "Euro",
+    "CAD": "Canadian dollar",
+    "JPY": "Japanese Yen",
+    "GBP": "British Pound"
+  }
+}

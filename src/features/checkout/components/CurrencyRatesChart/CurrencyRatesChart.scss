@@ -1,0 +1,6 @@
+@use '../../../../shared/styles/mixins' as *;
+
+.currency-chart {
+  width: 100%;
+  @include grid(1);
+}

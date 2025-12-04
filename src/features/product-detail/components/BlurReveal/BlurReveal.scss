@@ -1,0 +1,65 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+
+.blur-reveal {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+
+    cursor: pointer;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    z-index: 10;
+    border-radius: inherit;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Modal inside the block */
+  &__modal {
+    position: absolute;
+    padding-inline: map.get($spacing, 'md');
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    backdrop-filter: blur(4px);
+    background: rgba(0, 0, 0, 0.25);
+
+    z-index: 20;
+  }
+
+  &__modal-inner {
+    background: map.get($colors, 'light');
+    padding: map.get($spacing, 'md') map.get($spacing, 'lg');
+    max-width: 420px;
+    border-radius: 10px;
+    text-align: center;
+
+    box-shadow: 0 4px 25px rgba(0, 0, 0, 0.18);
+  }
+
+  &__modal-text {
+    margin-bottom: map.get($spacing, 'md');
+    color: map.get($colors, 'dark');
+  }
+}
+
+[data-theme='dark'] {
+  .blur-reveal {
+    background-color: transparent;
+  }
+}

@@ -1,0 +1,42 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+
+.capacity-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: map.get($spacing, 'xs') map.get($spacing, 'sm');
+
+  border: $border;
+  cursor: pointer;
+  transition:
+    background $base-transition ease,
+    box-shadow $base-transition ease;
+
+  &--selected {
+    color: map.get($colors, 'white');
+    background-color: map.get($colors, 'dark');
+  }
+
+  &__value {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 14px;
+  }
+
+  &:hover {
+    box-shadow: 0px 3px 13px 0px var(--btn-shadow-color);
+  }
+}
+
+[data-theme='dark'] {
+  .capacity-button {
+    background-color: map.get($colors, 'gray-black');
+    border-color: map.get($colors, 'gray-black');
+    color: var(--text-color);
+
+    &--selected {
+      background-color: map.get($colors, 'purple');
+    }
+  }
+}

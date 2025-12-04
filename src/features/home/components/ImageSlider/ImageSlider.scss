@@ -1,0 +1,77 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.image-slider {
+  position: relative;
+  max-width: $max-container-width;
+  width: 100%;
+
+  &__img,
+  &__media {
+    width: 100%;
+    height: 320px;
+    object-position: center;
+    object-fit: cover;
+  }
+
+  &__wrapper {
+    display: flex;
+    gap: map.get($spacing, 'md');
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 400px;
+  }
+
+  &__button {
+    transition: transform $base-transition ease;
+    width: 25px;
+    height: 5px;
+    background-color: map.get($colors, 'black');
+    opacity: 0.5;
+  }
+
+  &__navigation {
+    display: flex;
+    gap: 20px;
+    margin-top: -20px;
+    justify-content: center;
+  }
+
+  &__button.active {
+    transform: translateY(-5px);
+    opacity: 1;
+  }
+
+  .arrow-button {
+    display: none;
+  }
+
+  body[data-theme='dark'] & {
+    &__button {
+      background-color: map.get($colors, 'light');
+    }
+  }
+
+  @include on-tablet {
+    &__img,
+    &__media {
+      height: 400px;
+      padding-left: map.get($spacing, 'md');
+      padding-right: map.get($spacing, 'md');
+    }
+
+    &__navigation {
+      margin-top: 20px;
+    }
+
+    .arrow-button {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: map.get($spacing, 'xl');
+      height: 100%;
+    }
+  }
+}

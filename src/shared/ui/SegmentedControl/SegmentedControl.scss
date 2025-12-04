@@ -1,0 +1,52 @@
+@use 'sass:map';
+@use '../../../shared/styles/vars' as *;
+
+.segmented-control {
+  position: relative;
+  display: inline-block;
+  background-color: var(--bg-color);
+  padding: map.get($spacing, 'xs');
+  border-radius: 8px;
+  overflow: hidden;
+
+  &__group {
+    display: flex;
+    position: relative;
+    z-index: 2;
+    white-space: nowrap;
+  }
+
+  &__item {
+    flex: 1;
+    padding: map.get($spacing, 'sm') map.get($spacing, 'md');
+    color: var(--text-color);
+    text-align: center;
+    font-size: 14px;
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    outline: none;
+    user-select: none;
+
+    &[data-state='on'] {
+      font-weight: 600;
+    }
+  }
+
+  &__slider {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 0;
+    background: var(--bg-color-lighter);
+    border-radius: 6px;
+    transition: transform 0.25s ease;
+    z-index: 1;
+  }
+}
+
+[data-theme='dark'] {
+  .segmented-control__slider {
+    background: map.get($colors, 'gray');
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "cartEmptyMessage": "Ваш кошик порожній.",
+  "totalItemsLabel_one": "Загальна сума для {{count}} позиції",
+  "totalItemsLabel_other": "Загальна сума для {{count}} позицій",
+  "checkoutAction": "Оформити замовлення",
+  "productImageAlt": "Зображення продукту",
+  "cartTitle": "Ваш кошик"
+}

@@ -1,0 +1,126 @@
+@use '../../shared/styles/mixins' as *;
+@use '../../shared/styles/vars' as *;
+@use 'sass:map';
+
+/* ================================
+   Skeleton animation (custom)
+================================ */
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+
+/* ==========================================================
+   CORE FIX — override Radix Skeleton ONLY inside the loader
+========================================================== */
+.product-card--loader .rt-Skeleton {
+  background: linear-gradient(
+    90deg,
+    #dcdcdc 25%,
+    #e8e8e8 37%,
+    #dcdcdc 63%
+  ) !important;
+
+  background-size: 400% 100% !important;
+  animation: skeleton-loading 1.4s ease infinite !important;
+  border-radius: 8px !important;
+  display: block;
+}
+
+/* ===============================================
+   BASE WRAPPER
+=============================================== */
+.product-card--loader {
+  width: 100%;
+  padding: 32px;
+  background: var(--bg-color-lighter);
+  border: $border;
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'sm');
+}
+
+/* ===============================================
+   IMAGE
+=============================================== */
+.product-card__loader-image {
+  width: 100%;
+  height: 300px;
+  border-radius: 12px;
+
+  @include on-tablet {
+    height: 300px;
+  }
+
+  @include on-desktop {
+    height: 200px;
+  }
+}
+
+/* ===============================================
+   TITLE
+=============================================== */
+.product-card__loader-title {
+  width: 70%;
+  height: 20px;
+  margin: 12px 0;
+  border-radius: 6px;
+}
+
+/* ===============================================
+   PRICE
+=============================================== */
+.product-card__loader-price-current {
+  width: 40%;
+  height: 18px;
+  border-radius: 4px;
+}
+
+.product-card__loader-price-old {
+  width: 25%;
+  height: 16px;
+  margin-left: 10px;
+  border-radius: 4px;
+}
+
+/* ===============================================
+   SPECS
+=============================================== */
+.product-card__loader-spec {
+  width: 60%;
+  height: 14px;
+  margin: 6px 0;
+  border-radius: 4px;
+
+  @include on-tablet {
+    width: 55%;
+  }
+
+  @include on-desktop {
+    width: 50%;
+  }
+}
+
+/* ===============================================
+   BUTTONS
+=============================================== */
+.product-card__loader-button {
+  width: 70%;
+  height: 40px;
+  border-radius: 8px;
+
+  @include on-desktop {
+    width: 65%;
+  }
+}
+
+.product-card__loader-favorite {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}

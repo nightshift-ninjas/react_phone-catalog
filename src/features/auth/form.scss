@@ -1,0 +1,156 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+
+.form {
+  width: var(--auth-block-width);
+
+  &__link {
+    color: var(--link-color);
+    text-decoration: underline;
+    margin-left: map.get($spacing, 'xs');
+  }
+
+  &__text {
+    margin-block: map.get($spacing, 'lg');
+  }
+
+  &__field {
+    display: grid;
+    margin-bottom: map.get($spacing, 'md');
+  }
+
+  &__field-group {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'md');
+
+    .form__field {
+      width: 100%;
+    }
+  }
+
+  &__message {
+    display: block;
+    margin-top: map.get($spacing, 'sm');
+
+    color: map.get($colors, 'red');
+    opacity: 0.8;
+  }
+
+  &__input {
+    padding: 0 map.get($spacing, 'md');
+    line-height: 1;
+  }
+
+  input {
+    height: 45px;
+    font-size: 14px;
+  }
+
+  &__textarea {
+    resize: none;
+    padding: 10px;
+  }
+
+  &__checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    margin-bottom: map.get($spacing, 'xl');
+
+    label {
+      display: flex;
+      align-items: center;
+    }
+
+    #agreement {
+      width: auto;
+      margin-right: map.get($spacing, 'md');
+    }
+  }
+
+  &__submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    padding: 0 map.get($spacing, 'md');
+    line-height: 1;
+    font-weight: 500;
+    height: 35px;
+    width: 100%;
+
+    background-color: map.get($colors, 'purple');
+    color: map.get($colors, 'white');
+
+    &:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+  }
+
+  &__button-google {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: map.get($spacing, 'xs') map.get($spacing, 'md');
+    width: 100%;
+    color: var(--text-color);
+
+    gap: map.get($spacing, 'md');
+    border-radius: 4px;
+    border: $border;
+
+    svg {
+      width: 22px;
+    }
+  }
+
+  &__divider {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: map.get($spacing, 'md');
+    margin-block: map.get($spacing, 'lg');
+
+    span {
+      white-space: nowrap;
+    }
+  }
+
+  &__line {
+    background-color: var(--nav-not-active-link);
+    width: 100%;
+    height: 1px;
+  }
+
+  &__input,
+  &__textarea,
+  input {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    border: none;
+  }
+
+  &__input,
+  &__textarea,
+  &__input:focus,
+  .password-input__input:focus-visible,
+  &__textarea:focus {
+    color: var(--text-color);
+    background-color: var(--bg-color-lighter);
+  }
+
+  &__input:focus-visible,
+  &__textarea:focus-visible {
+    outline: 2px solid var(--text-color);
+    outline-offset: 2px;
+  }
+
+  &__input:hover,
+  &__textarea:hover {
+    box-shadow: 0 0 0 1px var(--bg-color);
+  }
+}

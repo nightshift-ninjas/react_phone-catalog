@@ -1,0 +1,13 @@
+{
+  "welcomeMessage": "Ласкаво просимо до Nice Gadgets!",
+  "brandNewModels": "Нові моделі",
+  "shopByCategory": "Купуй за категоріями",
+  "hotPrices": "Гарячі ціни",
+  "premiumDevices": "Преміум пристрої",
+  "popularDevices": "Популярні пристрої",
+  "categories": {
+    "phones": "Мобільні телефони",
+    "tablets": "Планшети",
+    "accessories": "Аксесуари"
+  }
+}

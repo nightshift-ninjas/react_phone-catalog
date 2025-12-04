@@ -1,0 +1,8 @@
+{
+  "favoritesTitle": "Favorites",
+  "loadingFavorites": "Loading favorites...",
+  "noFavorites": "You have no favorite items yet.",
+  "itemCount_one": "{{count}} item",
+  "itemCount_other": "{{count}} items",
+  "error": "Failed to load favorites: {{error}}"
+}

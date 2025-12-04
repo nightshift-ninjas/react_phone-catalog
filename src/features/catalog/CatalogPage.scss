@@ -1,0 +1,22 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.catalog {
+  &__breadcrumbs {
+    margin-block: map.get($spacing, 'lg');
+    margin-block: map.get($spacing, 'xl');
+
+    @include on-tablet {
+      margin-bottom: map.get($spacing, '2xl');
+    }
+  }
+
+  &__total-items {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'sm');
+    margin-top: map.get($spacing, "sm");
+    color: var(--nav-not-active-link);
+  }
+}

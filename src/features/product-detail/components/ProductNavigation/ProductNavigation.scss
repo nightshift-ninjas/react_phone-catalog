@@ -1,0 +1,115 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.product-navigation {
+  position: relative;
+  width: 100%;
+
+  &__label {
+    color: map.get($colors, 'gray');
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0;
+
+    &--color {
+      width: 100%;
+    }
+
+    margin-bottom: map.get($spacing, 'sm');
+  }
+
+  &__color-items {
+    display: flex;
+    gap: map.get($spacing, 'sm');
+
+    margin-bottom: map.get($spacing, 'lg');
+  }
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    gap: map.get($spacing, 'md');
+  }
+
+  &__id {
+    color: map.get($colors, 'silver');
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0;
+
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  &__divider {
+    border-top: $border;
+  }
+
+  &__capacity {
+    margin-block: map.get($spacing, 'lg');
+  }
+
+  &__capacity-items {
+    display: flex;
+    gap: map.get($spacing, 'sm');
+
+    flex-wrap: wrap;
+  }
+
+  &__inner-wrapper {
+    margin-block: map.get($spacing, 'xl');
+  }
+
+  &__price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'sm');
+
+    margin-bottom: map.get($spacing, 'md');
+  }
+
+  &__price {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1%;
+  }
+
+  &__price-discount {
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -1%;
+  }
+
+  &__price-regular {
+    color: map.get($colors, 'silver');
+    font-size: 22px;
+    font-weight: 500;
+    text-decoration: line-through;
+  }
+
+  &__buttons {
+    display: flex;
+    gap: map.get($spacing, 'sm');
+  }
+
+  &__screen,
+  &__resolution,
+  &__processor,
+  &__ram {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__value {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 15px;
+    letter-spacing: 0;
+
+    margin-bottom: map.get($spacing, 'sm');
+  }
+}

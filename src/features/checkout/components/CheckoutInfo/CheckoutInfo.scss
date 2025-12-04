@@ -1,0 +1,29 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.checkout-info {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, "xl");
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'md');
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+
+    &--total {
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    dd {
+      font-weight: 900;
+    }
+  }
+}

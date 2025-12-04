@@ -1,0 +1,30 @@
+{
+  "payment": {
+    "method": "Payment Method",
+    "online": "Online Payment",
+    "cash": "Cash on Delivery",
+    "pos": "POS on Delivery"
+  },
+
+  "checkoutForm": {
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "email": "Email",
+    "mobile": "Mobile Number",
+    "country": "Country",
+    "region": "Region",
+    "city": "City",
+    "warehouse": "Warehouse",
+    "address": "Address",
+    "zip": "ZIP",
+    "state": "State"
+  },
+
+  "schedule": {
+    "delivery": "Schedule Delivery",
+    "date": "Delivery Date",
+    "time": "Delivery Time",
+    "notes": "Delivery Notes",
+    "notesForCourier": "Notes for the courier"
+  }
+}

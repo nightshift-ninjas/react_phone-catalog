@@ -1,0 +1,45 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.slider {
+  position: relative;
+
+  &__layout {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 41px;
+
+    max-width: 100px;
+    flex-wrap: wrap;
+
+    @include on-tablet {
+      max-width: none;
+    }
+
+    @include on-desktop {
+      max-width: none;
+    }
+
+    margin-bottom: map.get($spacing, 'lg');
+  }
+
+  &__navigation-buttons {
+    position: absolute;
+    display: flex;
+    top: 5%;
+    right: 0%;
+
+    @include on-tablet {
+      top: 1%;
+      right: 0%;
+    }
+
+    @include on-desktop {
+      top: 1%;
+      right: 0%;
+    }
+
+    gap: map.get($spacing, 'md');
+  }
+}

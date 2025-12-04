@@ -1,8 +1,8 @@
 {
-  "experimentalTernaries": true,
+  "experimentalTernaries": false,
   "singleQuote": true,
   "quoteProps": "consistent",
-  "singleAttributePerLine": true,
+  "singleAttributePerLine": false,
   "arrowParens": "always",
   "bracketSameLine": false,
   "bracketSpacing": true,

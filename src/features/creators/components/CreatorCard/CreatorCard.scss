@@ -1,0 +1,51 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.creator-info {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, '2xl');
+
+  @include on-desktop {
+    flex-direction: row;
+    align-items: center;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'md');
+  }
+
+  &__images {
+    max-width: 100%;
+
+    @include on-desktop {
+      max-width: 350px;
+    }
+  }
+
+  &__role {
+    color: map.get($colors, 'red');
+  }
+
+  &__name,
+  &__role {
+    text-transform: capitalize;
+  }
+
+  &__social-network-list {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'md');
+
+    svg {
+      width: 25px;
+
+      path {
+        fill: var(--text-color);
+      }
+    }
+  }
+}

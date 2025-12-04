@@ -1,0 +1,48 @@
+{
+  "welcome": "Welcome, {{name}}!",
+  "items": "{{count}} items",
+  "profileInfo": {
+    "id": "ID:",
+    "email": "Email:",
+    "createdAt": "Created at:",
+    "lastSign": "Last sign:"
+  },
+  "chart": {
+    "ordersPerDay": "Orders Per Day (This Week) by Status",
+    "salesPerDay": "Total Sales Per Day (This Month)",
+    "ordersByCategory": "Products Ordered by Category",
+    "orderStatus": "Order Status"
+  },
+  "table": {
+    "order": "Order",
+    "date": "Date",
+    "customer": "Customer",
+    "payment": "Payment",
+    "total": "Total",
+    "delivery": "Delivery",
+    "items": "Items",
+    "fulfilment": "Fulfilment"
+  },
+  "orderStatus": {
+    "canceled": "Canceled",
+    "pending": "Pending",
+    "fulfilled": "Fulfilled"
+  },
+  "paymentMethod": {
+    "online_payment": "Online Payment",
+    "cash_on_delivery": "Cash on Delivery",
+    "pos_on_delivery": "POS on Delivery"
+  },
+  "orderFilterMethods": {
+    "all": "All",
+    "unfulfilled": "Unfulfilled",
+    "unpaid": "Unpaid",
+    "open": "Open",
+    "closed": "Closed"
+  },
+  "orderSortFields": {
+    "created_at": "Created At",
+    "items": "Items",
+    "total": "Total"
+  }
+}

@@ -1,0 +1,20 @@
+@use "sass:map";
+@use "../styles/vars" as *;
+
+@mixin on-tablet {
+  @media (min-width: map.get($breakpoints, "tablet")) {
+    @content;
+  }
+}
+
+@mixin on-desktop {
+  @media (min-width: map.get($breakpoints, "desktop")) {
+    @content;
+  }
+}
+
+@mixin grid($cols) {
+  display: grid;
+  gap: map.get($spacing, "md");
+  grid-template-columns: repeat($cols, minmax(0, 1fr));
+}

@@ -1,0 +1,51 @@
+.arrow-button {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  border: 1px solid #B4BDC3;
+  background-color: #ffffff;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, border-color 0.3s ease, background-color 0.3s ease;
+
+  &__icon {
+    height: 10px;
+    transition: transform 0.3s ease;
+    
+    path {
+      fill: var(--icon-color);
+    }
+  }
+
+  &:hover {
+    background-color: #f0f0f0;
+    border-color: #313237;
+  }
+
+  &--disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+    border-color: #E2E6E9;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  body[data-theme="dark"] & {
+    border-color: #323542;
+    background-color: #323542;
+    
+    &:hover {
+      background-color: #4A4D58;
+    }
+
+    &--disabled {
+      background-color: #323542;
+      border-color: #3B3E4A;
+    }
+  }
+}

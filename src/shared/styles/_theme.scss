@@ -1,0 +1,64 @@
+@use 'sass:map';
+@use './vars' as *;
+
+/* We will probably modify those colors in the future */
+
+:root {
+  --nav-not-active-link: #{map.get($colors, 'gray')};
+  --auth-input-bg: #{map.get($colors, 'light-purple')};
+  --auth-modal-bg: #{map.get($colors, 'lavender')};
+  --auth-bg-color: #{map.get($colors, "platinum")};
+
+  --bg-contacs-page: url(../assets/img/contacts_background_light.jpg);
+
+  --bg-color: #{map.get($colors, 'white')};
+
+  // for card background
+  --bg-color-lighter: #{map.get($colors, 'light')};
+
+  --text-color: #{map.get($colors, 'dark')};
+  --icon-color: #{map.get($colors, 'dark')};
+  --btn-bg-color: #{map.get($colors, 'dark')};
+  --btn-bg-shadow: #{rgba(map.get($colors, 'dark'), 0.1)};
+  --btn-text-color: #{map.get($colors, 'white')};
+  --border-color: #{map.get($colors, 'platinum')};
+  --btn-shadow-color: #{map.get($colors, 'blue-shadow')};
+  --link-color: #{map.get($colors, 'purple')};
+}
+
+[data-theme='dark'] {
+  --nav-not-active-link: #{map.get($colors, 'gray')};
+  --auth-input-bg: #{map.get($colors, 'slight-purple')};
+  --auth-modal-bg: #{map.get($colors, 'imperial-purple')};
+  --auth-bg-color: #{map.get($colors, "black")};
+
+  --bg-contacs-page: url(../assets/img/contacts_bg_img.jpg);
+
+  --bg-color: #{map.get($colors, 'black')};
+
+  // for card background
+  --bg-color-lighter: #{map.get($colors, 'deep-blue')};
+
+  --text-color: #{map.get($colors, 'white')};
+  --icon-color: #{map.get($colors, 'silver')};
+  --btn-bg-color: #{map.get($colors, 'white')};
+  --btn-bg-shadow: #{rgba(map.get($colors, 'white'), 0.1)};
+  --btn-text-color: #{map.get($colors, 'dark')};
+  --border-color: #{map.get($colors, 'platinum')};
+  --btn-shadow-color: #{map.get($colors, 'white-shadow')};
+  --link-color: #{map.get($colors, 'purple')};
+}
+
+body {
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+* {
+  transition:
+    color $base-transition ease,
+    background-color $theme-transition ease,
+    box-shadow $theme-transition ease,
+    border-color $theme-transition ease,
+    fill $theme-transition ease;
+}

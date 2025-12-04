@@ -1,0 +1,112 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+@use '../../styles/mixins' as *;
+
+:root {
+  --dropdown-width: 200px;
+}
+
+.dropdown {
+  font-size: 12px;
+  font-weight: 500;
+  color: map.get($colors, 'gray');
+  height: 59px;
+  width: var(--dropdown-width);
+  max-width: 320px;
+
+  &__content {
+    border: $border;
+
+    &[data-state='open'] {
+      animation: slideUpOnOpenAndFade $base-transition;
+    }
+
+    &[data-state='closed'] {
+      animation: slideUpOnCloseAndFade $base-transition;
+    }
+  }
+
+  &__item {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    padding-inline: 12px;
+    background-color: var(--bg-color);
+    width: var(--dropdown-width);
+
+    &:hover {
+      background-color: var(--bg-color-lighter);
+      outline: none;
+    }
+  }
+
+  &__trigger {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: map.get($spacing, 'md');
+
+    height: 40px;
+    padding: 12px;
+    border: $border;
+    color: var(--text-color);
+    width: var(--dropdown-width);
+    white-space: nowrap;
+
+    &[data-state='open'] .dropdown__trigger-button {
+      transform: rotate(180deg);
+    }
+
+    svg {
+      width: 16px;
+      min-width: 16px;
+    }
+  }
+
+  &__trigger-button {
+    transition: transform $base-transition ease;
+    transform: rotate(0deg);
+  }
+}
+
+[data-theme='dark'] {
+  .dropdown__trigger,
+  .dropdown__item {
+    background-color: map.get($colors, 'gray-black');
+    border: 1px solid map.get($colors, 'gray-black');
+
+    &:hover {
+      background-color: map.get($colors, 'deep-blue');
+      border: 1px solid map.get($colors, 'deep-blue');
+    }
+  }
+
+  .dropdown__content {
+    border: none;
+  }
+}
+
+@keyframes slideUpOnOpenAndFade {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUpOnCloseAndFade {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}

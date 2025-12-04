@@ -1,0 +1,82 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+@use '../../styles/mixins' as *;
+
+.icon-dropdown {
+  &__button {
+    cursor: pointer;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    border-radius: 6px;
+
+    padding: map.get($spacing, 'sm');
+    background-color: var(--bg-color);
+
+    &--theme {
+      svg {
+        path {
+          fill: var(--text-color);
+        }
+      }
+    }
+  }
+
+  &__content {
+    z-index: 100;
+    background-color: var(--bg-color);
+    border-radius: 6px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: map.get($spacing, 'sm');
+    min-width: 200px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    padding: map.get($spacing, 'sm') map.get($spacing, 'md');
+    cursor: pointer;
+    font-size: 14px;
+    color: var(--text-color);
+
+    &--disabled {
+      color: var(--nav-not-active-link);
+      cursor: not-allowed;
+    }
+
+    &:hover:not(.icon-dropdown__item--disabled) {
+      background-color: var(--bg-color-lighter);
+    }
+
+    &-icon {
+      margin-right: map.get($spacing, 'sm');
+    }
+
+    &-label {
+      flex-grow: 1;
+    }
+
+    &-check {
+      margin-left: auto;
+      color: map.get($colors, 'green');
+    }
+  }
+
+  &__item-icon {
+    &--theme {
+      svg {
+        path {
+          fill: var(--text-color);
+        }
+      }
+    }
+  }
+}
+
+[data-theme='dark'] {
+  .icon-dropdown__content {
+    background-color: var(--bg-color-lighter);
+    border: $border;
+  }
+}

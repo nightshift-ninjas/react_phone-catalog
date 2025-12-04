@@ -1,0 +1,47 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.product-detail {
+  &__breadcrumbs {
+    margin-block: map.get($spacing, 'lg');
+    margin-block: map.get($spacing, 'xl');
+
+    @include on-tablet {
+      margin-bottom: map.get($spacing, '2xl');
+    }
+  }
+
+  &__title {
+    margin-bottom: map.get($spacing, 'xl');
+
+    @include on-tablet {
+      margin-bottom: map.get($spacing, '2xl');
+    }
+  }
+
+  &__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: map.get($spacing, 'xl');
+    align-items: center;
+    margin-bottom: map.get($spacing, '2xl');
+
+    @include on-tablet {
+      flex-direction: row;
+    }
+
+    @include on-tablet {
+      margin-bottom: map.get($spacing, '4xl');
+    }
+  }
+
+  &__related {
+    margin-top: map.get($spacing, '3xl');
+
+    @include on-desktop {
+      margin-top: map.get($spacing, '4xl');
+    }
+  }
+}

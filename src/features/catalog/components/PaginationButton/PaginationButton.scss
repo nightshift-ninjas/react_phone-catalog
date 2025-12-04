@@ -1,0 +1,49 @@
+.pagination-button {
+  width: 32px;
+  min-width: 32px;
+  height: 32px;
+  min-height: 32px;
+  border: 1px solid #E2E6E9;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    border-color: #313237;
+  }
+
+  &--selected {
+    background-color: #313237;
+    color: #ffffff;
+    border-color: transparent;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  body[data-theme="dark"] & {
+    background-color: #161827;
+    border-color: transparent;
+    color: #ffffff;
+    
+    &:hover {
+      background-color: #3B3E4A;
+      color: #ffffff;
+    }
+
+    &--selected {
+      background-color: #905BFF;
+      color: #ffffff;
+
+      &:hover {
+        background-color: #905BFF;
+        color: #ffffff;      
+      }
+    }
+  }
+}

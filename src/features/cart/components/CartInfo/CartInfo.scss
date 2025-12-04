@@ -1,0 +1,44 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.cart-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  
+  border: $border;
+  padding: map.get($spacing, "lg");
+
+  @include on-desktop {
+    width: 368px;
+    height: 206px;
+  }
+
+  &__wrapper {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+    margin-bottom: map.get($spacing, "md");
+  }
+
+  &__total-price {
+    height: 32px;
+    font-size: 32px;
+    font-weight: 800;
+  }
+
+  &__total-items {
+    font-size: 14px;
+    font-weight: 200;
+    color: map.get($colors, "gray");
+  }
+
+  &__divider {
+    height: 1px;
+    background-color: var(--border-color);
+    margin-bottom: map.get($spacing, "md");
+  }
+}

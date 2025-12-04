@@ -1,0 +1,50 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.user-info {
+  min-height: 200px;
+
+  &__welcome {
+    margin-bottom: map.get($spacing, 'xl');
+  }
+
+  &--center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'md');
+    margin-bottom: map.get($spacing, 'xl');
+  }
+
+  &__item {
+    display: grid;
+    grid-template-columns: repeat(24, 1fr);
+    max-width: 500px;
+
+    dt {
+      grid-column: 1/7;
+    }
+
+    dd {
+      grid-column: 7/-1;
+      font-weight: 600;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+
+    &--capitalize {
+      text-transform: capitalize;
+    }
+  }
+
+  &__button {
+    max-width: 200px;
+  }
+}

@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.checkout-form {
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'md');
+
+  &__block {
+    width: 100%;
+    background-color: #fff;
+    padding: map.get($spacing, 'xl');
+  }
+
+  &__row {
+    display: flex;
+    flex-direction: column;
+    column-gap: map.get($spacing, 'md');
+
+    @include on-tablet {
+      flex-direction: row;
+    }
+  }
+
+  &__long {
+    min-width: 50%;
+  }
+
+  .toggle-switch__label,
+  &__label {
+    font-weight: 900;
+  }
+
+  &__label,
+  &__switcher {
+    margin-top: map.get($spacing, 'lg');
+  }
+
+  &__form-input {
+    width: 100%;
+  }
+
+  .radio-group__root {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+[data-theme='dark'] {
+  .checkout-form__block {
+    background-color: var(--bg-color-lighter);
+  }
+}

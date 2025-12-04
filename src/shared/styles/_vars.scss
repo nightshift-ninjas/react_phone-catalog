@@ -1,0 +1,115 @@
+@use 'sass:map';
+
+$max-container-width: 1200px;
+$base-transition: 300ms;
+$theme-transition: 0;
+$border: 1px solid var(--border-color);
+
+$spacing: (
+  '3xs': 2px,
+  '2xs': 3px,
+  'xs': 4px,
+  'sm': 8px,
+  'md': 16px,
+  'lg': 24px,
+  'xl': 32px,
+  '2xl': 56px,
+  '3xl': 64px,
+  '4xl': 80px,
+);
+
+$colors: (
+  'black': #0f1121,
+  'dark': #313237,
+  'deep-blue': #161827,
+  'gray': #75767f,
+  'gray-light': #89939A,
+  'silver': #b4bdc3,
+  'platinum': #e2e6e9,
+  'light': #f1f1f1,
+  'white': #fafbfc,
+  'green': #27ae60,
+  'red': #eb5757,
+  'blue-shadow': #17203166,
+  'white-shadow': #ffffff40,
+  'blue': #0000ee,
+  'purple': #6d54b5,
+
+  // Used for buttons on dark theme
+  'gray-black': #323542,
+
+  // Used for Authentication page
+  'slight-purple': #3c364d,
+  'light-purple': #e6e1f2,
+  "imperial-purple": #2C2638,
+  "lavender": #fdfdfd,
+);
+
+$typography: (
+  'h1': (
+    'font-weight': 700,
+    'font-size-mobile': 32px,
+    'line-height-mobile': 41px,
+    'letter-spacing-mobile': -0.01em,
+    'font-size-desktop': 48px,
+    'line-height-desktop': 56px,
+    'letter-spacing-desktop': -0.01em,
+  ),
+  'h2': (
+    'font-weight': 700,
+    'font-size-mobile': 22px,
+    'line-height-mobile': 31px,
+    'letter-spacing-mobile': 0,
+    'font-size-desktop': 32px,
+    'line-height-desktop': 41px,
+    'letter-spacing-desktop': -0.01em,
+  ),
+  'h3': (
+    'font-weight-mobile': 600,
+    'font-weight-desktop': 700,
+    'font-size-mobile': 20px,
+    'line-height-mobile': 26px,
+    'letter-spacing-mobile': 0,
+    'font-size-desktop': 22px,
+    'line-height-desktop': 31px,
+    'letter-spacing-desktop': 0,
+  ),
+  'h4': (
+    'font-weight': 600,
+    'font-size-mobile': 16px,
+    'line-height-mobile': 20px,
+    'letter-spacing-mobile': 0,
+    'font-size-desktop': 20px,
+    'line-height-desktop': 26px,
+    'letter-spacing-desktop': 0,
+  ),
+  'uppercase-text': (
+    'font-weight': 700,
+    'font-size': 12px,
+    'line-height': 11px,
+    'letter-spacing': 0.04em,
+  ),
+  'button-text': (
+    'font-weight': 600,
+    'font-size': 14px,
+    'line-height': 21px,
+    'letter-spacing': 0,
+  ),
+  'body': (
+    'font-weight': 400,
+    'font-size': 14px,
+    'line-height': 21px,
+    'letter-spacing': 0,
+  ),
+  'small-text': (
+    'font-weight': 600,
+    'font-size': 12px,
+    'line-height': 15px,
+    'letter-spacing': 0,
+  ),
+);
+
+$breakpoints: (
+  'tablet': 640px,
+  'desktop': 1200px,
+);

@@ -1,0 +1,26 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+@use '../../../../shared/styles/mixins' as *;
+
+.gallery-skeleton {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: map.get($spacing, 'xl');
+  margin-top: map.get($spacing, "2xl");
+
+  @include on-desktop {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: map.get($spacing, 'xl');
+
+    @include on-desktop {
+      flex-direction: column;
+    }
+  }
+}

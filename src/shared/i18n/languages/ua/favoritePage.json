@@ -1,0 +1,9 @@
+{
+  "favoritesTitle": "Вибрані товари",
+  "loadingFavorites": "Завантаження улюблених товарів...",
+  "noFavorites": "У вас ще немає улюблених товарів.",
+  "itemCount_one": "{{count}} товар",
+  "itemCount_few": "{{count}} товари",
+  "itemCount_many": "{{count}} товарів",
+  "error": "Не вдалося завантажити улюблені товари: {{error}}"
+}

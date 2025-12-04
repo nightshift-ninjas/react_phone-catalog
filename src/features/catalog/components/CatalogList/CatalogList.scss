@@ -1,0 +1,17 @@
+@use 'sass:map';
+@use '../../../../shared/styles/mixins' as *;
+@use '../../../../shared/styles/vars' as *;
+
+.catalog-list {
+  &__list {
+    @include grid(1);
+
+    @include on-tablet {
+      @include grid(2);
+    }
+
+    @include on-desktop {
+      @include grid(4);
+    }
+  }
+}

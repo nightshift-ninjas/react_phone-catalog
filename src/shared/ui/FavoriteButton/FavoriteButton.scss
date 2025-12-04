@@ -1,0 +1,60 @@
+@use 'sass:map';
+@use '../../styles/vars' as *;
+
+.favorite-button {
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;  
+  border: $border;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    background-color 0.3s ease,
+    border-color 0.3s ease;
+
+  path {
+    transition: fill $theme-transition ease;
+  }
+
+  &__icon {
+    width: 16px;
+    height: 16px;
+
+    &--selected path {
+      fill: map.get($colors, 'red');
+    }
+
+    &--not-selected path {
+      fill: var(--icon-color);
+    }
+  }
+
+  &:hover {
+    background-color: transparent;
+    border-color: #313237;
+  }
+
+  &--selected {
+    background-color: transparent;
+    border-color: #e2e6e9;
+  }
+}
+
+[data-theme='dark'] {
+  .favorite-button {
+    background-color: map.get($colors, "gray-black");
+    border-color: map.get($colors, "gray-black");
+
+    &:hover {
+      background-color: #4A4D58;
+      border-color: #313237;
+    }
+
+    &--selected {
+      background-color: transparent;
+      border: 1px solid #3B3E4A;
+    }
+  }
+}

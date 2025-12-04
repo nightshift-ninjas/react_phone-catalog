@@ -1,0 +1,78 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+@use '../../shared/styles/mixins' as *;
+
+.contacts {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: var(--bg-contacs-page);
+
+  &__card {
+    width: 100%;
+    max-width: 520px;
+    padding: 40px 50px;
+    background: var(--bg-color-lighter);
+    border-radius: 4px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    text-align: center;
+  }
+
+  // ▸ FORM WRAPPER
+  &__form {
+    margin-top: 24px;
+  }
+
+  // ▸ ROW FOR FIRST/LAST NAME
+  &__row {
+    display: flex;
+    flex-direction: column;
+    column-gap: map.get($spacing, 'md');
+
+    @include on-tablet {
+      flex-direction: row;
+    }
+  }
+
+  // ▸ FIELD — (legacy, can remove if replaced by FormInput)
+  &__field {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: map.get($spacing, 'md');
+  }
+
+  &__label {
+    margin-bottom: map.get($spacing, 'sm');
+    font-size: 14px;
+    color: #444;
+    text-align: left;
+  }
+
+  &__link {
+    color: var(--text-color);
+    text-decoration: underline;
+    margin: 0 3px;
+  }
+
+  // ▸ RADIX MESSAGES (can stay if used elsewhere)
+  .radix-form-message {
+    text-align: start;
+    margin-top: map.get($spacing, 'xs');
+    font-size: 13px;
+    color: map.get($colors, 'red');
+  }
+
+  // ▸ TERMS TEXT
+  .terms {
+    margin-top: map.get($spacing, 'md');
+    font-size: 13px;
+    color: #666;
+  }
+}

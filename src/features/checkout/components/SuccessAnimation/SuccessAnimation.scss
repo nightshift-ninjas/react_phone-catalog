@@ -1,0 +1,55 @@
+@use 'sass:map';
+@use '../../../../shared/styles/vars' as *;
+
+.cat-container {
+  position: fixed;
+  z-index: 999999;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  background-color: #ff6d87;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: map.get($spacing, 'xl');
+
+  &__title {
+    color: #000;
+  }
+
+  &__btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: map.get($spacing, 'sm');
+    padding: map.get($spacing, 'sm') map.get($spacing, 'xl');
+
+    border-radius: 6px;
+    background-color: #f5c857;
+    color: #000;
+
+    &__arrow {
+      transition: transform $base-transition ease;
+      width: 25px;
+    }
+
+    &:hover {
+      background-color: #ffda7c;
+
+      .cat-container__arrow {
+        transform: translateX(10px);
+      }
+    }
+  }
+
+  .container_svg {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

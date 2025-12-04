@@ -1,0 +1,37 @@
+@use 'sass:map';
+@use '../../shared/styles/vars' as *;
+
+.product-card-skeleton {
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: map.get($spacing, 'md');
+  background: var(--bg-color-lighter);
+  overflow: hidden;
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: map.get($spacing, 'sm');
+    padding: map.get($spacing, 'md');
+  }
+
+  &__row {
+    display: flex;
+    justify-content: space-between;
+    gap: map.get($spacing, 'md');
+
+    &--devider {
+      padding-block: map.get($spacing, 'md');
+    }
+
+    &--btns {
+      gap: map.get($spacing, 'sm');
+      padding-top: map.get($spacing, 'md');
+
+      span {
+        min-width: 40px;
+      }
+    }
+  }
+}
